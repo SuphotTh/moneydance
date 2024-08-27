@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %} Convert Moneydance {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5>Update Data</h5>
+            <form id="myForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="csvFile">Select CSV File:</label>
+                    <input type="file" class="form-control-file" id="csvFile" name="csvFile" accept=".csv">
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="checkbox" id="confirm" name="confirm" value="confirm">
+                    <label for="confirm">Confirm</label>
+                </div>
+                <br>
+                <input type='button' class='btn btn-sm btn-primary' 
+                    value='Submit' onclick='submitForm()'>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="content">    
+    <h5 id='header' class='text text-primary' ></h5>
+    <div class="container">
+        <h4 id='message'> {{ header }} </h4>
+        <h4 id='return_message'></h4>
+    </div>
+</div>
+
+<script>
+function submitForm() {
+    var fileInput = document.getElementById('csvFile');
+    var file = fileInput.files[0];
+    var confirmed = document.getElementById('confirm').checked;
+    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    if (!file) {
+        document.getElementById('return_message').textContent = 'Please select a file.';
+        return;
+    }
+
+    if (file.name !== "Income and Expenses Detailed.csv") {
+        document.getElementById('return_message').textContent = 'Please select the correct file: "Income and Expenses Detailed.csv"';
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('csvFile', file);
+    formData.append('confirm', confirmed ? 'confirm' : '');
+
+    fetch('/convert_moneydance/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('return_message').textContent = data.message;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('return_message').textContent = 'An error occurred';
+    });
+}
+</script>
+{% endblock %}

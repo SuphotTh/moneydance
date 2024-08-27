@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} Convert Moneydance {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5>Update Data</h5>
+            <form id="myForm">
+                <br>
+                {% csrf_token %}
+                Check and Press Submit
+                <br>
+                <br>
+                <input type="checkbox" id="confirm" name="confirm" value="confirm">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type='button' class='btn btn-sm btn-primary' 
+                    value='Submit' onclick='submitForm()'>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="content">    
+    <h5 id='header' class='text text-primary' ></h5>
+    <hr>
+    <div class="container">
+        <h4 id='message'> {{ header }} </h4>
+        <h4 id='return_message'></h4>
+    </div>
+</div>
+
+<script>
+function submitForm() {
+    var confirmed = document.getElementById('confirm').checked;
+    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    fetch('/convert_moneydance/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({
+            confirm: confirmed ? 'confirm' : ''
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('return_message').textContent = data.message;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('return_message').textContent = 'An error occurred';
+    });
+}
+</script>
+{% endblock %}

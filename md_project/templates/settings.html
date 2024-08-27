@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Money Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        .sidebar {
+            height: 80vh;
+            background-color: #dce0e5;
+            padding-top: 20px;
+        }
+        .main-content {
+            height: 80vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar">
+                <h5 class="mb-3">Edit table</h5>
+                <form action="">
+                    {% csrf_token %}
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" id="income" name="set_table" value="income" onclick="get_dataset('income')">
+                        <label class="form-check-label" for="income">Income</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" id="expenses" name="set_table" value="expenses" onclick="get_dataset('expenses')">
+                        <label class="form-check-label" for="expenses">Expenses</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" id="payee" name="set_table" value="payee" onclick="get_dataset('payee')">
+                        <label class="form-check-label" for="payee">Payee</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" id="account_type" name="set_table" value="account_type" onclick="get_dataset('account_type')">
+                        <label class="form-check-label" for="account_type">Account type</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" id="account_name" name="set_table" value="account_name" onclick="get_dataset('account_name')">
+                        <label class="form-check-label" for="account_name">Account name</label>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Main Content Area -->
+            <div class="col-md-10 main-content">
+                <h5 id='header'></h5>
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8" >
+                            <table id="table" class="table table-sm" >
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<script>
+function get_dataset(set_table) {
+    //const set_table = document.querySelector('input[name="set_table"]:checked').value;
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    document.getElementById('header').innerHTML = '&nbsp&nbsp&nbsp&nbsp edit : ' + set_table;
+
+    if (set_table == 'income' || set_table == 'expenses') {
+        backend_table = 'category';
+    } else {
+        backend_table = set_table;
+    }
+    console.log(set_table, csrftoken);
+    // Parameters to be sent in the POST request
+    const requestData = {
+        // Add any parameters you need for fetching data
+        backend_table: backend_table,
+        table_name : set_table
+    };
+    fetch('../get_dataset/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(requestData),
+    })
+    .then(response => response.json())
+    .then(received_data => {
+        console.log('Received data:', received_data);
+        // Process and use the data as needed
+        table_data = received_data;
+        table_name = set_table;
+        console.log("table name: ",table_name);
+        console.log("backend_table: " , backend_table);
+        if (backend_table == "category") {
+            createTierTable(table_data, table_name, backend_table);
+        } else {
+            createTable(table_data, table_name, backend_table);
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
+function createTierTable(table_data, table_name, backend_table) {
+    table_data = table_data.sort((a, b) => a.category.localeCompare(b.category));
+    let table = "";
+    table += '<thead>';
+    table += '<tr><th>ID</th><th>Group</th><th>Category</th><th class="text text-center">Selection</th><th>Tier1</th><th>Tier2</th><th>Tier3</th><th>Tier4</th></tr></thead>';
+    table += '<tbody>';
+    for (let i = 0; i < table_data.length; i++) {
+        const rowData = table_data[i];
+        const id = rowData.id;
+        const group = rowData.group;
+        const category = rowData.category;
+        table += '<tr>';
+        table += `<td>${id}</td><td>${group}</td><td>${category}</td>`;
+        table += '<td class="text-center">';
+        table += `<button class="btn btn-sm btn-outline-info" onclick="updateSelection(${rowData.id}, ${rowData.selected}, '${table_name}', '${backend_table}')">`;
+        if (rowData.selected) {
+            table += '<i id="icon_' + rowData.id + '" class="bi bi-check"></i>';
+        } else {
+            table += '<i id="icon_' + rowData.id + '" class="bi bi-x"></i>';
+        }
+        table += '</button></td>';
+        // Generate radio buttons for tier selection
+        for (let tier = 1; tier <= 4; tier++) {
+            table += `<td><input type="radio" name="tier_${i}" value="${tier}" ${rowData.tier === tier ? 'checked' : ''}> ${tier} </td>`;
+        }
+        table += '</tr>';
+    }
+    table += '</tbody>';
+
+    const displayTableElement = document.getElementById('table');
+    if (displayTableElement) {
+        displayTableElement.innerHTML = table;
+
+        // Add event listeners to the radio buttons for tier selection
+        const tierRadioButtons = displayTableElement.querySelectorAll('input[name^="tier_"]');
+        tierRadioButtons.forEach((button, index) => {
+            button.addEventListener('change', function() {
+                const rowIndex = parseInt(this.name.split('_')[1]);
+                // Retrieve rowData from the table_data array based on rowIndex
+                const rowData = table_data[rowIndex];
+                // Update the rowData with the selected tier value
+                rowData.tier = parseInt(this.value);
+                const clickedID = rowData.id;
+                // Display the selected tier value in the console
+                console.log('Selected Tier for Row ' + rowIndex + ' : ' + clickedID + ' :' + rowData.tier);
+
+                let tier = rowData.tier;
+                updateTierBackend(clickedID, rowData.tier, table_name, backend_table );
+            });
+        });
+    }
+}
+
+function updateTierBackend(id, tier, table_name, backend_table) {
+    console.log('******updateTierBackend******** -> ' + id + ' : ' + tier + ' :' + table_name + " : " +backend_table);
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const dataToSend = {
+        id: id,
+        tier : tier,
+        table_name: table_name,
+        backend_table: backend_table
+    };
+    // AJAX request using fetch
+    fetch('../set_tier/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(dataToSend),
+    })
+    .then(response => {
+        // Handle response
+        console.log('Request succeeded with JSON response', response);
+        createTierTable(table_data, table_name, backend_table);
+    })
+    .catch(error => {
+        // Handle error
+        console.error('Request failed', error);
+    });
+}
+
+function createTable(table_data, table_name, backend_table) {
+    if (table_name == "payee") {
+        table_data = table_data.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+        table_data = table_data.sort((a, b) => a.desc.localeCompare(b.desc));
+    }
+    table = "";
+    table += '<thead>';
+    table += '<tr><th>ID</th><th>Desc</th><th class="text text-center">Selection</th></tr></thead>';
+    table += '<tbody><tr>';
+    for (let i = 0; i < table_data.length; i++) {
+        const rowData = table_data[i]; // Get data for each row
+        // Access individual properties for each row
+        if (table_name == 'account_name' || table_name == 'account_type') {
+            const id = rowData.id;
+            const desc = rowData.desc;
+            table += '<td>'+id+'</td><td>'+desc+'</td>';
+        } else if (table_name == 'payee') {
+            const id = rowData.id;
+            const name = rowData.name;
+            table += '<td>'+id+'</td><td>'+name+'</td>';
+        } /* else if (table_name == 'income' || table_name == 'expenses') {
+            const id = rowData.id;
+            const group = rowData.group;
+            const category = rowData.category;
+            table += '<td>'+id+'</td><td>'+group+'</td><td>'+category+'</td>';
+        } */
+        const selected = rowData.selected;           
+        table += '<td class="text-center">';
+        table += '<button class="btn btn-sm btn-outline-info" ';
+        table += ' onclick="updateSelection(' + rowData.id + ', ' + rowData.selected + ', \'' + table_name + '\', \'' + backend_table + '\')" >';
+        if (rowData.selected) {
+            table += '<i id="icon_' + rowData.id + '" class="bi bi-check"></i>';
+        } else {
+            table += '<i id="icon_' + rowData.id + '" class="bi bi-x"></i>';
+        }
+        table += '</button></td></tr>';            
+    }
+    table +='</tbody>';
+
+    const displayTableElement = document.getElementById('table');
+    if (displayTableElement) {
+        displayTableElement.innerHTML = table;
+    }  
+}
+
+function updateSelection(id, selected, table_name, backend_table) {
+    //console.log('Clicked on button with ID:', id, 'Selected:', selected, 'Set Table:', table_name);
+    if (selected) {
+        selected = false;
+    } else {
+        selected = true;
+    }
+    console.log("********",selected);
+    //update table_data for frontEnd
+    for (let i = 0; i < table_data.length; i++) {
+        const rowData = table_data[i]; // Get data for each row
+        if (rowData.id == id) {
+            rowData.selected = selected;
+
+            // below is Test condition output to console log.
+            if (table_name == 'account_name' || table_name == 'account_type') {
+                console.log("id : ", rowData.id , "desc : ", rowData.desc ,  "selected : ", rowData.selected);
+            } else if (table_name == 'payee') {
+                console.log("id : ", rowData.id , "name : ", rowData.name ,  "selected : ", rowData.selected);
+            } else if (table_name == 'category') {
+                console.log("id : ", rowData.id , "category : ", rowData.category ,  "selected : ", rowData.selected);
+            }
+        }
+    }
+    updateBackend(id, selected, table_name, backend_table);
+    //after updateBackend success, in the respond of updateBackend function will Perform
+    //function createTable() as below format, 
+    //createTable(table_data, table_name, backend_table);
+}
+
+function updateBackend(id, selected, table_name, backend_table) {
+    // Make an AJAX request or fetch API call to your backend (views.py)
+    // Send the ID and newValue to the backend to update the 'selected' field for the corresponding category  
+    console.log('updateBackend - ID:', id, 'Selected:', selected, 'Set Table:', table_name, 'Backend Table:', backend_table);  
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const dataToSend = {
+        id: id,
+        selected: selected,
+        table_name: table_name,
+        backend_table: backend_table
+    };
+    // AJAX request using fetch
+    fetch('../set_selection/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(dataToSend),
+    })
+    .then(response => {
+        // Handle response
+        console.log('Request succeeded with JSON response', response);
+
+        if (backend_table == "category") {
+            createTierTable(table_data, table_name, backend_table);
+        } else {
+            createTable(table_data, table_name, backend_table);
+        }
+
+    })
+    .catch(error => {
+        // Handle error
+        console.error('Request failed', error);
+    });
+
+}
+</script>
+{% endblock %}

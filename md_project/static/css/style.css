@@ -1,0 +1,149 @@
+/* Custom styles to enhance Bootstrap */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Lighter background color */
+}
+
+.bg-custom {
+    background-color: #2e81d4; /* Darker navbar color */
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.515);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.app-title {
+    font-weight: normal; /* Less thick font for "My Money Dance" */
+    margin-right: 1rem; /* Add some space after the title */
+}
+
+.nav-link {
+    font-size: 1.1rem;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.bi-house-door {
+    font-size: 1.2rem;
+}
+
+/* Hover dropdown styles */
+.hover-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.hover-dropdown .dropdown-toggle::after {
+    display: none;
+}
+
+/* Adjust spacing for navbar items */
+.navbar-nav {
+    margin-left: 1rem; /* Add space before dropdown menu */
+}
+
+.navbar-nav .nav-item {
+    margin-right: 0.5rem; /* Add space between dropdown items */
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        margin-left: 0;
+    }
+    .navbar-nav .nav-item {
+        margin-right: 0;
+    }
+    .app-title {
+        margin-right: 0;
+    }
+}
+
+/* Larger power button */
+.btn-lg .bi-power {
+    font-size: 1.5rem;
+}
+
+header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu li a {
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.menu li a:hover {
+    background-color: #9fb8ee;
+}
+
+.home-icon, .logout-icon {
+    font-size: 20px;
+}
+
+.logout {
+    margin-left: auto;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Add styles for the active dropdown */
+.dropdown:hover .dropbtn {
+    background-color: #e0e0e0;
+}
+
+/* Style for the main title */
+.menu li:nth-child(2) a {
+    font-weight: bold;
+    font-size: 18px;
+}

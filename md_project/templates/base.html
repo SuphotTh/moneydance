@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Money Dance{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-2" href="home"><i class="bi bi-house-door"></i></a>
+            <a class="navbar-brand app-title" href="{% url 'home' %}">My MoneyDance Report</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-4">
+                    <li class="nav-item dropdown hover-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownReport" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Report
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownReport">
+                            <li><a class="dropdown-item" href="{% url 'inc_exp_report' %}">Transactions report</a></li>
+                            <li><a class="dropdown-item" href="{% url 'report_by_range' %}">Report by date</a></li>
+                            <li><a class="dropdown-item" href="{% url 'monthly_report' %}">Monthly report</a></li>
+                            <li><a class="dropdown-item" href="{% url 'yearly_report' %}">Yearly report</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown hover-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSetting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Data Setting
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownSetting">
+                            <li><a class="dropdown-item" href="{% url 'convert_moneydance' %}">Convert MoneyDance(.csv)</a></li>
+                            <li><a class="dropdown-item" href="{% url 'get_dataset' %}">Manage Category</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown hover-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSandbox" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sandbox
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownSandbox">
+                            <li><a class="dropdown-item" href="#">Test</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="ms-auto">
+                    <a href="{% url 'logout' %}" class="btn btn-dark btn-md">
+                        <i class="bi bi-power"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+    
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="mt-5">
+        <!-- Add footer content if needed -->
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
