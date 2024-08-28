@@ -13,71 +13,120 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
 from django.conf import settings
-import csv, re
+from decimal import Decimal
+import os, csv, re
 import json
-import os
-
+# import requests
+ 
 @login_required
 def home(request):
-    if request.method == 'GET':
-        # Custom dates
-        end_date = date.today()
-        start_date = end_date.replace(day=1)
-        print ("*****start_date*****", start_date)
-        start_date = start_date.strftime("%Y-%m-%d")
-        end_date = end_date.strftime("%Y-%m-%d")
-        this_month = []
-        this_month.append(start_date)
-        this_month.append(end_date)     
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.content_type == 'application/json':
+                try:
+                    data = json.loads(request.body)
+                    date_selection = data.get('date_selection')
+                    toggled_value = data.get('toggled_value')
+                    
+                    if (date_selection == "mtd"):
+                        end_date = date.today()
+                        start_date = end_date.replace(day=1)
+                    else:
+                        date_range = date_range_function(date_selection)
+                        start_date = date_range[0]
+                        end_date = date_range[1]
 
-        last_month = date_range_function('last_month')
 
-        def create_report_data(group, flag, s_date, e_date) :
-            category = Category.objects.filter(selected=flag).values()
-            report_data = []
-            for c in category:
-                category_name = c['category']
-                rows = Transaction.objects.filter(group=group, category=category_name, date__range = [s_date, e_date]).values()
-                for row in rows:
-                    report_data.append(row)
-            return report_data
+                    # def create_report_data(group, select) :
+                    #     category = Category.objects.filter(selected=select).values()
+                    #     report_data = []
+                    #     # print ("*********category*******")
+                    #     for c in category:
+                    #         category_name = c['category']
+                    #         # print (category_name)
+                    #         rows = Transaction.objects.filter(group=group, 
+                    #                                     category=category_name,
+                    #                                     date__range = [start_date, end_date]).values()
+                    #         for row in rows:
+                    #             report_data.append(row)
+                    #     return report_data
+                        
+                    # if (toggled_value == 'enabled') :
+                    #     income_data = create_report_data ("Income", True)
+                    #     expenses_data = create_report_data ("Expenses", True)
+                    # elif (toggled_value == 'disabled') :
+                    #     income_data = create_report_data ("Income", False)
+                    #     expenses_data = create_report_data ("Expenses", False)
 
-        this_month_expenses = create_report_data('Expenses', True, this_month[0], this_month[1])
-        last_month_expenses = create_report_data('Expenses', True, last_month[0], last_month[1])
 
-        # print (this_month[0])
-        # print (this_month[1])
-        # print (last_month[0])
-        # print (last_month[1])
-        # for row in this_month_expenses:
-        #     print ("Cat : ",row['category'], "Amount :", row['amount'])
-        # print('**********************************')
-        # for row in last_month_expenses:
-        #     print ("Cat : ",row['category'], "Amount :", row['amount'])
 
-        
-        # Create CSV file
-        filename = '_month_expenses.csv'
-        filepath = os.path.join(settings.MEDIA_ROOT, filename)
 
-        with open(filepath, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(['Group', 'Category', 'Date', 'Description', 'Amount'])  # CSV Header
+                    print (date_selection)
+                    print ("END DATE :", end_date)
+                    end_date = '2024-08-10'
+                    def create_report_data(select) :
+                        category = Category.objects.filter(selected=select).values()
+                        report_data = []
+                        # print ("*********category*******")
+                        for c in category:
+                            category_name = c['category']
+                            # print (category_name)
+                            rows = Transaction.objects.filter(category=category_name, date__range = [start_date, end_date]).values()
+                            for row in rows:
+                                report_data.append(row)
+                        return report_data
+                    
+                    transactions = create_report_data(True)
 
-            for row in this_month_expenses:
-                writer.writerow([row['group'],row['category'],row['date'], row['description'], row['amount']])
-    
-        context = {
-            'this_month': this_month,
-            'last_month': last_month,
-        }       
-    
-    #     context = {
-    #         'this_month': this_month,
-    #         'last_month': last_month,
-    #     }       
-    
-    return render(request, 'home.html', context)
+                    # print ("**********class <list>**********")
+                    # print("Transactions <LIST> : ", transactions)
+
+                    # Custom serializer function
+                    def custom_serializer(obj):
+                        if isinstance(obj, (date)):
+                            return obj.isoformat()  # Convert date to string in ISO format
+                        elif isinstance(obj, Decimal):
+                            return str(obj)  # Convert Decimal to string
+                        raise TypeError(f"Type {type(obj)} not serializable")
+
+                    # Convert list of dictionaries to JSON string
+                    json_transactions = json.dumps(transactions, default=custom_serializer)
+
+                    print ("**********class <json>**********")
+                    print("json transactions" ,json_transactions)
+                    # print(json_income_data)
+                    # print("json_expenses_data" , type(json_expenses_data))
+                    # print(json_expenses_data)
+
+                    date_info = {
+                        'start_date': start_date,
+                        'end_date': end_date
+                    }
+                    print("date info : ",type(date_info))
+                    # Combining data and additional parameters
+                    report_data = {
+                        # 'income_data': income_data,
+                        # 'expenses_data': expenses_data,
+                        'date_info': date_info
+                    }
+
+
+                    return JsonResponse(report_data, safe=False)
+                
+                except json.JSONDecodeError:
+                    return JsonResponse({'error': 'Invalid JSON data'})
+            else:
+                return JsonResponse({'error': 'Invalid content type. Expected application/json'})
+        else:
+            end_date = date.today()
+            start_date = end_date.replace(day=1)
+            print ("*****start_date*****", start_date)
+            start_date = start_date.strftime("%Y-%m-%d")
+            end_date = end_date.strftime("%Y-%m-%d")           
+            
+            return render(request, 'home.html', {'header' : "รายงานวิเคราะห์ค่าใช้จ่าย" })
+    else:
+        return HttpResponseRedirect('main')
 
 @login_required
 def inc_exp_report(request):
@@ -122,84 +171,81 @@ def inc_exp_report(request):
 # report by range
 @login_required
 def report_by_range(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            if request.content_type == 'application/json':
-                try:
-                    data = json.loads(request.body)
-                    date_selection = data.get('date_selection')
-                    toggled_value = data.get('toggled_value')
-                    
-                    if (date_selection == "custom_date"):
-                        start_date = data.get('start_date')
-                        end_date = data.get('end_date')
-                    else:
-                        date_range = date_range_function(date_selection)
-                        start_date = date_range[0]
-                        end_date = date_range[1]
-                        # print ("date range : ", date_range)
-                        # print ("date range.start : ", start_date)
-                        # print ("date range.end : ", end_date)
-                        
-                    print (date_selection)
-                    
-                    def create_report_data(group, select) :
-                        category = Category.objects.filter(selected=select).values()
-                        report_data = []
-                        # print ("*********category*******")
-                        for c in category:
-                            category_name = c['category']
-                            # print (category_name)
-                            rows = Transaction.objects.filter(group=group, 
-                                                        category=category_name,
-                                                        date__range = [start_date, end_date]).values()
-                            for row in rows:
-                                report_data.append(row)
-                        return report_data
-                    
-                    if (toggled_value == 'enabled') :
-                        income_data = create_report_data ("Income", True)
-                        expenses_data = create_report_data ("Expenses", True)
-                    elif (toggled_value == 'disabled') :
-                        income_data = create_report_data ("Income", False)
-                        expenses_data = create_report_data ("Expenses", False)
-                    
-                    # income_data = sorted(income_data, key=lambda x: x['group', x['description']])
-                    # expenses_data = sorted(expenses_data, key=lambda x: x['group', x['description']])
-                        
-                    date_info = {
-                        'start_date': start_date,
-                        'end_date': end_date
-                    }
-                    print("date info : ",type(date_info))
-                    # Combining data and additional parameters
-                    report_data = {
-                        'income_data': income_data,
-                        'expenses_data': expenses_data,
-                        'date_info': date_info
-                    }
-                        
-                    return JsonResponse(report_data, safe=False)
+    if request.method == 'POST':
+        if request.content_type == 'application/json':
+            try:
+                data = json.loads(request.body)
+                date_selection = data.get('date_selection')
+                toggled_value = data.get('toggled_value')
                 
-                except json.JSONDecodeError:
-                    return JsonResponse({'error': 'Invalid JSON data'})
-            else:
-                return JsonResponse({'error': 'Invalid content type. Expected application/json'})
-        else:
-            # Custom dates
-            end_date = date.today()
-            start_date = end_date.replace(day=1)
-            print ("*****start_date*****", start_date)
-            start_date = start_date.strftime("%Y-%m-%d")
-            end_date = end_date.strftime("%Y-%m-%d")
-            custom_date = []
-            custom_date.append(start_date)
-            custom_date.append(end_date)                
+                if (date_selection == "custom_date"):
+                    start_date = data.get('start_date')
+                    end_date = data.get('end_date')
+                else:
+                    date_range = date_range_function(date_selection)
+                    start_date = date_range[0]
+                    end_date = date_range[1]
+                    print ("date range : ", date_range)
+                    print ("date range.start : ", start_date)
+                    print ("date range.end : ", end_date)
+                    
+                print (date_selection)
+                
+                def create_report_data(group, select) :
+                    category = Category.objects.filter(selected=select).values()
+                    report_data = []
+                    # print ("*********category*******")
+                    for c in category:
+                        category_name = c['category']
+                        # print (category_name)
+                        rows = Transaction.objects.filter(group=group, 
+                                                    category=category_name,
+                                                    date__range = [start_date, end_date]).values()
+                        for row in rows:
+                            report_data.append(row)
+                    return report_data
+                
+                if (toggled_value == 'enabled') :
+                    income_data = create_report_data ("Income", True)
+                    expenses_data = create_report_data ("Expenses", True)
+                elif (toggled_value == 'disabled') :
+                    income_data = create_report_data ("Income", False)
+                    expenses_data = create_report_data ("Expenses", False)
+                
+                # income_data = sorted(income_data, key=lambda x: x['group', x['description']])
+                # expenses_data = sorted(expenses_data, key=lambda x: x['group', x['description']])
+                    
+                date_info = {
+                    'start_date': start_date,
+                    'end_date': end_date
+                }
+                print("date info : ",type(date_info))
+                # Combining data and additional parameters
+                report_data = {
+                    'income_data': income_data,
+                    'expenses_data': expenses_data,
+                    'date_info': date_info
+                }
+                    
+                return JsonResponse(report_data, safe=False)
             
-            return render(request, 'report_by_range.html', {'header' : "Income&Expenses ",
-                                                            'custom_date' : custom_date })
+            except json.JSONDecodeError:
+                return JsonResponse({'error': 'Invalid JSON data'})
+        else:
+            return JsonResponse({'error': 'Invalid content type. Expected application/json'})
     else:
-        return HttpResponseRedirect('main')
+        # Custom dates
+        end_date = date.today()
+        start_date = end_date.replace(day=1)
+        print ("*****start_date*****", start_date)
+        start_date = start_date.strftime("%Y-%m-%d")
+        end_date = end_date.strftime("%Y-%m-%d")
+        custom_date = []
+        custom_date.append(start_date)
+        custom_date.append(end_date)                
+        
+        return render(request, 'report_by_range.html', {'header' : "Income&Expenses ",
+                                                        'custom_date' : custom_date })
 
 def date_range_function (date_selection):
     # today

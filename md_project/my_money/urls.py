@@ -10,7 +10,7 @@ urlpatterns = [
     path('logout/', login_views.logout_view, name='logout'),
 
     # dashboard
-    path('home/', report_views.home, name='home'),
+    path('home/', report_views.home, name='home'), 
 
     # report menu
     path('inc_exp_report/', report_views.inc_exp_report, name='inc_exp_report'),

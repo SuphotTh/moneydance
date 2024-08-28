@@ -17,7 +17,7 @@ def login_view(request):
     return render(request, 'login.html')
 
 @login_required
-def home_view(request):
+def home_view(request): 
     return render(request, 'home.html')
 
 def logout_view(request):
