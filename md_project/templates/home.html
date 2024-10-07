@@ -1,142 +1,178 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<!-- AG Grid CSS -->
-<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css">
-<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css">
-<!-- AG Grid JavaScript -->
-<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
-
 <div class="container">
-  <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-8">
-          <h5 class="text text-primary">{{ header }}</h5>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="text text-primary">Monthly Report</h5>
+                </div>
+            </div>
+            <form id="dataForm">
+                {% csrf_token %}
+                <div class="row align-items-end">
+                    <div class="col-md-2">
+                        <label for="selected_year" class="form-label">Select year:</label>
+                        <select class='form-select form-select-sm' id="selected_year" name='selected_year'>
+                            {% for y in year_array %}
+                                <option value="{{ y }}">{{ y }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="selected_type" class="form-label">Select type:</label>
+                        <select class='form-select form-select-sm' id="selected_type" name='selected_type'>
+                            <option value="Expenses">Expenses</option>
+                            <option value="Income">Income</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="selected_group" class="form-label">Select group:</label>
+                        <select class='form-select form-select-sm' id="selected_group" name='selected_group'>
+                            <option value="category">Category</option>
+                            <!-- <option value="payee">Payee/Recipient</option> -->
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Select tier:</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="tier1" name="tier" value="1" onclick="expenses_tier('1')">
+                                <label class="form-check-label" for="tier1">: Tier 1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="tier2" name="tier" value="2" onclick="expenses_tier('2')">
+                                <label class="form-check-label" for="tier2">: Tier 2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="tier3" name="tier" value="3" onclick="expenses_tier('3')">
+                                <label class="form-check-label" for="tier3">: Tier 3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="tier4" name="tier" value="4" onclick="expenses_tier('4')">
+                                <label class="form-check-label" for="tier4">: Tier 4</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="col-4">
-          <input type="radio" id="selected" name="toggled" value="enabled" checked >
-          <label for="selected">: report from enabled category</label>
-        </div>
-      </div>
-      <hr>
-      <div>
-        <form id="dataForm">
-          {% csrf_token %}
-          <div class="row">
-            <div class="col-2">
-              <input type="radio" id="option1" name="options" value="option1" onclick="date_range('mtd')">
-              <label for="option1">: Month to date</label>
-            </div>
-            <div class="col-2">
-              <input type="radio" id="option2" name="options" value="option2" onclick="date_range('last_month')">
-              <label for="option2">: Last month</label>                  
-            </div>
-            <div class="col-2">
-              <input type="radio" id="option3" name="options" value="option3" onclick="date_range('last_3months')">
-              <label for="option3">: Last 3 months</label>
-            </div>
-            <div class="col-2">
-              <input type="radio" id="option4" name="options" value="option4" onclick="date_range('last_12months')">
-              <label for="option4">: Last 12 months</label>
-            </div>
-            <div class="col-2">
-              <input type="radio" id="option5" name="options" value="option5" onclick="date_range('last_year')">
-              <label for="option5">: Last year</label>
-            </div>
-            <div class="col-2">
-              <input type="radio" id="option6" name="options" value="option6" onclick="date_range('ytd')">
-              <label for="option6">: Year to date</label>
-            </div>
-          </div>       
-        </form>
-      </div>
     </div>
-  </div>
 </div>
 
 <style>
-    .ag-theme-alpine {
-        --ag-font-size: 10px !important;
-        --ag-font-family: Arial, sans-serif;
+    .popup {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
     }
-    .ag-theme-alpine .ag-header-cell-label {
-        font-weight: bold;
-        font-size: 12px !important;
-    }
-    .ag-theme-alpine .ag-cell {
-        padding-top: 1px !important;
-        padding-bottom: 1px !important;
-        line-height: 16px !important;
-    }
-    .ag-theme-alpine .ag-cell-value {
-        font-size: 12px !important;
-    }
-    .ag-theme-alpine .ag-row {
-        font-size: 12px !important;
-    }
-    .ag-theme-alpine .ag-row-even {
-        background-color: #f8f8f8;
-    }
-    .ag-theme-alpine .ag-row-odd {
-        background-color: #ffffff;
-    }
-</style>
-<div class="content mt-2">    
-    <h5 id='header' class='text text-primary'></h5>
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <div id="income_table" class="ag-theme-alpine" style="height: 450px; width:100%;"></div>
-            </div>
-            <div class="col-6">
-                <div id="expenses_table" class="ag-theme-alpine" style="height: 450px; width:100%;"></div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-      <h2>Financial Analysis Report</h2>
 
-      <p>After analyzing the provided transactions, the following insights were observed:</p>
-      
-      <h3>Income Summary</h3>
-      <p>Total Income: $2,694.59</p>
-      <ul>
-        <li>Interest Received - $862.27 on 2024-08-01</li>
-        <li>Interest Received - $970.05 on 2024-08-02</li>
-        <li>Interest Received - $862.27 on 2024-08-05</li>
-      </ul>
-      
-      <h3>Expense Summary</h3>
-      <p>No expenses were recorded in the provided transactions.</p>
-      
-      <h3>Analysis and Recommendations</h3>
-      <p>The analysis of the transactions reveals a consistent source of income from interest received, totaling $2,694.59 in the specified period. The income is generated from the Money Market account under the name BBL TNTV.</p>
-      
-      <p>Given the steady income stream from interest received, it is recommended to continue monitoring the performance of the Money Market account and explore opportunities for maximizing returns on investment. Additionally, diversifying the investment portfolio to mitigate risk and enhance overall financial growth should be considered.</p>
-      
-      <p>It is important to maintain detailed records of all financial transactions, review investment strategies regularly, and consult with a financial advisor for personalized guidance on wealth management and financial planning.</p>
-      
-      <p>Overall, the financial health appears positive based on the income generated. However, proactive financial management and strategic decision-making will be crucial for long-term financial stability and growth.</p>        
-        
+    .popup-content {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 90%;
+        max-height: 90%;
+        overflow-y: auto;
+        font-size: 11px; /* Smaller font size */
+        padding-top: 30px; /* Add some top padding to make room for the search box */
+    }
+
+    .popup-content h3 {
+        position: absolute;
+        font-size: 16px; /* Smaller font for the title */
+        margin-bottom: 10px;
+    }
+
+    .popup-content .esc-hint {
+        font-size: 11px;
+        color: #666;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .popup-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .popup-table th, .popup-table td {
+        border: 1px solid #ddd;
+        padding: 4px 6px;
+        text-align: left;
+    }
+
+    .popup-table th {
+        background-color: #f2f2f2;
+        font-size: 12x;
+    }
+
+    .popup-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .popup-table .amount-cell {
+        text-align: right;
+        font-family: monospace; /* For better alignment of numbers */
+    }
+
+    #popupSearch {
+        padding: 5px;
+        margin-bottom: 10px;
+        width: 200px;
+        float: right;
+    }
+
+
+    /* ... (rest of the styles remain the same) ... */
+</style>
+
+<div class="content mt-2">
+    <h5 id='header' class='text-primary mb-3'></h5>
+    <div class="container-fluid">
+        <div class="content mt-2">    
+            <div class="container">
+              <div class="reportcontents">
+                {{ rep_contents|safe }}
+              </div>
+            </div>
+        </div>        
     </div>
 </div>
 
 <script>
-function date_range(selection) {
-    clearReportContent();
+function expenses_tier(selected_tier) {
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    const date_selection = selection;
-    const toggled_value = document.querySelector('input[name="toggled"]:checked').value;
+    const year = document.getElementById('selected_year').value;
+    const type = document.getElementById('selected_type').value;
+    const group = document.getElementById('selected_group').value;
+    const tier = selected_tier;
+    //const tier = document.querySelector('input[name="tier"]:checked').value;
 
-    console.log("Selected toggled value:", toggled_value);
-    console.log("Selected Option:", date_selection);
+    console.log(type);
+    console.log("Selected tier:", tier);
+    console.log(year);
+    console.log(group);
 
     const requestData = {
-        toggled_value : toggled_value,
-        date_selection : date_selection,
+        // Add any parameters you need for fetching data
+        tier : tier,
+        type : type,
+        group : group,
+        year : year,
     };
 
     fetch('../home/', {
@@ -147,336 +183,31 @@ function date_range(selection) {
         },
         body: JSON.stringify(requestData),
     })
+
     .then(response => response.json())
     .then(received_data => {
-        //console.log('Received data:', received_data);
-        table_data = received_data;
-        income_data = received_data.income_data;
-        expenses_data = received_data.expenses_data;
-        // console.log('inc data:', income_data);
-        //console.log('inc u data:', income_data_unselected);
-        //console.log('exp data:', expenses_data_selected);
-        //console.log('exp u data:', expenses_data_unselected); 
-
-        const date_info = received_data.date_info;
-        //console.log(typeof(date_info));
-        console.log("date info : ",date_info);
-        const s_date = date_info.start_date;
-        const e_date = date_info.end_date;
-
-        //console.log('table_data.length');
-        //console.log(typeof(table_data));
-        income_data = table_data.income_data;
-        expenses_data = table_data.expenses_data;
-        createSummaryTable(income_data, expenses_data);
-
-        combined_header = "  "+date_selection + " : " + s_date + " - " +e_date;
-        createHeader(combined_header);
-
-    })
+        document.querySelector('.reportcontents').innerHTML = received_data.rep_contents;
+      })
     .catch(error => {
         console.error('Error fetching data:', error);
-    });
-}
-
-function clearReportContent() {
-    // Clear the income table
-    const incomeTable = document.getElementById('income_table');
-    if (incomeTable) {
-        while (incomeTable.firstChild) {
-            incomeTable.removeChild(incomeTable.firstChild);
-        }
-    }
-
-    // Clear the expenses table
-    const expensesTable = document.getElementById('expenses_table');
-    if (expensesTable) {
-        while (expensesTable.firstChild) {
-            expensesTable.removeChild(expensesTable.firstChild);
-        }
-    }
-
-    // Clear the header
-    const header = document.getElementById('header');
-    if (header) {
-        header.innerHTML = '';
-    }
-}
-
-function formattedNumber(input) {
-    let output = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    }).format(input);
-    return output;
+    })
 }
 
 function createHeader(combined_header) {
-    document.getElementById('header').innerHTML = '&nbsp&nbsp&nbsp&nbsp report : '
+    document.getElementById('header').innerHTML = '&nbsp&nbsp&nbsp&nbsp '
         + combined_header ;
 }
 
-function consoleLog(name, variable) {
-    console.log(name);
-    console.log(variable);
-}
+document.addEventListener('DOMContentLoaded', function() {
+    // Your existing initialization code...
 
-function createSummaryTable(income_data, expenses_data) {
-    if ((income_data && Object.keys(income_data).length > 0) || 
-        (expenses_data && Object.keys(expenses_data).length > 0)) {
-        function createDataTable(data_in) {
-            let category1 = '';
-            let sub_total = 0;
-            let tabulator_table = [];
-            
-            data_in.forEach((rowData, index) => {
-                if (category1 !== rowData.category) {
-                    if (category1 !== '') {
-                        tabulator_table.push({
-                            category: category1,
-                            amount: sub_total
-                        });
-                    }
-                    category1 = rowData.category;
-                    sub_total = 0;
-                }
-                sub_total += parseFloat(rowData.amount);
-                
-                if (index === data_in.length - 1) {
-                    tabulator_table.push({
-                        category: category1,
-                        amount: sub_total
-                    });
-                }
-            });
-            
-            return tabulator_table;
-        }
-
-        const income_table = createDataTable(income_data);
-        const expenses_table = createDataTable(expenses_data);
-        
-        createTable("income_table", income_table);
-        createTable("expenses_table", expenses_table);
-    } else {
-        document.getElementById("income_table").innerHTML = "No data for this range of date";
-        document.getElementById("expenses_table").innerHTML = "";
-    }
-}
-
-function showPopup(data, transactions, columnHead) {
-    // console.log('transactions = ', transactions);
-
-    const existingPopup = document.getElementById('cellPopup');
-    if (existingPopup) {
-        existingPopup.remove();
-    }
-
-    const categoryTransactions = transactions.filter(t => t.category === data.category);
-
-    const popup = document.createElement('div');
-    popup.id = 'cellPopup';
-    popup.style.cssText = `
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        border: 1px solid #ccc;
-        padding: 20px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        z-index: 1000;
-        width: 50%; /* Increased width  */
-        max-height: 60%;
-        overflow-y: auto;
-        font-size: 12px; /* Further reduced font size */
-        font-family: Arial, sans-serif;
-    `;
-    if (columnHead == 'income_table') {
-        popupHead = "Income";
-    } else if (columnHead == 'expenses_table') {
-        popupHead = "Expenses";
-    }
-    let popupContent = `
-        <h3 style="font-size: 14px; margin-bottom: 8px;"> Type - ${popupHead}, Category - ${data.category}</h3>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <p style="margin: 0;"><strong>Total Amount:</strong> ${formattedNumber(data.amount)}</p>
-            <input type="text" id="searchBox" placeholder="Search..." style="padding: 4px; border: 1px solid #ccc; border-radius: 3px; font-size: 10px;">
-        </div>
-        <h4 style="font-size: 12px; margin-bottom: 8px;">Transactions:</h4>
-        <table id="transactionTable" style="width:100%; border-collapse: collapse;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid #ddd; padding: 6px; text-align: left; background-color: #f2f2f2;">Date</th>
-                    <th style="border: 1px solid #ddd; padding: 6px; text-align: left; background-color: #f2f2f2;">Description</th>
-                    <th style="border: 1px solid #ddd; padding: 6px; text-align: left; background-color: #f2f2f2;">Memo</th>
-                    <th style="border: 1px solid #ddd; padding: 6px; text-align: right; background-color: #f2f2f2;">Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-
-    categoryTransactions.forEach(t => {
-        popupContent += `
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 6px;">${t.date}</td>
-                <td style="border: 1px solid #ddd; padding: 6px;">${t.description}</td>
-                <td style="border: 1px solid #ddd; padding: 6px;">${t.memo}</td>
-                <td style="border: 1px solid #ddd; padding: 6px; text-align: right;">${formattedNumber(t.amount)}</td>
-            </tr>
-        `;
-    });
-
-    popupContent += `
-            </tbody>
-        </table>
-        <div style="text-align: center; margin-top: 12px;">
-            <p style="font-size: 9px; color: #666;">Press ESC to close</p>
-        </div>
-    `;
-
-    popup.innerHTML = popupContent;
-    document.body.appendChild(popup);
-
-    // Add ESC key listener
-    const escKeyListener = (event) => {
+    // Add event listener for ESC key
+    document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
-            popup.remove();
-            document.removeEventListener('keydown', escKeyListener);
+            closePopup();
         }
-    };
-    document.addEventListener('keydown', escKeyListener);
-
-    // Add search functionality
-    document.getElementById('searchBox').addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        const rows = document.querySelectorAll('#transactionTable tbody tr');
-        
-        rows.forEach(row => {
-            const text = row.textContent.toLowerCase();
-            row.style.display = text.includes(searchTerm) ? '' : 'none';
-        });
     });
-}
-
-// Add this to your existing JavaScript if not already present
-document.addEventListener('click', function(event) {
-    const popup = document.getElementById('cellPopup');
-    if (popup && !popup.contains(event.target) && !event.target.closest('.ag-cell')) {
-        popup.remove();
-    }
 });
-
-let gridApi = null; // Global variable to hold the grid API
-function createTable(tableId, tableData) {
-    if (gridApi) {
-        gridApi.destroy();
-    }
-
-    // Calculate total
-    const total = tableData.reduce((sum, row) => sum + row.amount, 0);
-
-    const gridOptions = {
-        columnDefs: [
-            { 
-                field: 'category', 
-                headerName: tableId.replace('_table', ''), 
-                flex: 1,
-            },
-            { 
-                field: 'amount', 
-                headerName: 'Amount', 
-                type: 'numericColumn', 
-                flex: 1,
-                valueFormatter: params => formattedNumber(params.value),
-                cellStyle: { textAlign: 'right' },
-                sort: 'desc',
-            }
-        ],
-        rowData: tableData,
-        defaultColDef: {
-            sortable: true,
-            filter: true
-        },
-        domLayout: 'normal',
-        suppressHorizontalScroll: true,
-        getRowStyle: params => {
-            if (params.node.rowIndex % 2 === 0) {
-                return { background: '#f8f8f8' };
-            }
-        },
-        rowHeight: 25,
-        pinnedBottomRowData: [{ category: 'Total', amount: total }],
-        getRowClass: (params) => {
-            if (params.node.rowPinned === 'bottom') {
-                return 'total-row';
-            }
-        },
-        maintainColumnOrder: true,
-        onCellClicked: function(params) {
-            if (params.column.getColId() === 'category' && params.node.rowPinned !== 'bottom') {
-                // console.log("param.data =", params.data);
-                // console.log("table income data =",tableId.replace('_table', '_data'));
-                // console.log("table ID =",tableId);
-                // console.log('inc data:', income_data);
-                if (tableId == 'income_table') {
-                    showPopup(params.data, income_data, tableId);
-                } else if (tableId == 'expenses_table') {
-                    showPopup(params.data, expenses_data, tableId);    
-                }
-            }
-        }
-    };
-
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-        .ag-theme-alpine {
-            --ag-font-size: 10px !important;
-            --ag-font-family: Arial, sans-serif;
-            --ag-row-height: 25px;
-        }
-        .ag-theme-alpine .ag-header-cell-label {
-            font-weight: bold;
-            font-size: 11px !important;
-        }
-        .ag-theme-alpine .ag-cell {
-            padding-top: 0px !important;
-            padding-bottom: 0px !important;
-            line-height: 25px !important;
-        }
-        .ag-theme-alpine .ag-cell-value {
-            font-size: 11px !important;
-        }
-        .ag-theme-alpine .ag-row {
-            font-size: 11px !important;
-        }
-        .ag-theme-alpine .ag-row-even {
-            background-color: #f8f8f8;
-        }
-        .ag-theme-alpine .ag-row-odd {
-            background-color: #ffffff;
-        }
-        .sticky-col {
-            position: sticky;
-            background-color: inherit !important;
-            z-index: 1;
-        }
-        .ag-theme-alpine .ag-header {
-            position: sticky;
-            top: 0;
-            z-index: 2;
-        }
-        .ag-theme-alpine .total-row {
-            font-weight: bold;
-            background-color: #e0e0e0 !important;
-        }
-    `;
-    
-    document.head.appendChild(styleElement);
-
-    const gridDiv = document.querySelector(`#${tableId}`);
-    new agGrid.Grid(gridDiv, gridOptions);
-}
 
 </script>
 {% endblock %}

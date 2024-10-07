@@ -16,123 +16,142 @@ from django.conf import settings
 from decimal import Decimal
 import os, csv, re
 import json
-# import requests
- 
+
+# ***********OPEN AI************
+import openai
+from openai import OpenAI
+
+# ***********LANGCHAIN + OPEN AI************
+
+from langchain_community.chat_models import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.schema import HumanMessage, SystemMessage
+from langchain.memory import ConversationBufferMemory
+
+# ***********LANGCHAIN + HUGGING FACES************
+# from langchain import HuggingFaceHub
+# from langchain_community.llms.HuggingFaceHub import HuggingFaceHub
+
+from langchain_huggingface import HuggingFaceEndpoint
+#from langchain.prompts import ChatPromptTemplate
+from django.conf import settings
+from decimal import Decimal
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+
+
 @login_required
 def home(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            if request.content_type == 'application/json':
-                try:
-                    data = json.loads(request.body)
-                    date_selection = data.get('date_selection')
-                    toggled_value = data.get('toggled_value')
-                    
-                    if (date_selection == "mtd"):
-                        end_date = date.today()
-                        start_date = end_date.replace(day=1)
-                    else:
-                        date_range = date_range_function(date_selection)
-                        start_date = date_range[0]
-                        end_date = date_range[1]
+    if request.method == 'POST':
+        if request.content_type == 'application/json':
+            try:
+                data = json.loads(request.body)
+                year = data.get('year')
+                selected_tier = data.get('tier')
+                selected_type = data.get('type')
+                selected_group = data.get('group')
 
+                # Call the refactored monthly_report function
+                report_data_set = monthly_report(year, selected_tier, selected_type, selected_group)
+                # report_table = report_data['report_table']
+                # grand_total = report_data['grand_total']
+                # total_expenses = sum(item['amount'] for item in transactions if item['group'] == 'Expenses')
+                # print ('expenses', total_expenses )
+                # print ("GRAND TOTAL : ", grand_total)
 
-                    # def create_report_data(group, select) :
-                    #     category = Category.objects.filter(selected=select).values()
-                    #     report_data = []
-                    #     # print ("*********category*******")
-                    #     for c in category:
-                    #         category_name = c['category']
-                    #         # print (category_name)
-                    #         rows = Transaction.objects.filter(group=group, 
-                    #                                     category=category_name,
-                    #                                     date__range = [start_date, end_date]).values()
-                    #         for row in rows:
-                    #             report_data.append(row)
-                    #     return report_data
-                        
-                    # if (toggled_value == 'enabled') :
-                    #     income_data = create_report_data ("Income", True)
-                    #     expenses_data = create_report_data ("Expenses", True)
-                    # elif (toggled_value == 'disabled') :
-                    #     income_data = create_report_data ("Income", False)
-                    #     expenses_data = create_report_data ("Expenses", False)
+                rep_contents = ai_report(report_data_set, selected_type)
 
+                report_data = {
+                    'year' : year,
+                    'tier' : selected_tier,
+                    'type' : selected_type,
+                    'group' : selected_group,
+                    'rep_contents': rep_contents,
+                }
 
+                return JsonResponse(report_data, safe=False)
 
-
-                    print (date_selection)
-                    print ("END DATE :", end_date)
-                    end_date = '2024-08-10'
-                    def create_report_data(select) :
-                        category = Category.objects.filter(selected=select).values()
-                        report_data = []
-                        # print ("*********category*******")
-                        for c in category:
-                            category_name = c['category']
-                            # print (category_name)
-                            rows = Transaction.objects.filter(category=category_name, date__range = [start_date, end_date]).values()
-                            for row in rows:
-                                report_data.append(row)
-                        return report_data
-                    
-                    transactions = create_report_data(True)
-
-                    # print ("**********class <list>**********")
-                    # print("Transactions <LIST> : ", transactions)
-
-                    # Custom serializer function
-                    def custom_serializer(obj):
-                        if isinstance(obj, (date)):
-                            return obj.isoformat()  # Convert date to string in ISO format
-                        elif isinstance(obj, Decimal):
-                            return str(obj)  # Convert Decimal to string
-                        raise TypeError(f"Type {type(obj)} not serializable")
-
-                    # Convert list of dictionaries to JSON string
-                    json_transactions = json.dumps(transactions, default=custom_serializer)
-
-                    print ("**********class <json>**********")
-                    print("json transactions" ,json_transactions)
-                    # print(json_income_data)
-                    # print("json_expenses_data" , type(json_expenses_data))
-                    # print(json_expenses_data)
-
-                    date_info = {
-                        'start_date': start_date,
-                        'end_date': end_date
-                    }
-                    print("date info : ",type(date_info))
-                    # Combining data and additional parameters
-                    report_data = {
-                        # 'income_data': income_data,
-                        # 'expenses_data': expenses_data,
-                        'date_info': date_info
-                    }
-
-
-                    return JsonResponse(report_data, safe=False)
-                
-                except json.JSONDecodeError:
-                    return JsonResponse({'error': 'Invalid JSON data'})
-            else:
-                return JsonResponse({'error': 'Invalid content type. Expected application/json'})
+            except json.JSONDecodeError:
+                return JsonResponse({'error': 'Invalid JSON data'})
         else:
-            end_date = date.today()
-            start_date = end_date.replace(day=1)
-            print ("*****start_date*****", start_date)
-            start_date = start_date.strftime("%Y-%m-%d")
-            end_date = end_date.strftime("%Y-%m-%d")           
-            
-            return render(request, 'home.html', {'header' : "รายงานวิเคราะห์ค่าใช้จ่าย" })
+            return JsonResponse({'error': 'Invalid content type. Expected application/json'})
+
     else:
-        return HttpResponseRedirect('main')
+        oldest_date = Transaction.objects.aggregate(oldest_date=Min('date'))['oldest_date']
+        oldest_year = oldest_date.year
+        current_year = date.today().year
+        year_array = []
+        for year in range(current_year, oldest_year, -1):
+            year_array.append(str(year))
+
+        context = {
+            'header': "รายงานวิเคราะห์การเงิน",
+            'year_array': year_array,
+        }
+
+        return render(request, 'home.html', context)
+
+def ai_report(report_data_set, selected_type):
+    # Extract report_table and grand_total from report_data
+    report_table = report_data_set['report_table']
+    grand_total = report_data_set['grand_total']
+    print("GRAND TOTAL:", grand_total)
+
+    # Custom serialization for dates and decimals
+    def custom_serializer(obj):
+        if isinstance(obj, (date)):
+            return obj.isoformat()  # Convert date to string in ISO format
+        elif isinstance(obj, Decimal):
+            return str(obj)  # Convert Decimal to string
+        raise TypeError(f"Type {type(obj)} not serializable")
+
+    # Convert list of dictionaries to JSON string
+    json_transactions = json.dumps(report_table, default=custom_serializer)
+    
+    # Ensure grand_total is safely converted to a string in the prompt
+    grand_total_str = str(grand_total)
+
+    # Create the prompt with placeholders for variables
+    prompt_template = """
+    You are an expert financial coach. Given the following {json_transactions} in JSON format, total of {selected_type} is {grand_total_str}, 
+    analyze the {selected_type}, identify any patterns, highlight the most valuable {selected_type}, 
+    and write a comprehensive report with recommendations for financial management. 
+    Please format the financial report with appropriate HTML tags. Headers should not be bigger than <h4>, and no need for an HTML skeleton.
+    """
+
+    # Initialize the ChatOpenAI model from LangChain
+    chat_model = ChatOpenAI(
+        model_name="gpt-4-turbo",
+        openai_api_key=settings.OPENAI_API_KEY,  # Assuming you have the key stored in Django settings
+        max_tokens=2000  # Adjust token limit based on your requirements
+    )
+
+    # Initialize memory to manage conversation context (optional for multi-step prompts)
+    memory = ConversationBufferMemory()
+
+    # Create a ChatPromptTemplate to fill the prompt with actual data
+    prompt = ChatPromptTemplate.from_template(prompt_template)
+
+    # Format the prompt with actual values, now correctly passing grand_total_str
+    final_prompt = prompt.format(
+        selected_type=selected_type,
+        json_transactions=json_transactions,
+        grand_total_str=grand_total_str  # Use grand_total_str here
+    )
+
+    # Execute the model to get the response
+    response = chat_model([SystemMessage(content="You are a financial assistant."), HumanMessage(content=final_prompt)])
+    
+    # Extract the generated report content
+    report = response.content
+    print(report)
+
+    return report
 
 @login_required
 def inc_exp_report(request):
     user_name = str(request.user).capitalize()
     rep_contents = []
-    
+
     if request.method == 'POST':
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
@@ -145,12 +164,12 @@ def inc_exp_report(request):
             rep_contents = Transaction.objects.filter(date_filter)
         elif report_type in ["Income", "Expenses"]:
             rep_contents = Transaction.objects.filter(date_filter & Q(group=report_type))
-        
+
         # Format dates for display
         rep_contents = list(rep_contents)  # Evaluate QuerySet
         for r in rep_contents:
             r.date = r.date.strftime("%Y-%m-%d")
-        
+
         print(f"Query results: {len(rep_contents)} transactions found")
     else:
         today = date.today()
@@ -176,8 +195,8 @@ def report_by_range(request):
             try:
                 data = json.loads(request.body)
                 date_selection = data.get('date_selection')
-                toggled_value = data.get('toggled_value')
-                
+                selected_tier = data.get('selected_tier')
+
                 if (date_selection == "custom_date"):
                     start_date = data.get('start_date')
                     end_date = data.get('end_date')
@@ -188,33 +207,29 @@ def report_by_range(request):
                     print ("date range : ", date_range)
                     print ("date range.start : ", start_date)
                     print ("date range.end : ", end_date)
-                    
-                print (date_selection)
-                
-                def create_report_data(group, select) :
-                    category = Category.objects.filter(selected=select).values()
+
+                print ("Date selection : ", date_selection)
+                print ("Tier : ", selected_tier)
+
+                def create_report_data(group, selected_tier) :
+                    category = Category.objects.filter(tier__lte=selected_tier, group=group).values().distinct()
                     report_data = []
                     # print ("*********category*******")
                     for c in category:
                         category_name = c['category']
-                        # print (category_name)
+                        tier_number = c['tier']
+                        # print (f'category_name {category_name} tier_number {tier_number}')
                         rows = Transaction.objects.filter(group=group, 
                                                     category=category_name,
                                                     date__range = [start_date, end_date]).values()
                         for row in rows:
+                            row['tier_number'] = tier_number
                             report_data.append(row)
                     return report_data
-                
-                if (toggled_value == 'enabled') :
-                    income_data = create_report_data ("Income", True)
-                    expenses_data = create_report_data ("Expenses", True)
-                elif (toggled_value == 'disabled') :
-                    income_data = create_report_data ("Income", False)
-                    expenses_data = create_report_data ("Expenses", False)
-                
-                # income_data = sorted(income_data, key=lambda x: x['group', x['description']])
-                # expenses_data = sorted(expenses_data, key=lambda x: x['group', x['description']])
-                    
+
+                income_data = create_report_data ("Income", selected_tier)
+                expenses_data = create_report_data ("Expenses", selected_tier)
+
                 date_info = {
                     'start_date': start_date,
                     'end_date': end_date
@@ -226,9 +241,9 @@ def report_by_range(request):
                     'expenses_data': expenses_data,
                     'date_info': date_info
                 }
-                    
+
                 return JsonResponse(report_data, safe=False)
-            
+
             except json.JSONDecodeError:
                 return JsonResponse({'error': 'Invalid JSON data'})
         else:
@@ -243,7 +258,7 @@ def report_by_range(request):
         custom_date = []
         custom_date.append(start_date)
         custom_date.append(end_date)                
-        
+
         return render(request, 'report_by_range.html', {'header' : "Income&Expenses ",
                                                         'custom_date' : custom_date })
 
@@ -277,12 +292,13 @@ def date_range_function (date_selection):
     date_range = []
     date_range.append(start_date)
     date_range.append(end_date)
-        
+
     return (date_range)
 
 # monthly report
-@login_required        
-def monthly_report (request):
+@csrf_exempt
+@login_required
+def monthly_report_view(request):
     if request.method == 'POST':
         if request.content_type == 'application/json':
             try:
@@ -291,83 +307,16 @@ def monthly_report (request):
                 selected_tier = data.get('tier')
                 selected_type = data.get('type')
                 selected_group = data.get('group')
-                
-                start_date = year+'-01-01'
-                end_date = year+'-12-31'
-                
-                if (selected_tier == '1'):
-                    selected = 2            
-                elif (selected_tier == '2'):
-                    selected = 3
-                elif (selected_tier == '3'):
-                    selected = 4
-                elif (selected_tier == '4'):
-                    selected = 5
-                    
-                # category = Category.objects.filter(tier__lt=selected).values('category', 'tier')
-                # for c in category:
-                #     category_name = c['tier']
-                #     print (category_name)
-                
-                categories = Category.objects.filter(tier__lt=selected).values_list('category', flat=True)
-                print('type of category :', type(categories))
-                    
-                transactions = Transaction.objects.filter(
-                                                        Q(group=selected_type) &
-                                                        Q(date__range=[start_date, end_date]) &
-                                                        Q(category__in=categories)
-                                                        ).values()
 
-                # get distinct category from Transactions filter
-                if selected_group == 'category':
-                    distinct_name = Transaction.objects.filter(
-                                                        Q(group=selected_type) &
-                                                        Q(date__range=[start_date, end_date]) &
-                                                        Q(category__in=categories)
-                                                        ).distinct().values_list('category', flat=True)
-                    category_and_tier = []
-                    for c in distinct_name:
-                        tier_query_set = Category.objects.filter(category=c).values_list('tier', flat=True)
-                        tier = tier_query_set.first()  # Use first() to get the first (and only) element
-                        category_and_tier.append((c, tier))
-                        print("distinct category ----->", c, "tier -->", tier)
-                                        
-                elif selected_group == 'payee':
-                    distinct_name = Transaction.objects.filter(
-                                                        Q(group=selected_type) &
-                                                        Q(date__range=[start_date, end_date]) &
-                                                        Q(category__in=categories)
-                                                        ).distinct().values_list('description', flat=True)
-                    category_and_tier = []
-                    for c in distinct_name:
-                        tier = ''
-                        category_and_tier.append((c, tier))
-                        print("distinct name ----->", c, "tier -->", tier)
-                
-                report_table = create_12_columns_report(selected_group, year, transactions, category_and_tier)
-
-                # for r in report_table:
-                #     print(r.year," : ",r.category," : ",r.jan," : ",r.feb," : ",r.mar," : ",r.apr," : "
-                #         ,r.may," : ",r.jun," : ",r.jul," : ",r.aug," : ",r.sep," : ",r.oct," : "
-                #         ,r.nov," : ",r.dec," : ",r.total)
-                    # print (r)
-                # report_table = json.dumps(report_table, cls=DjangoJSONEncoder)
-
-                report_table = list(report_table)
-                transactions = list(transactions)
-                
-                report_data = {
-                    'report_table' : report_table,
-                    'transactions' : transactions 
-                }
+                # Call the refactored monthly_report function
+                report_data = monthly_report(year, selected_tier, selected_type, selected_group)
 
                 return JsonResponse(report_data, safe=False)
-                        
+
             except json.JSONDecodeError:
                 return JsonResponse({'error': 'Invalid JSON data'})
         else:
             return JsonResponse({'error': 'Invalid content type. Expected application/json'})
-        
     else :
         oldest_date = Transaction.objects.aggregate(oldest_date=Min('date'))['oldest_date']
         oldest_year = oldest_date.year
@@ -375,11 +324,86 @@ def monthly_report (request):
         year_array = []
         for year in range(current_year, oldest_year, -1):
             year_array.append(str(year))
-            
         return render(request, 'monthly_report.html', {'year_array' : year_array})
-    
+        
+def monthly_report (year, selected_tier, selected_type, selected_group):
+    start_date = f'{year}-01-01'
+    end_date = f'{year}-12-31'
+
+    if selected_tier == '1':
+        selected = 2            
+    elif selected_tier == '2':
+        selected = 3
+    elif selected_tier == '3':
+        selected = 4
+    elif selected_tier == '4':
+        selected = 5
+
+    # category = Category.objects.filter(tier__lt=selected).values('category', 'tier')
+    # for c in category:
+    #     category_name = c['tier']
+    #     print (category_name)
+
+    categories = Category.objects.filter(tier__lt=selected).values_list('category', flat=True)
+    # print('type of category :', type(categories))
+
+    transactions = Transaction.objects.filter(
+                                            Q(group=selected_type) &
+                                            Q(date__range=[start_date, end_date]) &
+                                            Q(category__in=categories)
+                                            ).values()
+
+    # get distinct category from Transactions filter
+    if selected_group == 'category':
+        distinct_name = Transaction.objects.filter(
+                                            Q(group=selected_type) &
+                                            Q(date__range=[start_date, end_date]) &
+                                            Q(category__in=categories)
+                                            ).distinct().values_list('category', flat=True)
+        category_and_tier = []
+        for c in distinct_name:
+            tier_query_set = Category.objects.filter(category=c).values_list('tier', flat=True)
+            tier = tier_query_set.first()  # Use first() to get the first (and only) element
+            category_and_tier.append((c, tier))
+            # print("distinct category ----->", c, "tier -->", tier)
+
+    elif selected_group == 'payee':
+        distinct_name = Transaction.objects.filter(
+                                            Q(group=selected_type) &
+                                            Q(date__range=[start_date, end_date]) &
+                                            Q(category__in=categories)
+                                            ).distinct().values_list('description', flat=True)
+        category_and_tier = []
+        for c in distinct_name:
+            tier = ''
+            category_and_tier.append((c, tier))
+            # print("distinct name ----->", c, "tier -->", tier)
+
+    return_value = create_12_columns_report(selected_group, year, transactions, category_and_tier)
+
+    # for r in report_table:
+    #     print(r.year," : ",r.category," : ",r.jan," : ",r.feb," : ",r.mar," : ",r.apr," : "
+    #         ,r.may," : ",r.jun," : ",r.jul," : ",r.aug," : ",r.sep," : ",r.oct," : "
+    #         ,r.nov," : ",r.dec," : ",r.total)
+        # print (r)
+    # report_table = json.dumps(report_table, cls=DjangoJSONEncoder)
+    grand_total = return_value['grand_total']
+    report_table = return_value['report_table']
+
+    report_table = list(report_table)
+    transactions = list(transactions)
+
+    report_data = {
+        'grand_total' : grand_total,
+        'report_table' : report_table,
+        'transactions' : transactions 
+    }
+
+    return (report_data)
+
 def create_12_columns_report(group, year, transactions, category_and_tier):
-    report_data = []
+    report_table = []
+    grand_total = 0
 
     for c in category_and_tier:
         # c_t = str(c[1]) + ". " + c[0]
@@ -390,7 +414,7 @@ def create_12_columns_report(group, year, transactions, category_and_tier):
                 name_in_transactions = t['category']
             elif group == 'payee':
                 name_in_transactions = t['description']
-                
+
             if c[0] == name_in_transactions:
                 mnt = t['date']
                 month = mnt.month
@@ -421,10 +445,17 @@ def create_12_columns_report(group, year, transactions, category_and_tier):
                     row.dec += t['amount']
 
                 row.total += t['amount']
+                grand_total += t['amount']
 
-        report_data.append(row.to_dict())
+        report_table.append(row.to_dict())
 
-    return report_data
+    # print ("Grand Total : ", grand_total)
+    return_value = {
+        'report_table' : report_table,
+        'grand_total' : grand_total,
+    }
+
+    return return_value
 
 # yearly report
 @login_required
@@ -439,13 +470,13 @@ def yearly_report (request):
                     selected_type = data.get('type')
                     selected_group = data.get('group')
                     year_start_date = str(int(year) - 5)
-                    
+
                     start_date = year_start_date+'-01-01'
                     end_date = year+'-12-31'
-                    
+
                     print ('start date :', start_date)
                     print ('end date :', end_date)
-                    
+
                     if (selected_tier == '1'):
                         selected = 2            
                     elif (selected_tier == '2'):
@@ -454,15 +485,15 @@ def yearly_report (request):
                         selected = 4
                     elif (selected_tier == '4'):
                         selected = 5
-                        
+
                     # category = Category.objects.filter(tier__lt=selected).values('category', 'tier')
                     # for c in category:
                     #     category_name = c['tier']
                     #     print (category_name)
-                    
+
                     categories = Category.objects.filter(tier__lt=selected).values_list('category', flat=True)
-                    print('type of category :', type(categories))
-                        
+                    # print('type of category :', type(categories))
+
                     transactions = Transaction.objects.filter(
                                                             Q(group=selected_type) &
                                                             Q(date__range=[start_date, end_date]) &
@@ -482,7 +513,7 @@ def yearly_report (request):
                             tier = tier_query_set.first()  # Use first() to get the first (and only) element
                             category_and_tier.append((c, tier))
                             # print("distinct category ----->", c, "tier -->", tier)
-                                            
+
                     elif selected_group == 'payee':
                         distinct_name = Transaction.objects.filter(
                                                             Q(group=selected_type) &
@@ -494,7 +525,7 @@ def yearly_report (request):
                             tier = ''
                             category_and_tier.append((c, tier))
                             # print("distinct name ----->", c, "tier -->", tier)
-                    
+
                     report_table = create_6_columns_report(selected_group, year, transactions, category_and_tier)
 
                     # for r in report_table:
@@ -506,19 +537,19 @@ def yearly_report (request):
 
                     report_table = list(report_table)
                     transactions = list(transactions)
-                    
+
                     report_data = {
                         'report_table' : report_table,
                         'transactions' : transactions 
                     }
 
                     return JsonResponse(report_data, safe=False)
-                        
+
                 except json.JSONDecodeError:
                     return JsonResponse({'error': 'Invalid JSON data'})
             else:
                 return JsonResponse({'error': 'Invalid content type. Expected application/json'})
-            
+
         else :
             oldest_date = Transaction.objects.aggregate(oldest_date=Min('date'))['oldest_date']
             oldest_year = oldest_date.year
@@ -527,11 +558,11 @@ def yearly_report (request):
             year_array = []
             for year in range(current_year, oldest_year, -1):
                 year_array.append(str(year))
-                
+
             return render(request, 'yearly_report.html', {'year_array' : year_array})
     else:
         return HttpResponseRedirect('main')
-    
+
 def create_6_columns_report(group, year, transactions, category_and_tier):
     report_data = []
     oldest_year = int(year) - 5
@@ -562,7 +593,7 @@ def create_6_columns_report(group, year, transactions, category_and_tier):
                 name_in_transactions = t['category']
             elif group == 'payee':
                 name_in_transactions = t['description']
-                
+
             if c[0] == name_in_transactions:
                 y = t['date']
                 yr = str(y.year)

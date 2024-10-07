@@ -133,3 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+OPENAI_API_KEY = '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'
+HUGGINGFACE_API_KEY = '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'

@@ -274,6 +274,7 @@ function createHeader(combined_header) {
 
 let gridApi = null;
 
+
 function showPopup(data, transactions, column_head) {
     console.log("Attempting to show popup for:", data.category);
     console.log("Column head:", column_head);
@@ -319,12 +320,16 @@ function showPopup(data, transactions, column_head) {
         console.warn("No matching transactions found for the popup");
     }
 
+    // Calculate the initial total amount
+    let totalAmount = popupContents.reduce((sum, item) => sum + parseFloat(item.amount), 0);
+
     popupContents.sort((a, b) => new Date(a.date) - new Date(b.date));
 
     function createPopupHTML() {
         let popupHTML = `
-            <h3>${column_head}: ${category_or_payee_name}</h3>
+            <h6>${column_head}: ${category_or_payee_name}</h6>
             <input type="text" id="popupSearch" placeholder="Search..." style="float: right; margin-bottom: 10px;">
+            <p><strong>Total Amount: $<span id="totalAmount">${formatAmount(totalAmount)}</span></strong></p>
             <table class="popup-table">
                 <thead>
                     <tr>
@@ -363,20 +368,35 @@ function showPopup(data, transactions, column_head) {
         popupContent.innerHTML = createPopupHTML();
         popupContainer.style.display = 'block';
 
+        // Add ESC key listener
         document.addEventListener('keydown', handleEscKey);
 
+        // Search functionality and recalculation of total
         const searchInput = document.getElementById('popupSearch');
         if (searchInput) {
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
                 const tbody = document.getElementById('popupTableBody');
+                let filteredTotal = 0;
+
                 if (tbody) {
                     const rows = tbody.getElementsByTagName('tr');
                     for (let row of rows) {
                         const text = row.textContent.toLowerCase();
-                        row.style.display = text.includes(searchTerm) ? '' : 'none';
+                        const amountCell = row.querySelector('.amount-cell');
+                        const amount = parseFloat(amountCell.textContent.replace(/[^0-9.-]+/g, "")); // Extract and parse amount
+
+                        if (text.includes(searchTerm)) {
+                            row.style.display = '';
+                            filteredTotal += amount; // Sum visible row amounts
+                        } else {
+                            row.style.display = 'none';
+                        }
                     }
                 }
+
+                // Update total amount displayed
+                document.getElementById('totalAmount').textContent = formatAmount(filteredTotal);
             });
         }
 
@@ -385,6 +405,120 @@ function showPopup(data, transactions, column_head) {
         console.error("Error displaying popup:", error);
     }
 }
+
+
+
+// function showPopup(data, transactions, column_head) {
+//     console.log("Attempting to show popup for:", data.category);
+//     console.log("Column head:", column_head);
+
+//     const popupContainer = document.getElementById('popup-container');
+//     const popupContent = document.getElementById('popup-content');
+//     if (!popupContainer || !popupContent) {
+//         console.error("Popup container or content not found in the DOM");
+//         return;
+//     }
+
+//     function formatAmount(amount) {
+//         return parseFloat(amount).toLocaleString('en-US', {
+//             minimumFractionDigits: 2,
+//             maximumFractionDigits: 2
+//         });
+//     }
+
+//     let popupContents = [];
+//     let category_or_payee_name = data.category;
+    
+//     if (column_head == "Category") {
+//         popupContents = transactions.filter(rowData => rowData.category == category_or_payee_name)
+//             .map(rowData => ({
+//                 date: rowData.date,
+//                 payee: rowData.description,
+//                 accountName: rowData.account_name,
+//                 memo: rowData.memo,
+//                 amount: rowData.amount
+//             }));
+//     } else if (column_head == 'Payee/Recipient') {
+//         popupContents = transactions.filter(rowData => rowData.description == category_or_payee_name)
+//             .map(rowData => ({
+//                 date: rowData.date,
+//                 category: rowData.category,
+//                 accountName: rowData.account_name,
+//                 memo: rowData.memo,
+//                 amount: rowData.amount
+//             }));
+//     }
+
+//     if (popupContents.length === 0) {
+//         console.warn("No matching transactions found for the popup");
+//     }
+
+//     popupContents.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+//     function createPopupHTML() {
+//         let popupHTML = `
+//             <h3>${column_head}: ${category_or_payee_name}</h3>
+//             <input type="text" id="popupSearch" placeholder="Search..." style="float: right; margin-bottom: 10px;">
+//             <table class="popup-table">
+//                 <thead>
+//                     <tr>
+//                         <th>YYYY/MM/DD</th>
+//                         <th>${column_head == "Category" ? "Payee" : "Category"}</th>
+//                         <th>Account Name</th>
+//                         <th>Memo</th>
+//                         <th>Amount</th>
+//                     </tr>
+//                 </thead>
+//                 <tbody id="popupTableBody">
+//         `;
+
+//         popupContents.forEach(item => {
+//             popupHTML += `
+//                 <tr>
+//                     <td>${item.date || ''}</td>
+//                     <td>${column_head == "Category" ? (item.payee || '') : (item.category || '')}</td>
+//                     <td>${item.accountName || ''}</td>
+//                     <td>${item.memo || ''}</td>
+//                     <td class="amount-cell">${formatAmount(item.amount || 0)}</td>
+//                 </tr>
+//             `;
+//         });
+
+//         popupHTML += `
+//                 </tbody>
+//             </table>
+//             <div class="esc-hint">Press ESC to close</div>
+//         `;
+
+//         return popupHTML;
+//     }
+
+//     try {
+//         popupContent.innerHTML = createPopupHTML();
+//         popupContainer.style.display = 'block';
+
+//         document.addEventListener('keydown', handleEscKey);
+
+//         const searchInput = document.getElementById('popupSearch');
+//         if (searchInput) {
+//             searchInput.addEventListener('input', function() {
+//                 const searchTerm = this.value.toLowerCase();
+//                 const tbody = document.getElementById('popupTableBody');
+//                 if (tbody) {
+//                     const rows = tbody.getElementsByTagName('tr');
+//                     for (let row of rows) {
+//                         const text = row.textContent.toLowerCase();
+//                         row.style.display = text.includes(searchTerm) ? '' : 'none';
+//                     }
+//                 }
+//             });
+//         }
+
+//         console.log("Popup displayed successfully");
+//     } catch (error) {
+//         console.error("Error displaying popup:", error);
+//     }
+// }
 
 function handleEscKey(event) {
     if (event.key === 'Escape') {

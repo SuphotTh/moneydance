@@ -15,7 +15,7 @@ urlpatterns = [
     # report menu
     path('inc_exp_report/', report_views.inc_exp_report, name='inc_exp_report'),
     path('report_by_range/', report_views.report_by_range, name='report_by_range'),
-    path('monthly_report/', report_views.monthly_report, name='monthly_report'),
+    path('monthly_report/', report_views.monthly_report_view, name='monthly_report_view'),
     path('yearly_report/', report_views.yearly_report, name='yearly_report'),
 
     # data setting menu

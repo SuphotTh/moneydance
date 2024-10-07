@@ -6,7 +6,7 @@ class Transaction(models.Model):
     category = models.CharField(max_length=100)
     date = models.DateField()
     description = models.CharField(max_length=100)
-    account = models.CharField(max_length=200)
+    account = models.CharField(max_length=200) 
     account_type = models.CharField(max_length=100)
     account_name = models.CharField(max_length=100)
     account_detail = models.CharField(max_length=100)
@@ -15,7 +15,7 @@ class Transaction(models.Model):
 
     class Meta:
         db_table = 'Transaction'
-
+ 
 class Category(models.Model):
     group = models.CharField(max_length=50)
     category = models.CharField(max_length=100)

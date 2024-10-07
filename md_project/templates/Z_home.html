@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- AG Grid CSS -->
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css">
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css">
+<!-- AG Grid JavaScript -->
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-8">
+          <h5 class="text text-primary">{{ header }}</h5>
+        </div>
+        <div class="col-4">
+          <input type="radio" id="selected" name="toggled" value="enabled" checked >
+          <label for="selected">: report from enabled category</label>
+        </div> 
+      </div>
+      <hr>
+      <div>
+        <form id="dataForm">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-2">
+              <input type="radio" id="option1" name="options" value="option1" onclick="date_range('mtd')">
+              <label for="option1">: Month to date</label>
+            </div>
+            <div class="col-2">
+              <input type="radio" id="option2" name="options" value="option2" onclick="date_range('last_month')">
+              <label for="option2">: Last month</label>                  
+            </div>
+            <div class="col-2">
+              <input type="radio" id="option3" name="options" value="option3" onclick="date_range('last_3months')">
+              <label for="option3">: Last 3 months</label>
+            </div>
+            <div class="col-2">
+              <input type="radio" id="option4" name="options" value="option4" onclick="date_range('last_12months')">
+              <label for="option4">: Last 12 months</label>
+            </div>
+            <div class="col-2">
+              <input type="radio" id="option5" name="options" value="option5" onclick="date_range('last_year')">
+              <label for="option5">: Last year</label>
+            </div>
+            <div class="col-2">
+              <input type="radio" id="option6" name="options" value="option6" onclick="date_range('ytd')">
+              <label for="option6">: Year to date</label>
+            </div>
+          </div>       
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    .ag-theme-alpine {
+        --ag-font-size: 10px !important;
+        --ag-font-family: Arial, sans-serif;
+    }
+    .ag-theme-alpine .ag-header-cell-label {
+        font-weight: bold;
+        font-size: 12px !important;
+    }
+    .ag-theme-alpine .ag-cell {
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+        line-height: 16px !important;
+    }
+    .ag-theme-alpine .ag-cell-value {
+        font-size: 12px !important;
+    }
+    .ag-theme-alpine .ag-row {
+        font-size: 12px !important;
+    }
+    .ag-theme-alpine .ag-row-even {
+        background-color: #f8f8f8;
+    }
+    .ag-theme-alpine .ag-row-odd {
+        background-color: #ffffff;
+    }
+</style>
+  <div class="content mt-2">    
+    <div class="container">
+      <div class="reportcontents">
+        {{ rep_contents|safe }}
+      </div>
+    </div>
+  </div>
+
+<script>
+function date_range(selection) {
+    clearReportContent();
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const date_selection = selection;
+    const toggled_value = document.querySelector('input[name="toggled"]:checked').value;
+
+    console.log("Selected toggled value:", toggled_value);
+    console.log("Selected Option:", date_selection);
+
+    const requestData = {
+        toggled_value : toggled_value,
+        date_selection : date_selection,
+    };
+
+    fetch('../home/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(requestData),
+    })
+    .then(response => response.json())
+    .then(received_data => {
+        document.querySelector('.reportcontents').innerHTML = received_data.rep_contents;
+      })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
+function clearReportContent() {
+    // Clear the income table
+    const incomeTable = document.getElementById('income_table');
+    if (incomeTable) {
+        while (incomeTable.firstChild) {
+            incomeTable.removeChild(incomeTable.firstChild);
+        }
+    }
+
+    // Clear the expenses table
+    const expensesTable = document.getElementById('expenses_table');
+    if (expensesTable) {
+        while (expensesTable.firstChild) {
+            expensesTable.removeChild(expensesTable.firstChild);
+        }
+    }
+
+    // Clear the header
+    const header = document.getElementById('header');
+    if (header) {
+        header.innerHTML = '';
+    }
+}
+
+</script>
+{% endblock %}

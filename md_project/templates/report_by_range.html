@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Report by range{% endblock %}
+{% block title %}Report by date{% endblock %}
 
 {% block content %}
 <!-- AG Grid CSS -->
@@ -28,44 +28,64 @@
                     </div>
                     <div class="col-1"></div>
                     <div class="col-2">
-                        <input type="radio" id="option1" name="options" value="option1" onclick="report_by_range('custom_date')">
+                        <input type="radio" id="option1" name="options" value="custom_date" checked >
                         <label for="option1">: Custom date</label>
                     </div>
                     <div class="col-2">
-                        <input type="radio" id="option2" name="options" value="option2" onclick="report_by_range('last_month')">
+                        <input type="radio" id="option2" name="options" value="last_month" >
                         <label for="option2">: Last month</label>                  
                     </div>
                     <div class="col-2">
-                        <input type="radio" id="option3" name="options" value="option3" onclick="report_by_range('last_3months')">
+                        <input type="radio" id="option3" name="options" value="last_3months" >
                         <label for="option3">: Last 3 months</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-5"></div>
                     <div class="col-2">
-                        <input type="radio" id="option4" name="options" value="option4" onclick="report_by_range('last_12months')">
+                        <input type="radio" id="option4" name="options" value="last_12months" >
                         <label for="option4">: Last 12 months</label>
                     </div>
                     <div class="col-2">
-                        <input type="radio" id="option5" name="options" value="option5" onclick="report_by_range('last_year')">
+                        <input type="radio" id="option5" name="options" value="last_year" >
                         <label for="option5">: Last year</label>
                     </div>
                     <div class="col-2">
-                        <input type="radio" id="option6" name="options" value="option6" onclick="report_by_range('ytd')">
+                        <input type="radio" id="option6" name="options" value="ytd" >
                         <label for="option6">: Year to date</label>
                     </div>
                 </div>
                 <hr>
+
                 <div class="row">
-                    <div class="col-3">
-                        <input type="radio" id="selected" name="toggled" value="enabled" checked >
-                        <label for="selected">: enabled category</label>
+                    <div class="col-2">
+                        <label class="form-label">Select tier:</label>&nbsp&nbsp&nbsp&nbsp
                     </div>
-                    <div class="col-3">
-                        <input type="radio" id="unselected" name="toggled" value="disabled" >
-                        <label for="unselected">: disabled category</label>
+                    <div class="col-1">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="tier1" name="tier" value="1" onclick="expenses_tier('1')">
+                            <label class="form-check-label" for="tier1">:Tier1</label>
+                        </div>
                     </div>
-                </div>        
+                    <div class="col-1">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="tier2" name="tier" value="2" onclick="expenses_tier('2')">
+                            <label class="form-check-label" for="tier2">:Tier2</label>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="tier3" name="tier" value="3" onclick="expenses_tier('3')">
+                            <label class="form-check-label" for="tier3">:Tier3</label>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="tier4" name="tier" value="4" onclick="expenses_tier('4')">
+                            <label class="form-check-label" for="tier4">:Tier4</label>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -113,23 +133,35 @@
 </div>
 
 <script>
-function report_by_range(selection) {
+function expenses_tier(selected_tier) {
+    //Clear Screen 
     clearReportContent();
+
+    // Get CSRF token from the form
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+    // Get start date and end date from the input fields
     const start_date = document.getElementById('start_date').value;
     const end_date = document.getElementById('end_date').value;
-    const date_selection = selection;
-    const toggled_value = document.querySelector('input[name="toggled"]:checked').value;
 
-    console.log("Selected toggled value:", toggled_value);
-    console.log("Selected Option:", date_selection);
+    // Get selected date range option from radio buttons (checked)
+    const date_selection = document.querySelector('input[name="options"]:checked').value;
 
+    // Selected tier is passed to the function as an argument
+    const tier = selected_tier;
+
+    // Log values for debugging
+    console.log("Selected start date:", start_date);
+    console.log("Selected end date:", end_date);
+    console.log("Selected date range option:", date_selection);
+    console.log("Selected tier:", tier);
+
+    // Prepare the data to be sent in the request
     const requestData = {
-        // Add any parameters you need for fetching data
-        start_date : start_date,
-        end_date : end_date,
-        toggled_value : toggled_value,
-        date_selection : date_selection,
+        start_date: start_date,
+        end_date: end_date,
+        selected_tier: tier,
+        date_selection: date_selection,
     };
 
     fetch('../report_by_range/', {
@@ -142,7 +174,7 @@ function report_by_range(selection) {
     })
     .then(response => response.json())
     .then(received_data => {
-        //console.log('Received data:', received_data);
+        // console.log('Received data:', received_data);
         table_data = received_data;
         income_data = received_data.income_data;
         expenses_data = received_data.expenses_data;
@@ -219,6 +251,7 @@ function createSummaryTable(income_data, expenses_data) {
         (expenses_data && Object.keys(expenses_data).length > 0)) {
         function createDataTable(data_in) {
             let category1 = '';
+            let tier_number = null;
             let sub_total = 0;
             let tabulator_table = [];
             
@@ -227,10 +260,12 @@ function createSummaryTable(income_data, expenses_data) {
                     if (category1 !== '') {
                         tabulator_table.push({
                             category: category1,
+                            tier_number: tier_number,
                             amount: sub_total
                         });
                     }
                     category1 = rowData.category;
+                    tier_number = rowData.tier_number;
                     sub_total = 0;
                 }
                 sub_total += parseFloat(rowData.amount);
@@ -238,6 +273,7 @@ function createSummaryTable(income_data, expenses_data) {
                 if (index === data_in.length - 1) {
                     tabulator_table.push({
                         category: category1,
+                        tier_number: tier_number,
                         amount: sub_total
                     });
                 }
@@ -248,7 +284,7 @@ function createSummaryTable(income_data, expenses_data) {
 
         const income_table = createDataTable(income_data);
         const expenses_table = createDataTable(expenses_data);
-        
+
         createTable("income_table", income_table);
         createTable("expenses_table", expenses_table);
     } else {
@@ -258,15 +294,16 @@ function createSummaryTable(income_data, expenses_data) {
 }
 
 function showPopup(data, transactions, columnHead) {
-    // console.log('transactions = ', transactions);
-
+    // Remove existing popup if any
     const existingPopup = document.getElementById('cellPopup');
     if (existingPopup) {
         existingPopup.remove();
     }
 
+    // Filter transactions by category
     const categoryTransactions = transactions.filter(t => t.category === data.category);
 
+    // Create popup element
     const popup = document.createElement('div');
     popup.id = 'cellPopup';
     popup.style.cssText = `
@@ -279,21 +316,29 @@ function showPopup(data, transactions, columnHead) {
         padding: 20px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         z-index: 1000;
-        width: 50%; /* Increased width  */
+        width: 50%;
         max-height: 60%;
         overflow-y: auto;
-        font-size: 12px; /* Further reduced font size */
+        font-size: 12px;
         font-family: Arial, sans-serif;
     `;
-    if (columnHead == 'income_table') {
-        popupHead = "Income";
-    } else if (columnHead == 'expenses_table') {
-        popupHead = "Expenses";
+
+    // Determine whether it's income or expenses
+    let popupHead = '';
+    if (columnHead === 'income_table') {
+        popupHead = 'Income';
+    } else if (columnHead === 'expenses_table') {
+        popupHead = 'Expenses';
     }
+
+    // Calculate total amount for all category transactions
+    let totalAmount = categoryTransactions.reduce((sum, t) => sum + parseFloat(t.amount), 0);
+
+    // Create popup content
     let popupContent = `
         <h3 style="font-size: 14px; margin-bottom: 8px;"> Type - ${popupHead}, Category - ${data.category}</h3>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <p style="margin: 0;"><strong>Total Amount:</strong> ${formattedNumber(data.amount)}</p>
+            <p style="margin: 0;"><strong>Total Amount:</strong> <span id="totalAmountDisplay">${formattedNumber(totalAmount)}</span></p>
             <input type="text" id="searchBox" placeholder="Search..." style="padding: 4px; border: 1px solid #ccc; border-radius: 3px; font-size: 10px;">
         </div>
         <h4 style="font-size: 12px; margin-bottom: 8px;">Transactions:</h4>
@@ -309,6 +354,7 @@ function showPopup(data, transactions, columnHead) {
             <tbody>
     `;
 
+    // Add transactions to table
     categoryTransactions.forEach(t => {
         popupContent += `
             <tr>
@@ -331,7 +377,7 @@ function showPopup(data, transactions, columnHead) {
     popup.innerHTML = popupContent;
     document.body.appendChild(popup);
 
-    // Add ESC key listener
+    // Add ESC key listener to close popup
     const escKeyListener = (event) => {
         if (event.key === 'Escape') {
             popup.remove();
@@ -340,17 +386,31 @@ function showPopup(data, transactions, columnHead) {
     };
     document.addEventListener('keydown', escKeyListener);
 
-    // Add search functionality
+    // Search and filter transactions
     document.getElementById('searchBox').addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
         const rows = document.querySelectorAll('#transactionTable tbody tr');
-        
+        let filteredTotal = 0;
+
         rows.forEach(row => {
             const text = row.textContent.toLowerCase();
-            row.style.display = text.includes(searchTerm) ? '' : 'none';
+            if (text.includes(searchTerm)) {
+                row.style.display = '';
+                // Extract the amount from the displayed row and add to filteredTotal
+                const amount = parseFloat(row.cells[3].textContent.replace(/[^0-9.-]+/g, ""));
+                filteredTotal += amount;
+            } else {
+                row.style.display = 'none';
+            }
         });
+
+        // Update the total displayed in the popup
+        document.getElementById('totalAmountDisplay').textContent = formattedNumber(filteredTotal);
     });
 }
+
+
+
 
 // Add this to your existing JavaScript if not already present
 document.addEventListener('click', function(event) {
@@ -373,8 +433,21 @@ function createTable(tableId, tableData) {
         columnDefs: [
             { 
                 field: 'category', 
-                headerName: tableId.replace('_table', ''), 
+                headerName: tableId.replace('_table', '').charAt(0).toUpperCase() + tableId.replace('_table', '').slice(1),  
                 flex: 1,
+                valueFormatter: params => {
+                if (params.value) {
+                    return params.value.charAt(0).toUpperCase() + params.value.slice(1);
+                }
+                    return params.value; // Handle null or undefined values
+                }
+            },
+            { 
+                field: 'tier_number', 
+                headerName: 'Tier', 
+                type: 'numericColumn', 
+                flex: 1,
+                cellStyle: { textAlign: 'right' }
             },
             { 
                 field: 'amount', 
