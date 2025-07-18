@@ -1,0 +1,913 @@
+Watching for file changes with StatReloader
+[15/May/2025 14:25:54] "GET / HTTP/1.1" 302 0
+[15/May/2025 14:25:54] "GET /login/?next=/ HTTP/1.1" 200 2224
+[15/May/2025 14:25:54] "GET /static/css/style.css HTTP/1.1" 200 2519
+[15/May/2025 14:25:54] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[15/May/2025 14:25:54] "GET /favicon.ico HTTP/1.1" 404 5381
+[15/May/2025 14:26:05] "POST /login/?next=/ HTTP/1.1" 302 0
+[15/May/2025 14:26:05] "GET /home/ HTTP/1.1" 200 12219
+[15/May/2025 14:26:17] "GET /report_by_range/ HTTP/1.1" 200 24444
+[15/May/2025 14:26:19] "POST /report_by_range/ HTTP/1.1" 200 13318
+[15/May/2025 14:26:27] "POST /report_by_range/ HTTP/1.1" 200 39634
+[15/May/2025 14:26:39] "POST /report_by_range/ HTTP/1.1" 200 405374
+[15/May/2025 14:26:42] "POST /report_by_range/ HTTP/1.1" 200 428453
+[15/May/2025 14:27:08] "POST /report_by_range/ HTTP/1.1" 200 449538
+[15/May/2025 14:27:34] "POST /report_by_range/ HTTP/1.1" 200 104267
+[15/May/2025 14:27:53] "POST /report_by_range/ HTTP/1.1" 200 147846
+[15/May/2025 14:28:28] "POST /report_by_range/ HTTP/1.1" 200 449538
+[15/May/2025 14:28:42] "GET /logout/ HTTP/1.1" 302 0
+[15/May/2025 14:28:42] "GET /login/ HTTP/1.1" 200 2224
+[16/May/2025 09:27:26] "GET / HTTP/1.1" 302 0
+[16/May/2025 09:27:26] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[16/May/2025 09:27:29] "GET /favicon.ico HTTP/1.1" 404 5381
+[16/May/2025 09:27:32] "POST /login/?next=/ HTTP/1.1" 302 0
+[16/May/2025 09:27:33] "GET /home/ HTTP/1.1" 200 12219
+[16/May/2025 09:27:37] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[16/May/2025 09:28:36] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[16/May/2025 09:28:40] "GET /report_by_range/ HTTP/1.1" 200 24444
+[16/May/2025 09:28:44] "POST /report_by_range/ HTTP/1.1" 200 14151
+[16/May/2025 09:29:43] "POST /report_by_range/ HTTP/1.1" 200 150433
+[16/May/2025 09:29:58] "POST /report_by_range/ HTTP/1.1" 200 161260
+[16/May/2025 09:31:51] "POST /report_by_range/ HTTP/1.1" 200 449946
+[16/May/2025 09:32:37] "GET /logout/ HTTP/1.1" 302 0
+[16/May/2025 09:32:37] "GET /login/ HTTP/1.1" 200 2224
+[21/May/2025 05:05:01] "GET / HTTP/1.1" 302 0
+[21/May/2025 05:05:01] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[21/May/2025 05:05:02] "GET /favicon.ico HTTP/1.1" 404 5381
+[21/May/2025 05:05:06] "POST /login/?next=/ HTTP/1.1" 302 0
+[21/May/2025 05:05:06] "GET /home/ HTTP/1.1" 200 12219
+[21/May/2025 05:05:09] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[21/May/2025 05:06:06] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[21/May/2025 05:13:28] "GET /report_by_range/ HTTP/1.1" 200 24444
+[21/May/2025 05:13:31] "POST /report_by_range/ HTTP/1.1" 200 19848
+[21/May/2025 05:14:10] "POST /report_by_range/ HTTP/1.1" 200 20948
+[21/May/2025 05:14:42] "POST /report_by_range/ HTTP/1.1" 200 18181
+[21/May/2025 05:14:58] "GET /monthly_report/ HTTP/1.1" 200 26206
+[21/May/2025 05:14:59] "POST /monthly_report/ HTTP/1.1" 200 58
+[21/May/2025 05:15:04] "POST /monthly_report/ HTTP/1.1" 200 87724
+[21/May/2025 05:15:13] "POST /monthly_report/ HTTP/1.1" 200 116713
+[21/May/2025 05:15:26] "POST /monthly_report/ HTTP/1.1" 200 53216
+[21/May/2025 05:16:27] "POST /monthly_report/ HTTP/1.1" 200 116713
+[21/May/2025 05:17:01] "GET /logout/ HTTP/1.1" 302 0
+[21/May/2025 05:17:01] "GET /login/ HTTP/1.1" 200 2224
+[21/May/2025 07:16:47] "POST /login/ HTTP/1.1" 302 0
+[21/May/2025 07:16:47] "GET /home/ HTTP/1.1" 200 12219
+[21/May/2025 07:16:55] "GET /get_dataset/ HTTP/1.1" 200 17257
+[21/May/2025 07:16:57] "POST /get_dataset/ HTTP/1.1" 200 2613
+[21/May/2025 07:17:05] "POST /set_tier/ HTTP/1.1" 200 43
+[21/May/2025 07:17:11] "GET /report_by_range/ HTTP/1.1" 200 24444
+[21/May/2025 07:17:14] "POST /report_by_range/ HTTP/1.1" 200 19526
+[21/May/2025 07:17:30] "POST /report_by_range/ HTTP/1.1" 200 20626
+[21/May/2025 07:17:55] "POST /report_by_range/ HTTP/1.1" 200 39280
+[21/May/2025 07:18:18] "POST /report_by_range/ HTTP/1.1" 200 20626
+[21/May/2025 07:18:31] "POST /report_by_range/ HTTP/1.1" 200 18181
+[21/May/2025 07:18:44] "GET /logout/ HTTP/1.1" 302 0
+[21/May/2025 07:18:44] "GET /login/ HTTP/1.1" 200 2224
+[22/May/2025 04:15:08] "GET / HTTP/1.1" 302 0
+[22/May/2025 04:15:08] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[22/May/2025 04:15:09] "GET /favicon.ico HTTP/1.1" 404 5377
+[22/May/2025 04:15:13] "POST /login/?next=/ HTTP/1.1" 302 0
+[22/May/2025 04:15:13] "GET /home/ HTTP/1.1" 200 12219
+[22/May/2025 04:15:19] "GET /report_by_range/ HTTP/1.1" 200 24444
+[22/May/2025 04:15:22] "POST /report_by_range/ HTTP/1.1" 200 19526
+[22/May/2025 04:15:31] "POST /report_by_range/ HTTP/1.1" 200 20626
+[22/May/2025 04:15:42] "POST /report_by_range/ HTTP/1.1" 200 447996
+[22/May/2025 04:16:00] "GET /logout/ HTTP/1.1" 302 0
+[22/May/2025 04:16:00] "GET /login/ HTTP/1.1" 200 2224
+[01/Jun/2025 07:33:07] "GET / HTTP/1.1" 302 0
+[01/Jun/2025 07:33:07] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[01/Jun/2025 07:33:08] "GET /favicon.ico HTTP/1.1" 404 5381
+[01/Jun/2025 07:33:11] "POST /login/?next=/ HTTP/1.1" 302 0
+[01/Jun/2025 07:33:11] "GET /home/ HTTP/1.1" 200 12219
+[01/Jun/2025 07:33:14] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[01/Jun/2025 07:34:14] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[01/Jun/2025 07:34:27] "GET /report_by_range/ HTTP/1.1" 200 24444
+[01/Jun/2025 07:34:31] "POST /report_by_range/ HTTP/1.1" 200 35801
+[01/Jun/2025 07:35:57] "POST /report_by_range/ HTTP/1.1" 200 111916
+[01/Jun/2025 07:36:33] "POST /report_by_range/ HTTP/1.1" 200 170582
+[01/Jun/2025 07:37:03] "GET /monthly_report/ HTTP/1.1" 200 26206
+[01/Jun/2025 07:37:04] "POST /monthly_report/ HTTP/1.1" 200 58
+[01/Jun/2025 07:37:10] "POST /monthly_report/ HTTP/1.1" 200 128814
+[01/Jun/2025 07:37:14] "POST /monthly_report/ HTTP/1.1" 200 98143
+[01/Jun/2025 07:37:27] "POST /monthly_report/ HTTP/1.1" 200 122049
+[01/Jun/2025 07:38:04] "POST /monthly_report/ HTTP/1.1" 200 128814
+[01/Jun/2025 07:38:10] "POST /monthly_report/ HTTP/1.1" 200 57448
+[01/Jun/2025 07:39:29] "POST /monthly_report/ HTTP/1.1" 200 128814
+[01/Jun/2025 07:39:40] "POST /monthly_report/ HTTP/1.1" 200 122049
+[01/Jun/2025 07:41:05] "GET /logout/ HTTP/1.1" 302 0
+[01/Jun/2025 07:41:05] "GET /login/ HTTP/1.1" 200 2224
+[03/Jun/2025 04:14:12] "GET / HTTP/1.1" 302 0
+[03/Jun/2025 04:14:12] "GET /login/?next=/ HTTP/1.1" 200 2224
+[03/Jun/2025 04:14:12] "GET /static/css/style.css HTTP/1.1" 200 2519
+[03/Jun/2025 04:14:12] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[03/Jun/2025 04:14:12] "GET /favicon.ico HTTP/1.1" 404 5381
+[03/Jun/2025 04:14:20] "POST /login/?next=/ HTTP/1.1" 302 0
+[03/Jun/2025 04:14:20] "GET /home/ HTTP/1.1" 200 12219
+[03/Jun/2025 04:14:26] "GET /report_by_range/ HTTP/1.1" 200 24444
+[03/Jun/2025 04:14:29] "POST /report_by_range/ HTTP/1.1" 200 2540
+[03/Jun/2025 04:23:20] "POST /report_by_range/ HTTP/1.1" 200 35801
+[03/Jun/2025 04:23:35] "POST /report_by_range/ HTTP/1.1" 200 35801
+[03/Jun/2025 04:23:42] "POST /report_by_range/ HTTP/1.1" 200 173017
+[03/Jun/2025 04:23:48] "POST /report_by_range/ HTTP/1.1" 200 163207
+[03/Jun/2025 04:23:54] "POST /report_by_range/ HTTP/1.1" 200 131011
+[03/Jun/2025 04:24:03] "GET /logout/ HTTP/1.1" 302 0
+[03/Jun/2025 04:24:03] "GET /login/ HTTP/1.1" 200 2224
+[03/Jun/2025 10:48:11] "GET / HTTP/1.1" 302 0
+[03/Jun/2025 10:48:11] "GET /login/?next=/ HTTP/1.1" 200 2224
+[03/Jun/2025 10:48:11] "GET /static/css/style.css HTTP/1.1" 200 2519
+[03/Jun/2025 10:48:11] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[03/Jun/2025 10:48:12] "GET /favicon.ico HTTP/1.1" 404 5381
+[03/Jun/2025 10:59:46] "GET / HTTP/1.1" 302 0
+[03/Jun/2025 10:59:46] "GET /login/?next=/ HTTP/1.1" 200 2224
+[03/Jun/2025 10:59:46] "GET /static/css/style.css HTTP/1.1" 200 2519
+[03/Jun/2025 10:59:46] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[03/Jun/2025 10:59:47] "GET /favicon.ico HTTP/1.1" 404 5381
+[03/Jun/2025 10:59:51] code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x17\x00\x00\x00')
+[03/Jun/2025 10:59:51] code 400, message Bad request version ('ZZ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93ZZ\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+[03/Jun/2025 10:59:51] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Jun/2025 10:59:51] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Jun/2025 10:59:51] code 400, message Bad request version ('²\x82=;Ð\x9eºí1ô:\x9a')
+[03/Jun/2025 10:59:51] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Jun/2025 10:59:51] code 400, message Bad request syntax ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03aM?\x8a')
+[03/Jun/2025 10:59:51] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Jun/2025 10:59:53] code 400, message Bad request version ('\x00\x02\x01\x00\x00')
+[03/Jun/2025 10:59:53] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Jun/2025 10:59:53] code 400, message Bad request version ('Ç\x92<s|ë\x00ÍUÿª')
+[03/Jun/2025 10:59:53] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Jun/2025 10:59:53] code 400, message Bad request version ('\x84d£×\x00')
+[03/Jun/2025 10:59:53] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06')
+[03/Jun/2025 10:59:53] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Jun/2025 10:59:53] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Jun/2025 11:00:06] "GET / HTTP/1.1" 302 0
+[03/Jun/2025 11:00:06] "GET /login/?next=/ HTTP/1.1" 200 2224
+[03/Jun/2025 11:00:06] "GET /static/css/style.css HTTP/1.1" 200 2519
+[03/Jun/2025 11:00:06] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[03/Jun/2025 11:00:06] "GET /favicon.ico HTTP/1.1" 404 5381
+[03/Jun/2025 11:00:14] "POST /login/?next=/ HTTP/1.1" 302 0
+[03/Jun/2025 11:00:14] "GET /home/ HTTP/1.1" 200 12219
+[03/Jun/2025 11:00:19] "GET /report_by_range/ HTTP/1.1" 200 24444
+[03/Jun/2025 11:00:24] "GET /monthly_report/ HTTP/1.1" 200 26206
+[03/Jun/2025 11:00:24] "POST /monthly_report/ HTTP/1.1" 200 58
+[03/Jun/2025 11:00:30] "POST /monthly_report/ HTTP/1.1" 200 43555
+[03/Jun/2025 11:00:38] "POST /monthly_report/ HTTP/1.1" 200 57448
+[03/Jun/2025 11:00:42] "POST /monthly_report/ HTTP/1.1" 200 57448
+[03/Jun/2025 11:00:54] "POST /monthly_report/ HTTP/1.1" 200 43555
+[03/Jun/2025 11:00:58] "POST /monthly_report/ HTTP/1.1" 200 57448
+[03/Jun/2025 11:01:09] "GET /logout/ HTTP/1.1" 302 0
+[03/Jun/2025 11:01:09] "GET /login/ HTTP/1.1" 200 2224
+[05/Jun/2025 05:16:12] "GET /login/?next=/ HTTP/1.1" 200 2224
+[05/Jun/2025 05:16:12] "GET /static/css/style.css HTTP/1.1" 200 2519
+[05/Jun/2025 05:16:12] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[05/Jun/2025 05:16:13] "GET /favicon.ico HTTP/1.1" 404 5377
+[05/Jun/2025 05:16:19] "POST /login/?next=/ HTTP/1.1" 302 0
+[05/Jun/2025 05:16:19] "GET /home/ HTTP/1.1" 200 12219
+[05/Jun/2025 05:16:24] "GET /report_by_range/ HTTP/1.1" 200 24444
+[05/Jun/2025 05:16:27] "POST /report_by_range/ HTTP/1.1" 200 2540
+[05/Jun/2025 05:16:46] "POST /report_by_range/ HTTP/1.1" 200 4283
+[05/Jun/2025 05:17:13] "GET /logout/ HTTP/1.1" 302 0
+[05/Jun/2025 05:17:13] "GET /login/ HTTP/1.1" 200 2224
+[15/Jun/2025 10:07:14] "GET / HTTP/1.1" 302 0
+[15/Jun/2025 10:07:14] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[15/Jun/2025 10:07:15] "GET /favicon.ico HTTP/1.1" 404 5381
+[15/Jun/2025 10:07:25] "POST /login/?next=/ HTTP/1.1" 302 0
+[15/Jun/2025 10:07:25] "GET /home/ HTTP/1.1" 200 12219
+[15/Jun/2025 10:07:29] "GET /report_by_range/ HTTP/1.1" 200 24444
+[15/Jun/2025 10:07:33] "POST /report_by_range/ HTTP/1.1" 200 3183
+[15/Jun/2025 10:09:05] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[15/Jun/2025 10:10:08] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[15/Jun/2025 10:11:00] "GET /report_by_range/ HTTP/1.1" 200 24444
+[15/Jun/2025 10:11:02] "POST /report_by_range/ HTTP/1.1" 200 14862
+[15/Jun/2025 10:11:34] "POST /report_by_range/ HTTP/1.1" 200 13215
+[15/Jun/2025 10:11:43] "POST /report_by_range/ HTTP/1.1" 200 16732
+[15/Jun/2025 10:12:01] "GET /monthly_report/ HTTP/1.1" 200 26206
+[15/Jun/2025 10:12:01] "POST /monthly_report/ HTTP/1.1" 200 58
+[15/Jun/2025 10:12:06] "POST /monthly_report/ HTTP/1.1" 200 140459
+[15/Jun/2025 10:12:14] "POST /monthly_report/ HTTP/1.1" 200 132926
+[15/Jun/2025 10:12:47] "GET /logout/ HTTP/1.1" 302 0
+[15/Jun/2025 10:12:48] "GET /login/ HTTP/1.1" 200 2224
+[18/Jun/2025 12:49:25] "GET / HTTP/1.1" 302 0
+[18/Jun/2025 12:49:25] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[18/Jun/2025 12:49:26] "GET /favicon.ico HTTP/1.1" 404 5381
+[18/Jun/2025 12:51:09] "POST /login/?next=/ HTTP/1.1" 302 0
+[18/Jun/2025 12:51:09] "GET /home/ HTTP/1.1" 200 12219
+[18/Jun/2025 12:51:13] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 15, 2025 - 14:25:49
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+*****start_date***** 2025-05-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-04-01', '2025-04-30']
+date range.start :  2025-04-01
+date range.end :  2025-04-30
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2024-05-01', '2025-04-30']
+date range.start :  2024-05-01
+date range.end :  2025-04-30
+Date selection :  last_12months
+Tier :  2
+date info :  <class 'dict'>
+date range :  ['2024-05-01', '2025-04-30']
+date range.start :  2024-05-01
+date range.end :  2025-04-30
+Date selection :  last_12months
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2024-01-01', '2024-12-31']
+date range.start :  2024-01-01
+date range.end :  2024-12-31
+Date selection :  last_year
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-02-01', '2025-04-30']
+date range.start :  2025-02-01
+date range.end :  2025-04-30
+Date selection :  last_3months
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-05-15']
+date range.start :  2025-01-01
+date range.end :  2025-05-15
+Date selection :  ytd
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2024-01-01', '2024-12-31']
+date range.start :  2024-01-01
+date range.end :  2024-12-31
+Date selection :  last_year
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-05-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2024-01-01', '2024-12-31']
+date range.start :  2024-01-01
+date range.end :  2024-12-31
+Date selection :  last_year
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-05-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  2
+date info :  <class 'dict'>
+table category table_name income
+id: 18, tier_value: 4, set_table: category
+*****start_date***** 2025-05-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-04-01', '2025-04-30']
+date range.start :  2025-04-01
+date range.end :  2025-04-30
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  2
+date info :  <class 'dict'>
+*****start_date***** 2025-05-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2024-01-01', '2024-12-31']
+date range.start :  2024-01-01
+date range.end :  2024-12-31
+Date selection :  last_year
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-06-01
+date range :  ['2025-05-01', '2025-05-31']
+date range.start :  2025-05-01
+date range.end :  2025-05-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-03-01', '2025-05-31']
+date range.start :  2025-03-01
+date range.end :  2025-05-31
+Date selection :  last_3months
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+*****start_date***** 2025-06-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-05-01', '2025-05-31']
+date range.start :  2025-05-01
+date range.end :  2025-05-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-05-01', '2025-05-31']
+date range.start :  2025-05-01
+date range.end :  2025-05-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  2
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  1
+date info :  <class 'dict'>
+*****start_date***** 2025-06-01
+*****start_date***** 2025-06-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+*****start_date***** 2025-06-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-06-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  2
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table[18/Jun/2025 12:52:16] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[18/Jun/2025 12:52:20] "GET /report_by_range/ HTTP/1.1" 200 24444
+[18/Jun/2025 12:52:22] "POST /report_by_range/ HTTP/1.1" 200 16805
+[18/Jun/2025 12:52:58] "POST /report_by_range/ HTTP/1.1" 200 17905
+[18/Jun/2025 12:53:08] "GET /monthly_report/ HTTP/1.1" 200 26206
+[18/Jun/2025 12:53:08] "POST /monthly_report/ HTTP/1.1" 200 58
+[18/Jun/2025 12:53:14] "POST /monthly_report/ HTTP/1.1" 200 61781
+[18/Jun/2025 12:53:33] "POST /monthly_report/ HTTP/1.1" 200 61781
+[18/Jun/2025 12:53:55] "GET /report_by_range/ HTTP/1.1" 200 24444
+[18/Jun/2025 12:54:02] "POST /report_by_range/ HTTP/1.1" 200 17905
+[18/Jun/2025 12:54:13] "POST /report_by_range/ HTTP/1.1" 200 36134
+[18/Jun/2025 12:54:20] "POST /report_by_range/ HTTP/1.1" 200 17905
+[18/Jun/2025 12:54:26] "GET /report_by_range/ HTTP/1.1" 200 24444
+[18/Jun/2025 12:54:30] "GET /monthly_report/ HTTP/1.1" 200 26206
+[18/Jun/2025 12:54:30] "POST /monthly_report/ HTTP/1.1" 200 58
+[18/Jun/2025 12:54:38] "POST /monthly_report/ HTTP/1.1" 200 140388
+[18/Jun/2025 12:54:51] "POST /monthly_report/ HTTP/1.1" 200 132855
+[18/Jun/2025 12:55:44] "POST /monthly_report/ HTTP/1.1" 200 106272
+[18/Jun/2025 12:56:00] "GET /logout/ HTTP/1.1" 302 0
+[18/Jun/2025 12:56:00] "GET /login/ HTTP/1.1" 200 2224
+[21/Jun/2025 11:42:49] "GET / HTTP/1.1" 302 0
+[21/Jun/2025 11:42:49] "GET /login/?next=/ HTTP/1.1" 200 2224
+[22/Jun/2025 11:01:04] "GET / HTTP/1.1" 302 0
+[22/Jun/2025 11:01:04] "GET /login/?next=/ HTTP/1.1" 200 2224
+[22/Jun/2025 14:27:18] "GET / HTTP/1.1" 302 0
+[22/Jun/2025 14:27:18] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[22/Jun/2025 14:27:19] "GET /favicon.ico HTTP/1.1" 404 5381
+[22/Jun/2025 14:27:25] "POST /login/?next=/ HTTP/1.1" 302 0
+[22/Jun/2025 14:27:25] "GET /home/ HTTP/1.1" 200 12219
+[22/Jun/2025 14:27:33] "GET /report_by_range/ HTTP/1.1" 200 24444
+[22/Jun/2025 14:27:36] "POST /report_by_range/ HTTP/1.1" 200 16805
+[22/Jun/2025 14:27:51] "POST /report_by_range/ HTTP/1.1" 200 17905
+[22/Jun/2025 14:28:22] "GET /monthly_report/ HTTP/1.1" 200 26206
+[22/Jun/2025 14:28:22] "POST /monthly_report/ HTTP/1.1" 200 58
+[22/Jun/2025 14:28:28] "POST /monthly_report/ HTTP/1.1" 200 140388
+[22/Jun/2025 14:28:39] "POST /monthly_report/ HTTP/1.1" 200 132855
+[22/Jun/2025 14:29:00] "POST /monthly_report/ HTTP/1.1" 200 140388
+[22/Jun/2025 14:29:15] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[22/Jun/2025 14:30:19] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[22/Jun/2025 14:30:22] "GET /report_by_range/ HTTP/1.1" 200 24444
+[22/Jun/2025 14:30:24] "POST /report_by_range/ HTTP/1.1" 200 16805
+[22/Jun/2025 14:30:41] "GET /get_dataset/ HTTP/1.1" 200 17257
+[22/Jun/2025 14:30:42] "POST /get_dataset/ HTTP/1.1" 200 9960
+[22/Jun/2025 14:30:55] "POST /set_tier/ HTTP/1.1" 200 45
+[22/Jun/2025 14:30:56] "POST /set_tier/ HTTP/1.1" 200 45
+[22/Jun/2025 14:30:59] "POST /set_tier/ HTTP/1.1" 200 45
+[22/Jun/2025 14:31:09] "POST /set_tier/ HTTP/1.1" 200 45
+[22/Jun/2025 14:31:11] "POST /set_tier/ HTTP/1.1" 200 45
+[22/Jun/2025 14:31:12] "POST /set_tier/ HTTP/1.1" 200 45
+[22/Jun/2025 14:31:21] "GET /report_by_range/ HTTP/1.1" 200 24444
+[22/Jun/2025 14:31:23] "POST /report_by_range/ HTTP/1.1" 200 15590
+[22/Jun/2025 14:31:29] "POST /report_by_range/ HTTP/1.1" 200 14382
+[22/Jun/2025 14:31:36] "POST /report_by_range/ HTTP/1.1" 200 15590
+[22/Jun/2025 14:31:38] "POST /report_by_range/ HTTP/1.1" 200 12343
+[22/Jun/2025 14:31:48] "POST /report_by_range/ HTTP/1.1" 200 14382
+[22/Jun/2025 14:31:50] "POST /report_by_range/ HTTP/1.1" 200 15590
+[22/Jun/2025 14:31:53] "POST /report_by_range/ HTTP/1.1" 200 19582
+[22/Jun/2025 14:32:00] "GET /monthly_report/ HTTP/1.1" 200 26206
+[22/Jun/2025 14:32:01] "POST /monthly_report/ HTTP/1.1" 200 58
+[22/Jun/2025 14:32:05] "POST /monthly_report/ HTTP/1.1" 200 106272
+[22/Jun/2025 14:32:12] "POST /monthly_report/ HTTP/1.1" 200 120174
+[22/Jun/2025 14:32:14] "POST /monthly_report/ HTTP/1.1" 200 106272
+[22/Jun/2025 14:32:18] "POST /monthly_report/ HTTP/1.1" 200 120174
+[22/Jun/2025 14:32:26] "POST /monthly_report/ HTTP/1.1" 200 120755
+[22/Jun/2025 14:32:29] "POST /monthly_report/ HTTP/1.1" 200 120174
+[22/Jun/2025 14:32:32] "POST /monthly_report/ HTTP/1.1" 200 120755
+[22/Jun/2025 14:32:38] "POST /monthly_report/ HTTP/1.1" 200 143194
+[22/Jun/2025 14:32:43] "GET /logout/ HTTP/1.1" 302 0
+[22/Jun/2025 14:32:43] "GET /login/ HTTP/1.1" 200 2224
+[24/Jun/2025 11:00:45] "GET / HTTP/1.1" 302 0
+[24/Jun/2025 11:00:45] "GET /login/?next=/ HTTP/1.1" 200 2224
+[24/Jun/2025 11:00:55] "POST /login/?next=/ HTTP/1.1" 302 0
+[24/Jun/2025 11:00:55] "GET /home/ HTTP/1.1" 200 12219
+[24/Jun/2025 11:00:58] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[24/Jun/2025 11:03:06] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[24/Jun/2025 11:03:15] "GET /report_by_range/ HTTP/1.1" 200 24444
+[24/Jun/2025 11:03:19] "POST /report_by_range/ HTTP/1.1" 200 21807
+[24/Jun/2025 11:03:30] "POST /report_by_range/ HTTP/1.1" 200 23626
+[24/Jun/2025 11:03:54] "POST /report_by_range/ HTTP/1.1" 200 21227
+[24/Jun/2025 11:04:10] "POST /report_by_range/ HTTP/1.1" 200 32234
+[24/Jun/2025 11:04:28] "GET /logout/ HTTP/1.1" 302 0
+[24/Jun/2025 11:04:28] "GET /login/ HTTP/1.1" 200 2224
+[25/Jun/2025 14:42:51] "GET / HTTP/1.1" 302 0
+[25/Jun/2025 14:42:51] "GET /login/?next=/ HTTP/1.1" 200 2224
+[25/Jun/2025 14:42:51] "GET /static/css/style.css HTTP/1.1" 200 2519
+[25/Jun/2025 14:42:51] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[25/Jun/2025 14:42:52] "GET /favicon.ico HTTP/1.1" 404 5381
+Watching for file changes with StatReloader
+[01/Jul/2025 10:42:37] "GET / HTTP/1.1" 302 0
+[01/Jul/2025 10:42:37] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[01/Jul/2025 10:42:39] "GET /favicon.ico HTTP/1.1" 404 5381
+[01/Jul/2025 10:42:46] "POST /login/?next=/ HTTP/1.1" 302 0
+[01/Jul/2025 10:42:46] "GET /home/ HTTP/1.1" 200 12219
+[01/Jul/2025 10:42:51] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[01/Jul/2025 10:43:57] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[01/Jul/2025 10:44:00] "GET /report_by_range/ HTTP/1.1" 200 24444
+[01/Jul/2025 10:44:08] "POST /report_by_range/ HTTP/1.1" 200 31010
+[01/Jul/2025 10:45:27] "POST /report_by_range/ HTTP/1.1" 200 1717
+[01/Jul/2025 10:46:56] "POST /report_by_range/ HTTP/1.1" 200 97700
+[01/Jul/2025 10:47:11] "GET /monthly_report/ HTTP/1.1" 200 26206
+[01/Jul/2025 10:47:11] "POST /monthly_report/ HTTP/1.1" 200 58
+[01/Jul/2025 10:47:19] "POST /monthly_report/ HTTP/1.1" 200 130595
+[01/Jul/2025 10:47:27] "POST /monthly_report/ HTTP/1.1" 200 130014
+[01/Jul/2025 10:48:04] "GET /logout/ HTTP/1.1" 302 0
+[01/Jul/2025 10:48:04] "GET /login/ HTTP/1.1" 200 2224
+Watching for file changes with StatReloader
+[08/Jul/2025 03:05:27] "GET / HTTP/1.1" 302 0
+[08/Jul/2025 03:05:27] "GET /login/?next=/ HTTP/1.1" 200 2224
+[08/Jul/2025 03:05:27] "GET /static/css/style.css HTTP/1.1" 304 0
+[08/Jul/2025 03:05:27] "GET /static/js/script.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+[08/Jul/2025 03:05:27] "GET /favicon.ico HTTP/1.1" 404 5381
+[08/Jul/2025 03:05:33] "POST /login/?next=/ HTTP/1.1" 302 0
+[08/Jul/2025 03:05:33] "GET /home/ HTTP/1.1" 200 12219
+[08/Jul/2025 03:05:43] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[08/Jul/2025 03:06:55] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[08/Jul/2025 03:07:07] "GET /report_by_range/ HTTP/1.1" 200 24444
+[08/Jul/2025 03:07:10] "POST /report_by_range/ HTTP/1.1" 200 10716
+[08/Jul/2025 03:07:47] "POST /report_by_range/ HTTP/1.1" 200 31010
+[08/Jul/2025 03:08:11] "POST /report_by_range/ HTTP/1.1" 200 12903
+[08/Jul/2025 03:08:19] "GET /logout/ HTTP/1.1" 302 0
+[08/Jul/2025 03:08:19] "GET /login/ HTTP/1.1" 200 2224
+[09/Jul/2025 07:11:17] "GET / HTTP/1.1" 302 0
+[09/Jul/2025 07:11:17] "GET /login/?next=/ HTTP/1.1" 200 2224
+[09/Jul/2025 07:11:17] "GET /static/css/style.css HTTP/1.1" 200 2519
+[09/Jul/2025 07:11:17] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[09/Jul/2025 07:11:18] "GET /favicon.ico HTTP/1.1" 404 5381
+[09/Jul/2025 07:11:21] "POST /login/?next=/ HTTP/1.1" 302 0
+[09/Jul/2025 07:11:21] "GET /home/ HTTP/1.1" 200 12219
+[09/Jul/2025 07:11:28] "GET /report_by_range/ HTTP/1.1" 200 24444
+[09/Jul/2025 07:11:31] "POST /report_by_range/ HTTP/1.1" 200 11049
+[09/Jul/2025 07:11:44] "POST /report_by_range/ HTTP/1.1" 200 31010
+[09/Jul/2025 07:12:42] "GET /monthly_report/ HTTP/1.1" 200 26206
+[09/Jul/2025 07:12:42] "POST /monthly_report/ HTTP/1.1" 200 58
+[09/Jul/2025 07:12:48] "POST /monthly_report/ HTTP/1.1" 200 136825
+[09/Jul/2025 07:13:09] "POST /monthly_report/ HTTP/1.1" 200 136244
+[09/Jul/2025 07:15:09] "GET /report_by_range/ HTTP/1.1" 200 24444
+[09/Jul/2025 07:15:13] "POST /report_by_range/ HTTP/1.1" 200 97700
+[09/Jul/2025 07:15:34] "POST /report_by_range/ HTTP/1.1" 200 97700
+[09/Jul/2025 07:15:43] "POST /report_by_range/ HTTP/1.1" 200 194761
+[09/Jul/2025 07:16:02] "GET /logout/ HTTP/1.1" 302 0
+[09/Jul/2025 07:16:02] "GET /login/ HTTP/1.1" 200 2224
+Watching for file changes with StatReloader
+[09/Jul/2025 11:25:18] "GET / HTTP/1.1" 302 0
+[09/Jul/2025 11:25:18] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[09/Jul/2025 11:25:18] "GET /favicon.ico HTTP/1.1" 404 5381
+[09/Jul/2025 11:25:30] "POST /login/?next=/ HTTP/1.1" 302 0
+[09/Jul/2025 11:25:30] "GET /home/ HTTP/1.1" 200 12219
+/app/md_project/my_money/views_dir/report_views.py:122: LangChainDeprecationWarning: The class `ChatOpenAI` was deprecated in LangChain 0.0.10 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-openai package and should be used instead. To use it run `pip install -U :class:`~langchain-openai` and import as `from :class:`~langchain_openai import ChatOpenAI``.
+  chat_model = ChatOpenAI(
+/app/md_project/my_money/views_dir/report_views.py:129: LangChainDeprecationWarning: Please see the migration guide at: https://python.langchain.com/docs/versions/migrating_memory/
+  memory = ConversationBufferMemory()
+/app/md_project/my_money/views_dir/report_views.py:142: LangChainDeprecationWarning: The method `BaseChatModel.__call__` was deprecated in langchain-core 0.1.7 and will be removed in 1.0. Use :meth:`~invoke` instead.
+  response = chat_model([SystemMessage(content="You are a financial assistant."), HumanMessage(content=final_prompt)])
+[09/Jul/2025 11:25:58] "POST /home/ HTTP/1.1" 200 3476
+[09/Jul/2025 11:27:16] "POST /home/ HTTP/1.1" 200 3478
+[09/Jul/2025 11:27:57] "GET /report_by_range/ HTTP/1.1" 200 24444
+[09/Jul/2025 11:28:06] "POST /report_by_range/ HTTP/1.1" 200 12903
+[09/Jul/2025 11:28:18] "GET /logout/ HTTP/1.1" 302 0
+[09/Jul/2025 11:28:18] "GET /login/ HTTP/1.1" 200 2224
+[14/Jul/2025 09:56:19] "GET / HTTP/1.1" 302 0
+[14/Jul/2025 09:56:19] "GET /login/?next=/ HTTP/1.1" 200 2224
+[14/Jul/2025 09:56:20] "GET /static/css/style.css HTTP/1.1" 200 2519
+[14/Jul/2025 09:56:20] "GET /static/js/script.js HTTP/1.1" 200 857
+[14/Jul/2025 09:56:21] "GET / HTTP/1.1" 302 0
+[14/Jul/2025 09:56:21] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[14/Jul/2025 09:56:21] "GET /favicon.ico HTTP/1.1" 404 5381
+[14/Jul/2025 09:56:38] "POST /login/?next=/ HTTP/1.1" 302 0
+[14/Jul/2025 09:56:38] "GET /home/ HTTP/1.1" 200 12219
+[14/Jul/2025 09:56:43] "GET /report_by_range/ HTTP/1.1" 200 24444
+[14/Jul/2025 09:56:47] "POST /report_by_range/ HTTP/1.1" 200 11513
+[14/Jul/2025 09:57:04] "GET /logout/ HTTP/1.1" 302 0
+[14/Jul/2025 09:57:04] "GET /login/ HTTP/1.1" 200 2224
+[14/Jul/2025 09:58:45] "GET / HTTP/1.1" 302 0
+[14/Jul/2025 09:58:45] "GET /login/?next=/ HTTP/1.1" 200 2224
+[17/Jul/2025 10:49:23] "GET /login/?next=/ HTTP/1.1" 200 2224
+[17/Jul/2025 10:49:23] "GET /static/css/style.css HTTP/1.1" 200 2519
+[17/Jul/2025 10:49:23] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[17/Jul/2025 10:49:24] "GET /favicon.ico HTTP/1.1" 404 5377
+[17/Jul/2025 10:49:30] "POST /login/?next=/ HTTP/1.1" 302 0
+[17/Jul/2025 10:49:30] "GET /home/ HTTP/1.1" 200 12219
+[17/Jul/2025 10:49:33] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[17/Jul/2025 10:50:42] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[17/Jul/2025 10:54:28] "GET /report_by_range/ HTTP/1.1" 200 24444
+[17/Jul/2025 10:54:35] "POST /report_by_range/ HTTP/1.1" 200 48906
+[17/Jul/2025 10:55:11] "POST /report_by_range/ HTTP/1.1" 200 26349
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 09, 2025 - 11:25:16
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+GRAND TOTAL: 1306823.92
+<h4>Financial Analysis Report for Year 2025</h4>
+<p>The given financial data for the year 2025 shows an aggregate expense of $1,306,823.92. The expenses are categorized across various needs and services, from home maintenance to personal expenses. Below is a detailed analysis focusing on expense patterns, significant categories, and recommendations for effective financial management.</p>
+
+<h4>Expense Overview</h4>
+<p>Expenses are distributed across several categories, each contributing differently to the total expenditure:</p>
+<ul>
+    <li><strong>Home Monthly Fixed Exp:</strong> The highest expense at $480,000, accounting for approximately 36.71% of the total expenses.</li>
+    <li><strong>Fixed and Service:</strong> This category, which likely includes significant service charges, ranks second with $124,805.27.</li>
+    <li><strong>Insurance Automobile:</strong> Significant singular expense in April at $70,000.</li>
+    <li><strong>Fuel:</strong> Regular monthly expenses totaling $28,540.</li>
+    <li><strong>Home Maintenance and Home Meal:</strong> Both categories show substantial outlays at $36,902.10 and $35,816.59 respectively.</li>
+    <li><strong>Home Monthly Variable Exp:</strong> This category shows significant variability and totals $203,034.16.</li>
+</ul>
+
+<h4>Analysis of Spending Patterns</h4>
+<p>Review of the monthly distribution shows significant variability:</p>
+<ul>
+    <li><strong>Q1 and Q2:</strong> There is a noticeable concentration of expenses in the first half of the year, with heavy outlays in categories like Fixed and Service, Insurance, and Fuel.</li>
+    <li><strong>Home Related Expenses:</strong> High expenses in Home Maintenance, Home Meal, and Home Grocery indicate significant spending on living conditions.</li>
+    <li><strong>Insurance:</strong> Large payments in April for automobile and life insurance suggest annual payment schedules.</li>
+</ul>
+
+<h4>Key Expense Categories</h4>
+<p>Certain categories, such as Home Monthly Fixed Expenses, Insurance, and Home Maintenance, dominate the expenditure chart. These are mainly fixed or semi-fixed expenses, indicating predictable but high financial outflows.</p>
+
+<h4>Recommendations for Financial Management</h4>
+<ul>
+    <li><strong>Budget Planning:</strong> Establish a more structured budget with set limits for variable expenses to avoid overspending.</li>
+    <li><strong>Expense Review:</strong> Periodic review of expenses, especially the high-cost categories like Home Maintenance and Meals, to identify cost-saving opportunities.</li>
+    <li><strong>Insurance Payments:</strong> Consider monthly or quarterly insurance payments to manage cash flows better instead of annual lump sums.</li>
+    <li><strong>Energy and Fuel Monitoring:</strong> Implement monitoring and efficiency practices to reduce fuel costs, considering its significant share of expenses.</li>
+    <li><strong>Emergency Fund:</strong> Strengthen financial security by bolstering the emergency fund, given the high fixed expenses that consume a large portion of the budget.</li>
+</ul>
+
+<p>The outlined financial strategies aim to improve budget management, reduce unnecessary expenses, and enhance overall financial stability. Regular monitoring and adjustment of financial plans will be crucial to adapting to any economic changes or personal financial goals.</p>
+GRAND TOTAL: 7626957.51
+<h4>Financial Analysis Report for the Year 2025</h4>
+
+<p>This financial analysis report provides an overview and detailed examination of the income streams for the year 2025. The total recorded income stands at $7,626,957.51. We have categorized the income into various sources and assessed each for patterns and contributions to the total income.</p>
+
+<h4>Summary of Income Sources</h4>
+<ul>
+    <li><strong>Dividends Received:</strong> $5,530,614.24</li>
+    <li><strong>Salary:</strong> $978,000.00</li>
+    <li><strong>Interest Received:</strong> $578,869.57</li>
+    <li><strong>Misc:</strong> $129,438.30</li>
+    <li><strong>Bonus:</strong> $200,000.00</li>
+    <li><strong>Elderly Allowance:</strong> $70,200.00</li>
+    <li><strong>Other Income:</strong> $74,453.40</li>
+    <li><strong>Tax Refund:</strong> $35,900.00</li>
+    <li><strong>Meeting Fee:</strong> $30,000.00</li>
+    <li><strong>Allowance: Car Fixed:</strong> -$518.00</li>
+</ul>
+
+<h4>Analysis of Income Patterns</h4>
+<p>The predominant source of income is <strong>Dividends Received</strong>, constituting approximately <strong>72.5%</strong> of the total income. This is followed by <strong>Salary</strong>, which makes up about <strong>12.8%</strong> of the income. Both sources, categorized under tier 2, indicate a strong dependency on investment returns and stable employment.</p>
+
+<p>The <strong>Interest Received</strong> and <strong>Miscellaneous Income</strong> categories also contribute significant amounts, though they are less predictable and vary more in their monthly totals. The presence of a substantial <strong>Bonus</strong> and consistent <strong>Elderly Allowance</strong> further diversifies the income sources.</p>
+
+<h4>Recommendations for Financial Management</h4>
+<p>Given the analysis, the following strategies are recommended to ensure financial stability and growth:</p>
+<ul>
+    <li><strong>Diversification:</strong> While dividends provide a hefty portion of the income, it's prudent to diversify the income sources to mitigate risks associated with market volatility influencing dividend payouts.</li>
+    <li><strong>Reinvestment:</strong> Consider reinvesting a portion of the dividends and bonuses into other stable financial instruments to capitalize on compound growth and to spread risk.</li>
+    <li><strong>Savings Strategy:</strong> Given the substantial income from stable sources like salary, setting up a robust savings plan can be beneficial. This could include increasing contributions to retirement accounts or setting aside funds for an emergency.</li>
+    <li><strong>Debt Management:</strong> If there are any significant liabilities or debts, using a portion of the bonus or miscellaneous income for early repayment could be advantageous, reducing interest costs over time.</li>
+    <li><strong>Tax Planning:</strong> Given the high income from dividends and salary, effective tax planning is essential. Consider consulting a tax advisor to optimize tax liabilities and explore tax-efficient investing options.</li>
+</ul>
+
+<h4>Conclusion</h4>
+<p>The financial outlook for 2025 is robust, with a healthy mix of income streams providing both stability and substantial total income. By adhering to the above recommendations, there can be assurance of not only maintaining but also enhancing financial health in the upcoming years.</p>
+*****start_date***** 2025-07-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+*****start_date***** 2025-07-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-07-01
+Date selection :  custom_date
+Tier :  4
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection : [17/Jul/2025 10:55:24] "POST /report_by_range/ HTTP/1.1" 200 48906
+[17/Jul/2025 10:55:39] "POST /report_by_range/ HTTP/1.1" 200 327162
+[17/Jul/2025 10:59:05] "POST /report_by_range/ HTTP/1.1" 200 213633
+[17/Jul/2025 10:59:11] "POST /report_by_range/ HTTP/1.1" 200 327162
+[17/Jul/2025 11:22:08] "GET /logout/ HTTP/1.1" 302 0
+[17/Jul/2025 11:22:08] "GET /login/ HTTP/1.1" 200 2224
+[17/Jul/2025 14:31:04] "GET / HTTP/1.1" 302 0
+[17/Jul/2025 14:31:04] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[17/Jul/2025 14:31:04] "GET /favicon.ico HTTP/1.1" 404 5381
+[17/Jul/2025 14:31:08] "POST /login/?next=/ HTTP/1.1" 302 0
+[17/Jul/2025 14:31:08] "GET /home/ HTTP/1.1" 200 12219
+[17/Jul/2025 14:31:11] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[17/Jul/2025 14:32:20] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[17/Jul/2025 14:32:29] "GET /report_by_range/ HTTP/1.1" 200 24444
+[17/Jul/2025 14:32:33] "POST /report_by_range/ HTTP/1.1" 200 46851
+[17/Jul/2025 14:33:31] "GET /monthly_report/ HTTP/1.1" 200 26206
+[17/Jul/2025 14:33:31] "POST /monthly_report/ HTTP/1.1" 200 58
+[17/Jul/2025 14:33:39] "POST /monthly_report/ HTTP/1.1" 200 165377
+[17/Jul/2025 14:36:25] "POST /monthly_report/ HTTP/1.1" 200 85707
+[17/Jul/2025 14:36:34] "GET /get_dataset/ HTTP/1.1" 200 17257
+[17/Jul/2025 14:36:37] "POST /get_dataset/ HTTP/1.1" 200 2702
+[17/Jul/2025 14:37:06] "POST /set_tier/ HTTP/1.1" 200 43
+[17/Jul/2025 14:37:17] "GET /report_by_range/ HTTP/1.1" 200 24444
+[17/Jul/2025 14:37:19] "POST /report_by_range/ HTTP/1.1" 200 26214
+[17/Jul/2025 14:37:23] "POST /report_by_range/ HTTP/1.1" 200 22114
+[17/Jul/2025 14:37:27] "POST /report_by_range/ HTTP/1.1" 200 21109
+[17/Jul/2025 14:37:32] "POST /report_by_range/ HTTP/1.1" 200 22114
+[17/Jul/2025 14:39:13] "POST /report_by_range/ HTTP/1.1" 200 46851
+[17/Jul/2025 14:39:48] "POST /report_by_range/ HTTP/1.1" 200 26214
+[17/Jul/2025 14:40:03] "POST /report_by_range/ HTTP/1.1" 200 22114
+[17/Jul/2025 14:40:06] "POST /report_by_range/ HTTP/1.1" 200 21109
+[17/Jul/2025 14:40:13] "POST /report_by_range/ HTTP/1.1" 200 21491
+[17/Jul/2025 14:40:17] "POST /report_by_range/ HTTP/1.1" 200 23504
+[17/Jul/2025 14:40:27] "POST /report_by_range/ HTTP/1.1" 200 27604
+[17/Jul/2025 14:40:32] "GET /get_dataset/ HTTP/1.1" 200 17257
+[17/Jul/2025 14:40:35] "POST /get_dataset/ HTTP/1.1" 200 2702
+[17/Jul/2025 14:40:51] "POST /set_tier/ HTTP/1.1" 200 43
+[17/Jul/2025 14:40:54] "GET /report_by_range/ HTTP/1.1" 200 24444
+[17/Jul/2025 14:40:59] "POST /report_by_range/ HTTP/1.1" 200 21491
+[17/Jul/2025 14:41:07] "POST /report_by_range/ HTTP/1.1" 200 23504
+[17/Jul/2025 14:41:11] "POST /report_by_range/ HTTP/1.1" 200 21491
+[17/Jul/2025 14:41:14] "POST /report_by_range/ HTTP/1.1" 200 23504
+[17/Jul/2025 14:41:15] "POST /report_by_range/ HTTP/1.1" 200 26349
+[17/Jul/2025 14:41:19] "POST /report_by_range/ HTTP/1.1" 200 23504
+[17/Jul/2025 14:41:22] "POST /report_by_range/ HTTP/1.1" 200 26349
+[17/Jul/2025 14:41:31] "POST /report_by_range/ HTTP/1.1" 200 48526
+[17/Jul/2025 14:41:57] "POST /report_by_range/ HTTP/1.1" 200 326011
+[17/Jul/2025 14:42:14] "POST /report_by_range/ HTTP/1.1" 200 213633
+[17/Jul/2025 14:42:23] "POST /report_by_range/ HTTP/1.1" 200 326011
+[17/Jul/2025 14:42:50] "GET /logout/ HTTP/1.1" 302 0
+[17/Jul/2025 14:42:50] "GET /login/ HTTP/1.1" 200 2224
+[17/Jul/2025 21:51:05] "GET / HTTP/1.1" 302 0
+[17/Jul/2025 21:51:05] "GET /login/?next=/ HTTP/1.1" 200 2224
+[17/Jul/2025 21:51:15] "POST /login/?next=/ HTTP/1.1" 302 0
+[17/Jul/2025 21:51:15] "GET /home/ HTTP/1.1" 200 12219
+[17/Jul/2025 21:51:20] "GET /report_by_range/ HTTP/1.1" 200 24444
+[17/Jul/2025 21:51:41] "POST /report_by_range/ HTTP/1.1" 200 327686
+[17/Jul/2025 21:57:44] "POST /report_by_range/ HTTP/1.1" 200 606215
+[17/Jul/2025 21:59:09] "POST /report_by_range/ HTTP/1.1" 200 473394
+[17/Jul/2025 22:00:10] "POST /report_by_range/ HTTP/1.1" 200 370895
+[17/Jul/2025 22:01:49] "POST /report_by_range/ HTTP/1.1" 200 251529
+[17/Jul/2025 23:08:10] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[17/Jul/2025 23:09:15] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[17/Jul/2025 23:09:38] "GET /report_by_range/ HTTP/1.1" 200 24444
+[17/Jul/2025 23:09:48] "POST /report_by_range/ HTTP/1.1" 200 325366
+[17/Jul/2025 23:11:06] "POST /report_by_range/ HTTP/1.1" 200 605072
+[17/Jul/2025 23:11:25] "POST /report_by_range/ HTTP/1.1" 200 325366
+[17/Jul/2025 23:14:18] "POST /report_by_range/ HTTP/1.1" 200 605072
+[17/Jul/2025 23:15:28] "GET /monthly_report/ HTTP/1.1" 200 26206
+[17/Jul/2025 23:15:29] "POST /monthly_report/ HTTP/1.1" 200 58
+[17/Jul/2025 23:15:36] "GET /yearly_report/ HTTP/1.1" 200 26196
+[17/Jul/2025 23:15:44] "POST /yearly_report/ HTTP/1.1" 200 990882
+[17/Jul/2025 23:22:25] "POST /yearly_report/ HTTP/1.1" 200 350600
+[17/Jul/2025 23:24:52] "POST /yearly_report/ HTTP/1.1" 200 990882
+[17/Jul/2025 23:25:09] "POST /yearly_report/ HTTP/1.1" 200 350600
+[17/Jul/2025 23:26:25] "POST /yearly_report/ HTTP/1.1" 200 990882
+[18/Jul/2025 00:01:34] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[18/Jul/2025 00:02:36] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[18/Jul/2025 00:02:54] "GET /monthly_report/ HTTP/1.1" 200 26206
+[18/Jul/2025 00:02:54] "POST /monthly_report/ HTTP/1.1" 200 58
+[18/Jul/2025 00:02:56] "GET /yearly_report/ HTTP/1.1" 200 26196
+[18/Jul/2025 00:03:03] "POST /yearly_report/ HTTP/1.1" 200 990229
+Unknown command: '0.0.0.0:8004'
+Type 'manage.py help' for usage.
+Watching for file changes with StatReloader
+[18/Jul/2025 02:42:22] "GET /login/?next=/ HTTP/1.1" 200 2224
+[18/Jul/2025 02:42:28] "POST /login/?next=/ HTTP/1.1" 302 0
+[18/Jul/2025 02:42:28] "GET /home/ HTTP/1.1" 200 12219
+[18/Jul/2025 02:42:31] "GET /yearly_report/ HTTP/1.1" 200 26196
+[18/Jul/2025 02:42:37] "POST /yearly_report/ HTTP/1.1" 200 999095
+[18/Jul/2025 02:43:32] "POST /yearly_report/ HTTP/1.1" 200 367128
+[18/Jul/2025 02:44:02] "POST /yearly_report/ HTTP/1.1" 200 999095
+[18/Jul/2025 02:44:15] "GET /monthly_report/ HTTP/1.1" 200 26206
+[18/Jul/2025 02:44:15] "POST /monthly_report/ HTTP/1.1" 200 58
+[18/Jul/2025 02:44:21] "POST /monthly_report/ HTTP/1.1" 200 170643
+[18/Jul/2025 02:44:26] "POST /monthly_report/ HTTP/1.1" 200 164605
+[18/Jul/2025 02:51:07] "GET / HTTP/1.1" 200 11067
+/app/md_project/my_money/views_dir/data_import_views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 18, 2025 - 02:42:21
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+start date : 2020-01-01
+end date : 2025-12-31
+Year  2025
+xx 2020
+xx 2021
+xx 2022
+xx 2023
+xx 2024
+start date : 2015-01-01
+end date : 2020-12-31
+Year  2020
+xx 2015
+xx 2016
+xx 2017
+xx 2018
+xx 2019
+start date : 2020-01-01
+end date : 2025-12-31
+Year  2025
+xx 2020
+xx 2021
+xx 2022
+xx 2023
+xx 2024
+Watching for file changes with StatReloader
+/app/md_project/my_money/views_dir/data_import_views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 18, 2025 - 02:51:42
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader

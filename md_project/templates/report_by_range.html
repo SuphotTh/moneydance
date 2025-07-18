@@ -6,8 +6,9 @@
 <!-- AG Grid CSS -->
 <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css">
 <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css">
+
 <!-- AG Grid JavaScript -->
-<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
 
 <div class="container">
     <div class="card">
@@ -133,6 +134,27 @@
 </div>
 
 <script>
+// Global variable to track AG Grid availability
+let isAgGridLoaded = false;
+
+// Function to wait for AG Grid to load
+function waitForAgGrid() {
+    return new Promise((resolve, reject) => {
+        const checkInterval = setInterval(() => {
+            if (window.agGrid) {
+                clearInterval(checkInterval);
+                resolve(true);
+            }
+        }, 100);
+
+        // Timeout after 5 seconds
+        setTimeout(() => {
+            clearInterval(checkInterval);
+            reject(new Error('AG Grid failed to load'));
+        }, 5000);
+    });
+}
+
 function expenses_tier(selected_tier) {
     //Clear Screen 
     clearReportContent();
@@ -178,9 +200,12 @@ function expenses_tier(selected_tier) {
         table_data = received_data;
         income_data = received_data.income_data;
         expenses_data = received_data.expenses_data;
-        // console.log('inc data:', income_data);
+
+        console.log('inc data XX:', income_data);
         //console.log('inc u data:', income_data_unselected);
-        //console.log('exp data:', expenses_data_selected);
+        console.log('exp data XX:', expenses_data);
+        console.log('AG GRID : ', agGrid);
+
         //console.log('exp u data:', expenses_data_unselected); 
 
         const date_info = received_data.date_info;
@@ -247,6 +272,12 @@ function consoleLog(name, variable) {
 }
 
 function createSummaryTable(income_data, expenses_data) {
+    // Check if AG Grid is loaded before proceeding
+    if (!window.agGrid) {
+        console.error('AG Grid is not loaded');
+        return;
+    }
+
     if ((income_data && Object.keys(income_data).length > 0) || 
         (expenses_data && Object.keys(expenses_data).length > 0)) {
         function createDataTable(data_in) {
@@ -410,20 +441,19 @@ function showPopup(data, transactions, columnHead) {
 }
 
 
-
-
-// Add this to your existing JavaScript if not already present
-document.addEventListener('click', function(event) {
-    const popup = document.getElementById('cellPopup');
-    if (popup && !popup.contains(event.target) && !event.target.closest('.ag-cell')) {
-        popup.remove();
-    }
-});
-
 let gridApi = null; // Global variable to hold the grid API
+
 function createTable(tableId, tableData) {
-    if (gridApi) {
-        gridApi.destroy();
+    // Ensure AG Grid is available
+    if (!window.agGrid) {
+        console.error('AG Grid is not available');
+        return;
+    }
+
+    // Destroy existing grid if it exists
+    const gridDiv = document.querySelector(`#${tableId}`);
+    if (gridDiv && gridDiv.gridApi) {
+        gridDiv.gridApi.destroy();
     }
 
     // Calculate total
@@ -436,10 +466,10 @@ function createTable(tableId, tableData) {
                 headerName: tableId.replace('_table', '').charAt(0).toUpperCase() + tableId.replace('_table', '').slice(1),  
                 flex: 1,
                 valueFormatter: params => {
-                if (params.value) {
-                    return params.value.charAt(0).toUpperCase() + params.value.slice(1);
-                }
-                    return params.value; // Handle null or undefined values
+                    if (params.value) {
+                        return params.value.charAt(0).toUpperCase() + params.value.slice(1);
+                    }
+                    return params.value;
                 }
             },
             { 
@@ -481,10 +511,6 @@ function createTable(tableId, tableData) {
         maintainColumnOrder: true,
         onCellClicked: function(params) {
             if (params.column.getColId() === 'category' && params.node.rowPinned !== 'bottom') {
-                // console.log("param.data =", params.data);
-                // console.log("table income data =",tableId.replace('_table', '_data'));
-                // console.log("table ID =",tableId);
-                // console.log('inc data:', income_data);
                 if (tableId == 'income_table') {
                     showPopup(params.data, income_data, tableId);
                 } else if (tableId == 'expenses_table') {
@@ -494,55 +520,34 @@ function createTable(tableId, tableData) {
         }
     };
 
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-        .ag-theme-alpine {
-            --ag-font-size: 10px !important;
-            --ag-font-family: Arial, sans-serif;
-            --ag-row-height: 25px;
-        }
-        .ag-theme-alpine .ag-header-cell-label {
-            font-weight: bold;
-            font-size: 11px !important;
-        }
-        .ag-theme-alpine .ag-cell {
-            padding-top: 0px !important;
-            padding-bottom: 0px !important;
-            line-height: 25px !important;
-        }
-        .ag-theme-alpine .ag-cell-value {
-            font-size: 11px !important;
-        }
-        .ag-theme-alpine .ag-row {
-            font-size: 11px !important;
-        }
-        .ag-theme-alpine .ag-row-even {
-            background-color: #f8f8f8;
-        }
-        .ag-theme-alpine .ag-row-odd {
-            background-color: #ffffff;
-        }
-        .sticky-col {
-            position: sticky;
-            background-color: inherit !important;
-            z-index: 1;
-        }
-        .ag-theme-alpine .ag-header {
-            position: sticky;
-            top: 0;
-            z-index: 2;
-        }
-        .ag-theme-alpine .total-row {
-            font-weight: bold;
-            background-color: #e0e0e0 !important;
-        }
-    `;
-    
-    document.head.appendChild(styleElement);
-
-    const gridDiv = document.querySelector(`#${tableId}`);
-    new agGrid.Grid(gridDiv, gridOptions);
+    try {
+        // Use Grid initialization that works with latest AG Grid versions
+        const gridInstance = agGrid.createGrid(gridDiv, gridOptions);
+        
+        // Attach grid API to the div for potential future reference
+        gridDiv.gridApi = gridInstance;
+    } catch (error) {
+        console.error('Error creating AG Grid:', error);
+    }
 }
+
+// Event listener to handle clicks outside popup
+document.addEventListener('click', function(event) {
+    const popup = document.getElementById('cellPopup');
+    if (popup && !popup.contains(event.target) && !event.target.closest('.ag-cell')) {
+        popup.remove();
+    }
+});
+
+// Ensure AG Grid is loaded before enabling interactions
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        await waitForAgGrid();
+        console.log('AG Grid is loaded and ready');
+    } catch (error) {
+        console.error('Failed to load AG Grid:', error);
+    }
+});
 
 </script>
 {% endblock %}

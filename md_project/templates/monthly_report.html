@@ -4,6 +4,14 @@
 {% block title %}Monthly Report{% endblock %}
 
 {% block content %}
+
+<!-- AG Grid CSS -->
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css">
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css">
+
+<!-- AG Grid JavaScript -->
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
+
 <div class="container">
     <div class="card">
         <div class="card-body">
@@ -136,7 +144,36 @@
         float: right;
     }
 
+    .ag-theme-alpine {
+        --ag-font-size: 10px;
+        --ag-font-family: Arial, sans-serif;
+        --ag-header-height: 30px;
+        --ag-row-height: 25px;
+    }
+    
+    .ag-theme-alpine .ag-header-cell {
+        background-color: #f8f9fa;
+        font-weight: bold;
+        font-size: 11px;
+    }
+    
+    .ag-theme-alpine .ag-cell {
+        padding: 5px;
+        font-size: 11px;
+    }
 
+    .sticky-col {
+        position: sticky;
+        left: 0;
+        background-color: inherit !important;
+        z-index: 1;
+    }
+
+    #myGrid {
+        width: 100%;
+        height: 500px;
+        margin-top: 20px;
+    }
     /* ... (rest of the styles remain the same) ... */
 </style>
 
@@ -152,33 +189,103 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css">
-<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css">
-<!-- AG Grid CSS -->
-
-<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
 <!-- AG Grid JavaScript -->
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
 
 <script>
+
+// Global variables
+let gridApi = null;
+let gridColumnApi = null;
+let escKeyListener = null;
+
+// Single DOMContentLoaded event listener
+// document.addEventListener('DOMContentLoaded', function() {
+//     initializeEventListeners();
+//     initializeFirstTier();
+// });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize first tier
+    const firstTierRadio = document.querySelector('input[name="tier"][value="1"]');
+    if (firstTierRadio) {
+        firstTierRadio.checked = true;
+        expenses_tier('1');
+    }
+});
+
+function initializeEventListeners() {
+    // Add event listeners for dropdown changes
+    ['selected_year', 'selected_type', 'selected_group'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', function() {
+                const selectedTier = document.querySelector('input[name="tier"]:checked');
+                if (selectedTier) {
+                    expenses_tier(selectedTier.value);
+                }
+            });
+        }
+    });
+
+    // Add ESC key listener for popup
+    escKeyListener = function(event) {
+        if (event.key === 'Escape') {
+            closePopup();
+        }
+    };
+}
+
+function initializeFirstTier() {
+    const firstTierRadio = document.querySelector('input[name="tier"][value="1"]');
+    if (firstTierRadio) {
+        firstTierRadio.checked = true;
+        expenses_tier('1');
+    }
+}
+
+
 function expenses_tier(selected_tier) {
+    // Clear existing grid if it exists
+    const gridDiv = document.querySelector('#myGrid');
+    if (gridDiv) {
+        if (gridDiv.gridInstance) {
+            try {
+                gridDiv.gridInstance.destroy();
+            } catch (e) {
+                console.error('Error destroying grid:', e);
+            }
+            gridDiv.gridInstance = null;
+        }
+        // Also try cleaning up using the API if available
+        if (gridApi) {
+            try {
+                gridApi.destroy();
+            } catch (e) {
+                console.error('Error destroying grid api:', e);
+            }
+            gridApi = null;
+            gridColumnApi = null;
+        }
+        gridDiv.innerHTML = '';
+    }
+    // Clear existing grid if it exists
+
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     const year = document.getElementById('selected_year').value;
     const type = document.getElementById('selected_type').value;
     const group = document.getElementById('selected_group').value;
-    const tier = selected_tier;
-    //const tier = document.querySelector('input[name="tier"]:checked').value;
 
-    console.log(type);
-    console.log("Selected tier:", tier);
-    console.log(year);
-    console.log(group);
+    // Reset the grid div height
+    if (gridDiv) {
+        gridDiv.style.height = '500px';
+    }
 
     const requestData = {
-        // Add any parameters you need for fetching data
-        tier : tier,
-        type : type,
-        group : group,
-        year : year,
+        tier: selected_tier,
+        type: type,
+        group: group,
+        year: year,
     };
 
     fetch('../monthly_report/', {
@@ -189,33 +296,29 @@ function expenses_tier(selected_tier) {
         },
         body: JSON.stringify(requestData),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(received_data => {
-        console.log('Received data:', received_data);
-        report_table = received_data.report_table;
-        console.log('type of report_table ', typeof(report_table))
-        console.log('report_table ',report_table);
-
-        transactions = received_data.transactions;
-        console.log('type of transactions', typeof(transactions))
-        console.log('transactions', transactions);
-        console.log(typeof(transactions))
-
-        column_head = '';
-        if (group == 'category') {
-            column_head = 'Category';
-        } else if (group == 'payee') {
-            column_head = 'Payee/Recipiant';
-        }        
-     
-        createTable(column_head, report_table, transactions);
-
-        combined_header = "  "+ type + " report&nbsp,&nbsp&nbspYear : " + year + " for " + type + " of Tier : " + tier;
-        createHeader(combined_header);
-
+        if (received_data && received_data.report_table) {
+            const column_head = group === 'category' ? 'Category' : 'Payee/Recipient';
+            createTable(column_head, received_data.report_table, received_data.transactions);
+            createHeader(`${type} report, Year: ${year}, Tier: ${selected_tier}`);
+        } else {
+            console.error('No report_table in received data');
+            if (gridDiv) {
+                gridDiv.innerHTML = 'No data available for the selected criteria.';
+            }
+        }
     })
     .catch(error => {
         console.error('Error fetching data:', error);
+        if (gridDiv) {
+            gridDiv.innerHTML = 'Error loading data. Please try again.';
+        }
     });
 }
 
@@ -224,19 +327,16 @@ function createHeader(combined_header) {
         + combined_header ;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Your existing initialization code...
-
-    // Add event listener for ESC key
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            closePopup();
-        }
-    });
-});
-
 
 function showPopup(data, transactions, column_head) {
+    // Remove existing ESC listener if it exists
+    if (escKeyListener) {
+            document.removeEventListener('keydown', escKeyListener);
+    }
+
+    // Add ESC listener
+    document.addEventListener('keydown', escKeyListener);
+
     console.log("data.category is:", data.category);
     console.log("column_head is", column_head);
 
@@ -351,157 +451,44 @@ function showPopup(data, transactions, column_head) {
 }
 
 
-
-// function showPopup(data, transactions, column_head) {
-//     console.log("data.category is:", data.category);
-//     console.log("column_head is", column_head);
-
-//     function formatAmount(amount) {
-//         return parseFloat(amount).toLocaleString('en-US', {
-//             minimumFractionDigits: 2,
-//             maximumFractionDigits: 2
-//         });
-//     }
-
-//     let popupContents = [];
-//     let category_or_payee_name = data.category;
-    
-//     if (column_head == "Category") {
-//         popupContents = transactions.filter(rowData => rowData.category == category_or_payee_name)
-//             .map(rowData => ({
-//                 date: rowData.date,
-//                 payee: rowData.description,
-//                 accountName: rowData.account_name,
-//                 memo: rowData.memo,
-//                 amount: rowData.amount
-//             }));
-//     } else if (column_head == 'Payee/Recipiant') {
-//         popupContents = transactions.filter(rowData => rowData.description == category_or_payee_name)
-//             .map(rowData => ({
-//                 date: rowData.date,
-//                 category: rowData.category,
-//                 accountName: rowData.account_name,
-//                 memo: rowData.memo,
-//                 amount: rowData.amount
-//             }));
-//     }
-
-//     // Sort popupContents by date in ascending order
-//     popupContents.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-//     function createPopupHTML() {
-//         let popupHTML = `
-//             <div class="popup-content">
-//                 <h3>${column_head}: ${category_or_payee_name}</h3>
-//                 <input type="text" id="popupSearch" placeholder="Search..." style="float: right; margin-bottom: 10px;">
-//                 <table class="popup-table">
-//                     <thead>
-//                         <tr>
-//                             <th>YYYY/MM/DD</th>
-//                             <th>${column_head == "Category" ? "Payee" : "Category"}</th>
-//                             <th>Account Name</th>
-//                             <th>Memo</th>
-//                             <th>Amount</th>
-//                         </tr>
-//                     </thead>
-//                     <tbody id="popupTableBody">
-//         `;
-
-//         popupContents.forEach(item => {
-//             popupHTML += `
-//                 <tr>
-//                     <td>${item.date}</td>
-//                     <td>${column_head == "Category" ? item.payee : item.category}</td>
-//                     <td>${item.accountName}</td>
-//                     <td>${item.memo}</td>
-//                     <td class="amount-cell">${formatAmount(item.amount)}</td>
-//                 </tr>
-//             `;
-//         });
-
-//         popupHTML += `
-//                     </tbody>
-//                 </table>
-//                 <div class="esc-hint">Press ESC to close</div>
-//             </div>
-//         `;
-
-//         return popupHTML;
-//     }
-
-//     // Display the popup
-//     document.getElementById('popup-container').innerHTML = createPopupHTML();
-//     document.getElementById('popup-container').style.display = 'block';
-
-//     // Add event listener for ESC key
-//     document.addEventListener('keydown', handleEscKey);
-
-//     // Add event listener for search
-//     document.getElementById('popupSearch').addEventListener('input', function() {
-//         const searchTerm = this.value.toLowerCase();
-//         const tbody = document.getElementById('popupTableBody');
-//         const rows = tbody.getElementsByTagName('tr');
-
-//         for (let row of rows) {
-//             const text = row.textContent.toLowerCase();
-//             row.style.display = text.includes(searchTerm) ? '' : 'none';
-//         }
-//     });
-// }
-
 function handleEscKey(event) {
     if (event.key === 'Escape') {
         closePopup();
     }
 }
 
+// function closePopup() {
+//     document.getElementById('popup-container').style.display = 'none';
+//     document.removeEventListener('keydown', handleEscKey);
+// }
+
 function closePopup() {
-    document.getElementById('popup-container').style.display = 'none';
-    document.removeEventListener('keydown', handleEscKey);
+    const popup = document.getElementById('popup-container');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+    
+    // Remove ESC listener
+    if (escKeyListener) {
+        document.removeEventListener('keydown', escKeyListener);
+    }
 }
 
-let gridApi = null; // Global variable to hold the grid API
-
 function createTable(column_head, tableData, transactions) {
-    if (gridApi) {
-        gridApi.destroy();
+    const gridDiv = document.querySelector('#myGrid');
+    if (!gridDiv) {
+        console.error('Grid container not found!');
+        return;
     }
-
-    function formatNumber(value) {
-        if (value === null || value === undefined) return '';
-        if (typeof value === 'number') {
-            return value.toLocaleString('en-US', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-                useGrouping: true
-            });
-        }
-        if (typeof value === 'string') {
-            const numValue = parseFloat(value.replace(/[^0-9.-]+/g,""));
-            if (!isNaN(numValue)) {
-                return Math.round(numValue).toLocaleString('en-US', {
-                    useGrouping: true
-                });
-            }
-        }
-        return value;
-    }
-
-    function parseValue(value) {
-        if (value === null || value === undefined) return 0;
-        if (typeof value === 'number') return value;
-        if (typeof value === 'string') {
-            return parseFloat(value.replace(/[^0-9.-]+/g,"")) || 0;
-        }
-        return 0;
-    }
+    
+    gridDiv.innerHTML = '';
 
     const columnDefs = [
         { 
             field: 'category', 
             headerName: column_head, 
             width: 150, 
-            pinned: 'left', 
+            pinned: 'left',
             filter: true,
             cellClass: 'sticky-col'
         },
@@ -514,104 +501,114 @@ function createTable(column_head, tableData, transactions) {
         },
         ...['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'total'].map(month => ({
             field: month,
-            headerName: month.charAt(0).toUpperCase() + month.slice(1),
+            headerName: month.toUpperCase(),
             width: month === 'total' ? 100 : 80,
             type: 'numericColumn',
-            valueGetter: params => parseValue(params.data[month]),
             valueFormatter: params => formatNumber(params.value),
+            // Add valueParser to ensure proper numeric sorting
+            valueParser: params => {
+                if (params.newValue === null || params.newValue === '') return null;
+                return parseFloat(params.newValue.replace(/[^0-9.-]/g, ''));
+            },
+            // Add comparator for custom sorting
+            comparator: (valueA, valueB) => {
+                const numA = parseFloat(valueA) || 0;
+                const numB = parseFloat(valueB) || 0;
+                return numA - numB;
+            },
             sortable: true,
             sort: month === 'total' ? 'desc' : null,
+            // Ensure numbers are right-aligned
+            cellStyle: { textAlign: 'right' }
         }))
     ];
 
+    // Clean the data before passing it to the grid
+    const cleanedData = tableData.map(row => {
+        const cleanRow = { ...row };
+        ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'total'].forEach(month => {
+            cleanRow[month] = parseFloat(cleanRow[month]) || 0;
+        });
+        return cleanRow;
+    });
+
     const gridOptions = {
         columnDefs: columnDefs,
-        rowData: tableData,
+        rowData: cleanedData,
         defaultColDef: {
             sortable: true,
             resizable: true,
         },
-        onCellClicked: function(params) {
+        onGridReady: params => {
+            gridApi = params.api;
+            gridColumnApi = params.columnApi;
+            
+            if (params.api) {
+                params.api.sizeColumnsToFit();
+                
+                setTimeout(() => {
+                    if (params.api && !params.api.isDestroyed()) {
+                        params.api.sizeColumnsToFit();
+                    }
+                }, 100);
+            }
+        },
+        onCellClicked: params => {
             if (params.column.getColId() === 'category') {
                 showPopup(params.data, transactions, column_head);
             }
         },
-        getRowStyle: function(params) {
+        getRowStyle: params => {
             if (params.data && params.data.tier === "1") {
                 return { fontWeight: 'bold' };
             }
-        },
-        pinnedBottomRowData: [generateTotalsRow(tableData)],
-        onGridReady: function(params) {
-            params.api.sizeColumnsToFit();
-            console.log('Grid is ready');
+            return null;
         },
         domLayout: 'normal',
-        rowHeight: 18,
-        headerHeight: 25,
+        rowHeight: 25,
+        headerHeight: 30,
         suppressHorizontalScroll: false,
+        pinnedBottomRowData: [generateTotalsRow(cleanedData)],
+        animateRows: true
     };
 
-    const gridDiv = document.querySelector('#myGrid');
-    gridDiv.style.height = '500px'; // Set a fixed height for the grid container
-    gridDiv.style.width = '100%';
-    const grid = new agGrid.Grid(gridDiv, gridOptions);
-    gridApi = grid.gridOptions.api;
+    try {
+        const grid = agGrid.createGrid(gridDiv, gridOptions);
+        console.log('Grid successfully created');
+        
+        gridApi = grid.api;
+        gridColumnApi = grid.columnApi;
+        gridDiv.gridInstance = grid;
+    } catch (error) {
+        console.error('Error creating grid:', error);
+        try {
+            const grid = new agGrid.Grid(gridDiv, gridOptions);
+            console.log('Grid created with alternative method');
+            gridApi = gridOptions.api;
+            gridColumnApi = gridOptions.columnApi;
+            gridDiv.gridInstance = grid;
+        } catch (fallbackError) {
+            console.error('Both grid initialization methods failed:', fallbackError);
+            gridDiv.innerHTML = 'Error creating grid. Please try again.';
+        }
+    }
+}
 
-    // Apply custom styles
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-        .ag-theme-alpine {
-            --ag-font-size: 10px !important;
-            --ag-font-family: Arial, sans-serif;
-        }
-        .ag-theme-alpine .ag-header-cell-label {
-            font-weight: bold;
-            font-size: 11px !important;
-        }
-        .ag-theme-alpine .ag-cell {
-            padding-top: 1px !important;
-            padding-bottom: 1px !important;
-            line-height: 16px !important;
-        }
-        .ag-theme-alpine .ag-cell-value {
-            font-size: 11px !important;
-        }
-        .ag-theme-alpine .ag-row {
-            font-size: 11px !important;
-        }
-        .ag-theme-alpine .ag-row-even {
-            background-color: #f8f8f8;
-        }
-        .ag-theme-alpine .ag-row-odd {
-            background-color: #ffffff;
-        }
-        .sticky-col {
-            position: sticky;
-            background-color: inherit !important;
-            z-index: 1;
-        }
-    `;
-    document.head.appendChild(styleElement);
-
-    // Force refresh of grid to apply new styles
-    setTimeout(() => {
-        gridApi.resetRowHeights();
-        gridApi.sizeColumnsToFit();
-    }, 0);
-
-    console.log('Grid created with updated styles');
-    // If you need to access the grid API later, you can use:
-    // const gridApi = gridOptions.api;
-    // const columnApi = gridOptions.columnApi;
-
+function formatNumber(value) {
+    if (value == null || value === undefined || isNaN(value)) return '';
+    return new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+        style: 'decimal'
+    }).format(value);
 }
 
 function generateTotalsRow(rowData) {
     const totals = { category: 'Total', tier: '' };
     ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'total'].forEach(month => {
         totals[month] = rowData.reduce((sum, row) => {
-            return sum + parseValue(row[month]);
+            const value = parseFloat(row[month] || 0);
+            return sum + (isNaN(value) ? 0 : value);
         }, 0);
     });
     return totals;

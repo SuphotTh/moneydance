@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "ag-grid-community": "^33.0.2",
+    "ag-grid-enterprise": "^33.0.2"
+  }
+}

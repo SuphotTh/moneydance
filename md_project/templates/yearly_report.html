@@ -8,6 +8,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.6/styles/ag-grid.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/30.0.6/styles/ag-theme-alpine.min.css">
 
+<!-- AG Grid CSS -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css"> -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css"> -->
+
+<!-- AG Grid JavaScript -->
+<!-- <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script> -->
+
 <div class="container">
     <div class="card">
         <div class="card-body">
@@ -229,6 +236,12 @@
 <script>
 
 function expenses_tier(selected_tier) {
+    // Add check for AG Grid
+    if (!window.agGrid) {
+        console.error('AG Grid library not loaded. Please check your script imports.');
+        return;
+    }
+
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     const year = document.getElementById('selected_year').value;
     const type = document.getElementById('selected_type').value;
@@ -270,6 +283,29 @@ function expenses_tier(selected_tier) {
 
 function createHeader(combined_header) {
     document.getElementById('header').innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;' + combined_header;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if AG Grid is loaded
+    if (window.agGrid) {
+        console.log('AG Grid loaded successfully');
+        // Initialize your default view here if needed
+    } else {
+        console.error('AG Grid failed to load');
+    }
+});
+
+window.onerror = function(msg, url, lineNo, columnNo, error) {
+    console.error('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo + '\nColumn: ' + columnNo + '\nError object: ' + JSON.stringify(error));
+    return false;
+};
+
+function showLoading() {
+    document.getElementById('loadingIndicator').style.display = 'block';
+}
+
+function hideLoading() {
+    document.getElementById('loadingIndicator').style.display = 'none';
 }
 
 let gridApi = null;
@@ -406,120 +442,6 @@ function showPopup(data, transactions, column_head) {
     }
 }
 
-
-
-// function showPopup(data, transactions, column_head) {
-//     console.log("Attempting to show popup for:", data.category);
-//     console.log("Column head:", column_head);
-
-//     const popupContainer = document.getElementById('popup-container');
-//     const popupContent = document.getElementById('popup-content');
-//     if (!popupContainer || !popupContent) {
-//         console.error("Popup container or content not found in the DOM");
-//         return;
-//     }
-
-//     function formatAmount(amount) {
-//         return parseFloat(amount).toLocaleString('en-US', {
-//             minimumFractionDigits: 2,
-//             maximumFractionDigits: 2
-//         });
-//     }
-
-//     let popupContents = [];
-//     let category_or_payee_name = data.category;
-    
-//     if (column_head == "Category") {
-//         popupContents = transactions.filter(rowData => rowData.category == category_or_payee_name)
-//             .map(rowData => ({
-//                 date: rowData.date,
-//                 payee: rowData.description,
-//                 accountName: rowData.account_name,
-//                 memo: rowData.memo,
-//                 amount: rowData.amount
-//             }));
-//     } else if (column_head == 'Payee/Recipient') {
-//         popupContents = transactions.filter(rowData => rowData.description == category_or_payee_name)
-//             .map(rowData => ({
-//                 date: rowData.date,
-//                 category: rowData.category,
-//                 accountName: rowData.account_name,
-//                 memo: rowData.memo,
-//                 amount: rowData.amount
-//             }));
-//     }
-
-//     if (popupContents.length === 0) {
-//         console.warn("No matching transactions found for the popup");
-//     }
-
-//     popupContents.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-//     function createPopupHTML() {
-//         let popupHTML = `
-//             <h3>${column_head}: ${category_or_payee_name}</h3>
-//             <input type="text" id="popupSearch" placeholder="Search..." style="float: right; margin-bottom: 10px;">
-//             <table class="popup-table">
-//                 <thead>
-//                     <tr>
-//                         <th>YYYY/MM/DD</th>
-//                         <th>${column_head == "Category" ? "Payee" : "Category"}</th>
-//                         <th>Account Name</th>
-//                         <th>Memo</th>
-//                         <th>Amount</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody id="popupTableBody">
-//         `;
-
-//         popupContents.forEach(item => {
-//             popupHTML += `
-//                 <tr>
-//                     <td>${item.date || ''}</td>
-//                     <td>${column_head == "Category" ? (item.payee || '') : (item.category || '')}</td>
-//                     <td>${item.accountName || ''}</td>
-//                     <td>${item.memo || ''}</td>
-//                     <td class="amount-cell">${formatAmount(item.amount || 0)}</td>
-//                 </tr>
-//             `;
-//         });
-
-//         popupHTML += `
-//                 </tbody>
-//             </table>
-//             <div class="esc-hint">Press ESC to close</div>
-//         `;
-
-//         return popupHTML;
-//     }
-
-//     try {
-//         popupContent.innerHTML = createPopupHTML();
-//         popupContainer.style.display = 'block';
-
-//         document.addEventListener('keydown', handleEscKey);
-
-//         const searchInput = document.getElementById('popupSearch');
-//         if (searchInput) {
-//             searchInput.addEventListener('input', function() {
-//                 const searchTerm = this.value.toLowerCase();
-//                 const tbody = document.getElementById('popupTableBody');
-//                 if (tbody) {
-//                     const rows = tbody.getElementsByTagName('tr');
-//                     for (let row of rows) {
-//                         const text = row.textContent.toLowerCase();
-//                         row.style.display = text.includes(searchTerm) ? '' : 'none';
-//                     }
-//                 }
-//             });
-//         }
-
-//         console.log("Popup displayed successfully");
-//     } catch (error) {
-//         console.error("Error displaying popup:", error);
-//     }
-// }
-
 function handleEscKey(event) {
     if (event.key === 'Escape') {
         closePopup();
@@ -626,8 +548,29 @@ function createTable(year, column_head, tableData, transactions) {
     gridDiv.style.height = '500px'; // Set a fixed height for the grid
     gridDiv.style.width = '100%';
     
-    const grid = new agGrid.Grid(gridDiv, gridOptions);
-    gridApi = grid.gridOptions.api;
+    // const grid = new agGrid.Grid(gridDiv, gridOptions);
+    // gridApi = grid.gridOptions.api;
+    
+    try {
+        // Check if agGrid is properly loaded
+        if (!window.agGrid) {
+            console.error('AG Grid library not loaded');
+            return;
+        }
+        
+        // Create new grid instance
+        gridApi = agGrid.createGrid(gridDiv, gridOptions);
+        
+        // Add error handling for grid creation
+        if (!gridApi) {
+            console.error('Failed to create grid');
+            return;
+        }
+
+        console.log('Grid created successfully');
+    } catch (error) {
+        console.error('Error creating grid:', error);
+    }
 
     // ... (rest of the function remains the same)
 

@@ -1,0 +1,35 @@
+import type { BeanCollection, ClientSideRowModelStage, ColDef, GridOptions, IRowNodeStage, NamedBean, StageExecuteParams } from 'ag-grid-community';
+import { BeanStub } from 'ag-grid-community';
+export declare class PivotStage extends BeanStub implements NamedBean, IRowNodeStage {
+    beanName: "pivotStage";
+    refreshProps: Set<keyof GridOptions<any>>;
+    step: ClientSideRowModelStage;
+    private valueSvc;
+    private colModel;
+    private pivotResultCols;
+    private rowGroupColsSvc?;
+    private valueColsSvc?;
+    private pivotColsSvc?;
+    private pivotColDefSvc;
+    wireBeans(beans: BeanCollection): void;
+    private uniqueValues;
+    private pivotColumnDefs;
+    private aggregationColumnsHashLastTime;
+    private aggregationFuncsHashLastTime;
+    private groupColumnsHashLastTime;
+    private pivotRowTotalsLastTime;
+    private pivotColumnGroupTotalsLastTime;
+    private suppressExpandablePivotGroupsLastTime;
+    private removePivotHeaderRowWhenSingleValueColumnLastTime;
+    private lastTimeFailed;
+    private maxUniqueValues;
+    execute(params: StageExecuteParams): void;
+    private executePivotOff;
+    private executePivotOn;
+    private setUniqueValues;
+    private currentUniqueCount;
+    private bucketUpRowNodes;
+    private bucketRowNode;
+    private bucketChildren;
+    getPivotColumnDefs(): ColDef[];
+}

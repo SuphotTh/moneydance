@@ -1,0 +1,614 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Monthly Report{% endblock %}
+
+{% block content %}
+
+<!-- AG Grid CSS -->
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css">
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css">
+
+<!-- AG Grid JavaScript -->
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="text text-primary">Monthly Report</h5>
+                </div>
+            </div>
+            <form id="dataForm">
+                {% csrf_token %}
+                <div class="row align-items-end">
+                    <div class="col-md-2">
+                        <label for="selected_year" class="form-label">Select year:</label>
+                        <select class='form-select form-select-sm' id="selected_year" name='selected_year'>
+                            {% for y in year_array %}
+                                <option value="{{ y }}">{{ y }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="selected_type" class="form-label">Select type:</label>
+                        <select class='form-select form-select-sm' id="selected_type" name='selected_type'>
+                            <option value="Expenses">Expenses</option>
+                            <option value="Income">Income</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="selected_group" class="form-label">Select group:</label>
+                        <select class='form-select form-select-sm' id="selected_group" name='selected_group'>
+                            <option value="category">Category</option>
+                            <option value="payee">Payee/Recipient</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Select tier:</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="tier1" name="tier" value="1" onclick="expenses_tier('1')">
+                                <label class="form-check-label" for="tier1">: Tier 1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="tier2" name="tier" value="2" onclick="expenses_tier('2')">
+                                <label class="form-check-label" for="tier2">: Tier 2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="tier3" name="tier" value="3" onclick="expenses_tier('3')">
+                                <label class="form-check-label" for="tier3">: Tier 3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="tier4" name="tier" value="4" onclick="expenses_tier('4')">
+                                <label class="form-check-label" for="tier4">: Tier 4</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .popup {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+    }
+
+    .popup-content {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 90%;
+        max-height: 90%;
+        overflow-y: auto;
+        font-size: 11px; /* Smaller font size */
+        padding-top: 30px; /* Add some top padding to make room for the search box */
+    }
+
+    .popup-content h3 {
+        position: absolute;
+        font-size: 16px; /* Smaller font for the title */
+        margin-bottom: 10px;
+    }
+
+    .popup-content .esc-hint {
+        font-size: 11px;
+        color: #666;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .popup-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .popup-table th, .popup-table td {
+        border: 1px solid #ddd;
+        padding: 4px 6px;
+        text-align: left;
+    }
+
+    .popup-table th {
+        background-color: #f2f2f2;
+        font-size: 12x;
+    }
+
+    .popup-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .popup-table .amount-cell {
+        text-align: right;
+        font-family: monospace; /* For better alignment of numbers */
+    }
+
+    #popupSearch {
+        padding: 5px;
+        margin-bottom: 10px;
+        width: 200px;
+        float: right;
+    }
+
+    .ag-theme-alpine {
+        --ag-font-size: 10px;
+        --ag-font-family: Arial, sans-serif;
+        --ag-header-height: 30px;
+        --ag-row-height: 25px;
+    }
+    
+    .ag-theme-alpine .ag-header-cell {
+        background-color: #f8f9fa;
+        font-weight: bold;
+        font-size: 11px;
+    }
+    
+    .ag-theme-alpine .ag-cell {
+        padding: 5px;
+        font-size: 11px;
+    }
+
+    .sticky-col {
+        position: sticky;
+        left: 0;
+        background-color: inherit !important;
+        z-index: 1;
+    }
+
+    #myGrid {
+        width: 100%;
+        height: 500px;
+        margin-top: 20px;
+    }
+    /* ... (rest of the styles remain the same) ... */
+</style>
+
+<div class="content mt-2">
+    <h5 id='header' class='text-primary mb-3'></h5>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div id="myGrid" class="ag-theme-alpine" style="width:100%;"></div>
+                <div id="popup-container" class="popup"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AG Grid JavaScript -->
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
+
+<script>
+
+// Global variables
+let gridApi = null;
+let gridColumnApi = null;
+let escKeyListener = null;
+
+// Single DOMContentLoaded event listener
+// document.addEventListener('DOMContentLoaded', function() {
+//     initializeEventListeners();
+//     initializeFirstTier();
+// });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize first tier
+    const firstTierRadio = document.querySelector('input[name="tier"][value="1"]');
+    if (firstTierRadio) {
+        firstTierRadio.checked = true;
+        expenses_tier('1');
+    }
+});
+
+function initializeEventListeners() {
+    // Add event listeners for dropdown changes
+    ['selected_year', 'selected_type', 'selected_group'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', function() {
+                const selectedTier = document.querySelector('input[name="tier"]:checked');
+                if (selectedTier) {
+                    expenses_tier(selectedTier.value);
+                }
+            });
+        }
+    });
+
+    // Add ESC key listener for popup
+    escKeyListener = function(event) {
+        if (event.key === 'Escape') {
+            closePopup();
+        }
+    };
+}
+
+function initializeFirstTier() {
+    const firstTierRadio = document.querySelector('input[name="tier"][value="1"]');
+    if (firstTierRadio) {
+        firstTierRadio.checked = true;
+        expenses_tier('1');
+    }
+}
+
+
+function expenses_tier(selected_tier) {
+    // Clear existing grid if it exists
+    const gridDiv = document.querySelector('#myGrid');
+    if (gridDiv) {
+        if (gridDiv.gridInstance) {
+            try {
+                gridDiv.gridInstance.destroy();
+            } catch (e) {
+                console.error('Error destroying grid:', e);
+            }
+            gridDiv.gridInstance = null;
+        }
+        // Also try cleaning up using the API if available
+        if (gridApi) {
+            try {
+                gridApi.destroy();
+            } catch (e) {
+                console.error('Error destroying grid api:', e);
+            }
+            gridApi = null;
+            gridColumnApi = null;
+        }
+        gridDiv.innerHTML = '';
+    }
+    // Clear existing grid if it exists
+
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const year = document.getElementById('selected_year').value;
+    const type = document.getElementById('selected_type').value;
+    const group = document.getElementById('selected_group').value;
+
+    // Reset the grid div height
+    if (gridDiv) {
+        gridDiv.style.height = '500px';
+    }
+
+    const requestData = {
+        tier: selected_tier,
+        type: type,
+        group: group,
+        year: year,
+    };
+
+    fetch('../monthly_report/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(requestData),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(received_data => {
+        if (received_data && received_data.report_table) {
+            const column_head = group === 'category' ? 'Category' : 'Payee/Recipient';
+            createTable(column_head, received_data.report_table, received_data.transactions);
+            createHeader(`${type} report, Year: ${year}, Tier: ${selected_tier}`);
+        } else {
+            console.error('No report_table in received data');
+            if (gridDiv) {
+                gridDiv.innerHTML = 'No data available for the selected criteria.';
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+        if (gridDiv) {
+            gridDiv.innerHTML = 'Error loading data. Please try again.';
+        }
+    });
+}
+
+function createHeader(combined_header) {
+    document.getElementById('header').innerHTML = '&nbsp&nbsp&nbsp&nbsp '
+        + combined_header ;
+}
+
+
+function showPopup(data, transactions, column_head) {
+    // Remove existing ESC listener if it exists
+    if (escKeyListener) {
+            document.removeEventListener('keydown', escKeyListener);
+    }
+
+    // Add ESC listener
+    document.addEventListener('keydown', escKeyListener);
+
+    console.log("data.category is:", data.category);
+    console.log("column_head is", column_head);
+
+    function formatAmount(amount) {
+        return parseFloat(amount).toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    let popupContents = [];
+    let category_or_payee_name = data.category;
+
+    if (column_head == "Category") {
+        popupContents = transactions.filter(rowData => rowData.category == category_or_payee_name)
+            .map(rowData => ({
+                date: rowData.date,
+                payee: rowData.description,
+                accountName: rowData.account_name,
+                memo: rowData.memo,
+                amount: rowData.amount
+            }));
+    } else if (column_head == 'Payee/Recipiant') {
+        popupContents = transactions.filter(rowData => rowData.description == category_or_payee_name)
+            .map(rowData => ({
+                date: rowData.date,
+                category: rowData.category,
+                accountName: rowData.account_name,
+                memo: rowData.memo,
+                amount: rowData.amount
+            }));
+    }
+
+    // Sort popupContents by date in ascending order
+    popupContents.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    // Calculate the total amount of all transactions initially
+    let totalAmount = popupContents.reduce((sum, item) => sum + parseFloat(item.amount), 0);
+
+    function createPopupHTML() {
+        let popupHTML = `
+            <div class="popup-content">
+                <h6>${column_head}: ${category_or_payee_name}</h6>
+                <input type="text" id="popupSearch" placeholder="Search..." style="float: right; margin-bottom: 10px;">
+                <p><strong>Total Amount: $<span id="totalAmount">${formatAmount(totalAmount)}</span></strong></p>
+                <table class="popup-table">
+                    <thead>
+                        <tr>
+                            <th>YYYY/MM/DD</th>
+                            <th>${column_head == "Category" ? "Payee" : "Category"}</th>
+                            <th>Account Name</th>
+                            <th>Memo</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="popupTableBody">
+        `;
+
+        popupContents.forEach(item => {
+            popupHTML += `
+                <tr>
+                    <td>${item.date}</td>
+                    <td>${column_head == "Category" ? item.payee : item.category}</td>
+                    <td>${item.accountName}</td>
+                    <td>${item.memo}</td>
+                    <td class="amount-cell">${formatAmount(item.amount)}</td>
+                </tr>
+            `;
+        });
+
+        popupHTML += `
+                    </tbody>
+                </table>
+                <div class="esc-hint">Press ESC to close</div>
+            </div>
+        `;
+
+        return popupHTML;
+    }
+
+    // Display the popup
+    document.getElementById('popup-container').innerHTML = createPopupHTML();
+    document.getElementById('popup-container').style.display = 'block';
+
+    // Add event listener for ESC key
+    document.addEventListener('keydown', handleEscKey);
+
+    // Add event listener for search
+    document.getElementById('popupSearch').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const tbody = document.getElementById('popupTableBody');
+        const rows = tbody.getElementsByTagName('tr');
+        let filteredTotal = 0;
+
+        for (let row of rows) {
+            const text = row.textContent.toLowerCase();
+            const amountCell = row.querySelector('.amount-cell');
+            const amount = parseFloat(amountCell.textContent.replace(/[^0-9.-]+/g, "")); // Extract and parse the amount
+
+            // Show or hide the row based on the search term
+            if (text.includes(searchTerm)) {
+                row.style.display = '';
+                filteredTotal += amount; // Add the visible row's amount to the filtered total
+            } else {
+                row.style.display = 'none';
+            }
+        }
+
+        // Update the total amount displayed in the popup
+        document.getElementById('totalAmount').textContent = formatAmount(filteredTotal);
+    });
+}
+
+
+function handleEscKey(event) {
+    if (event.key === 'Escape') {
+        closePopup();
+    }
+}
+
+// function closePopup() {
+//     document.getElementById('popup-container').style.display = 'none';
+//     document.removeEventListener('keydown', handleEscKey);
+// }
+
+function closePopup() {
+    const popup = document.getElementById('popup-container');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+    
+    // Remove ESC listener
+    if (escKeyListener) {
+        document.removeEventListener('keydown', escKeyListener);
+    }
+}
+
+function createTable(column_head, tableData, transactions) {
+    const gridDiv = document.querySelector('#myGrid');
+    if (!gridDiv) {
+        console.error('Grid container not found!');
+        return;
+    }
+    
+    gridDiv.innerHTML = '';
+
+    const columnDefs = [
+        { 
+            field: 'category', 
+            headerName: column_head, 
+            width: 150, 
+            pinned: 'left',
+            filter: true,
+            cellClass: 'sticky-col'
+        },
+        { 
+            field: 'tier', 
+            headerName: 'T', 
+            width: 40,
+            pinned: 'left',
+            cellClass: 'sticky-col'
+        },
+        ...['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'total'].map(month => ({
+            field: month,
+            headerName: month.toUpperCase(),
+            width: month === 'total' ? 100 : 80,
+            type: 'numericColumn',
+            valueFormatter: params => formatNumber(params.value),
+            sortable: true,
+            sort: month === 'total' ? 'desc' : null,
+        }))
+    ];
+
+    const gridOptions = {
+        columnDefs: columnDefs,
+        rowData: tableData,
+        defaultColDef: {
+            sortable: true,
+            resizable: true,
+        },
+        onGridReady: params => {
+            gridApi = params.api;
+            gridColumnApi = params.columnApi;
+            
+            if (params.api) {
+                params.api.sizeColumnsToFit();
+                
+                // Use setTimeout to ensure the grid is fully rendered
+                setTimeout(() => {
+                    if (params.api && !params.api.isDestroyed()) {
+                        params.api.sizeColumnsToFit();
+                    }
+                }, 100);
+            }
+        },
+        onCellClicked: params => {
+            if (params.column.getColId() === 'category') {
+                showPopup(params.data, transactions, column_head);
+            }
+        },
+        getRowStyle: params => {
+            if (params.data && params.data.tier === "1") {
+                return { fontWeight: 'bold' };
+            }
+            return null;
+        },
+        domLayout: 'normal',
+        rowHeight: 25,
+        headerHeight: 30,
+        suppressHorizontalScroll: false,
+        pinnedBottomRowData: [generateTotalsRow(tableData)],
+        animateRows: true
+    };
+
+    try {
+        // Create new grid instance using the modern AG Grid initialization
+        const grid = agGrid.createGrid(gridDiv, gridOptions);
+        console.log('Grid successfully created');
+        
+        // Store grid API for future reference
+        gridApi = grid.api;
+        gridColumnApi = grid.columnApi;
+        
+        // Store grid instance for cleanup
+        gridDiv.gridInstance = grid;
+    } catch (error) {
+        console.error('Error creating grid:', error);
+        // Try alternative initialization if the first method fails
+        try {
+            const grid = new agGrid.Grid(gridDiv, gridOptions);
+            console.log('Grid created with alternative method');
+            gridApi = gridOptions.api;
+            gridColumnApi = gridOptions.columnApi;
+            gridDiv.gridInstance = grid;
+        } catch (fallbackError) {
+            console.error('Both grid initialization methods failed:', fallbackError);
+            gridDiv.innerHTML = 'Error creating grid. Please try again.';
+        }
+    }
+}
+
+
+function formatNumber(value) {
+    if (value == null || value === undefined) return '';
+    return new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(value);
+}
+
+function generateTotalsRow(rowData) {
+    const totals = { category: 'Total', tier: '' };
+    ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'total'].forEach(month => {
+        totals[month] = rowData.reduce((sum, row) => {
+            const value = parseFloat(row[month] || 0);
+            return sum + (isNaN(value) ? 0 : value);
+        }, 0);
+    });
+    return totals;
+}
+
+function parseValue(value) {
+    if (value === 'Invalid ...' || value === null || value === undefined) return 0;
+    if (typeof value === 'number') return value;
+    if (typeof value === 'string') {
+        if (value.endsWith('...')) {
+            return parseFloat(value) || 0;
+        }
+        return parseFloat(value.replace(/[^0-9.-]+/g,"")) || 0;
+    }
+    return 0;
+}
+
+</script>
+{% endblock %}

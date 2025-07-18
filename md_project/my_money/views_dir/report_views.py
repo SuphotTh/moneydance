@@ -236,6 +236,10 @@ def report_by_range(request):
                 }
                 print("date info : ",type(date_info))
                 # Combining data and additional parameters
+
+                # for data in income_data:
+                #     print (data)
+
                 report_data = {
                     'income_data': income_data,
                     'expenses_data': expenses_data,
@@ -320,7 +324,7 @@ def monthly_report_view(request):
     else :
         oldest_date = Transaction.objects.aggregate(oldest_date=Min('date'))['oldest_date']
         oldest_year = oldest_date.year
-        current_year = date.today().year
+        current_year = (date.today().year)+1
         year_array = []
         for year in range(current_year, oldest_year, -1):
             year_array.append(str(year))
@@ -554,7 +558,7 @@ def yearly_report (request):
             oldest_date = Transaction.objects.aggregate(oldest_date=Min('date'))['oldest_date']
             oldest_year = oldest_date.year
             # oldest_year = oldest_date.year + 5
-            current_year = date.today().year
+            current_year = (date.today().year)+1
             year_array = []
             for year in range(current_year, oldest_year, -1):
                 year_array.append(str(year))
