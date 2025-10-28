@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-2">
+  <h5>📊 Purchase Report (DCA)</h5>
+  <!-- Symbol Selection -->
+  <div class="mb-3">
+    <div class="d-flex align-items-center mb-2">
+      <label for="symbolSelect" class="form-label me-2 mb-0">Select Symbol:</label>
+      <select id="symbolSelect" class="form-select" style="width: 150px;">
+        <option value="">-- Choose Symbol --</option>
+        {% for s in symbols %}
+          <option value="{{ s }}">{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  
+  <div class="mt-2 d-flex justify-content-around align-items-center border p-2 rounded bg-light">
+    <p class="mb-0"><strong>THB Avail: </strong> <span id="accPostBal"></span></p>
+    <p class="mb-0"><strong class="symBalance">Latest: </strong> <span id="accLastPrice"></span></p>
+    <p class="mb-0"><strong class="symBalance">Qty: </strong> <span id="accTotalQty"></span></p>
+    <p class="mb-0"><strong class="symBalance">Value: </strong> <span id="accTotalValue"></span></p>
+  </div>
+  <!-- Report Table -->
+  <div id="reportSection" class="mt-3" style="display:none;">
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>id</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Symbol</th>
+          <th class="symColumn">{{ sym }} in Wallet</th>
+          <th>Fear&Greed Index</th>
+          <th>Amount</th>
+          <th>Purchase Qty</th>
+          <th>Purchase Price</th>
+        </tr>
+      </thead>
+      <tbody id="reportBody"></tbody>
+    </table>
+
+    <div class="d-flex justify-content-between">
+      <button id="prevBtn" class="btn btn-outline-secondary btn-sm">Previous</button>
+      <span id="pageInfo"></span>
+      <button id="nextBtn" class="btn btn-outline-secondary btn-sm">Next</button>
+    </div>
+
+    <div class="mt-2 d-flex justify-content-around align-items-center border p-2 rounded bg-light">
+      <p class="mb-0"><strong>DCA Qty:</strong> <span id="dcaQty"></span></p>
+      <p class="mb-0"><strong>DCA Value:</strong> <span id="dcaValue"></span></p>
+      <p class="mb-0"><strong>DCA Cost:</strong> <span id="dcaCost"></span></p>
+      <p class="mb-0"><strong>P&L:</strong> <span id="pnl"></span> Bt / ( <span id="percent"></span> %</span> )</p>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <!-- Purchase Section -->
+  <h5>💰 Purchase in Market Price</h5>
+  <div class="d-flex align-items-end gap-2">
+    <!-- Symbol -->
+    <div class="flex-grow-1">
+      <label for="symbolBuy" class="form-label">Symbol</label>
+      <select id="symbolBuy" class="form-select">
+        {% for s in symbols %}
+          <option value="{{ s }}">{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Amount -->
+    <div class="flex-grow-1">
+      <label for="amountBuy" class="form-label">Amount (THB)</label>
+      <select id="amountBuy" class="form-select">
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="150">150</option>
+        <option value="200">200</option>
+        <option value="300">300</option>
+      </select>
+    </div>
+
+    <!-- Confirm Button -->
+    <div>
+      <button id="confirmBuy" class="btn btn-primary">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentPage = 1;
+const reportSection = document.getElementById('reportSection');
+const symbolSelect = document.getElementById('symbolSelect');
+
+// Set default symbol to BTC on page load
+window.addEventListener('DOMContentLoaded', () => {
+  symbolSelect.value = "BTC";
+  loadReport();  // Load BTC report on page load
+});
+
+symbolSelect.addEventListener('change', () => {
+  currentPage = 1;
+  loadReport();
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if (currentPage > 1) { currentPage--; loadReport(); }
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  currentPage++; loadReport();
+});
+
+function loadReport() {
+  const sym = symbolSelect.value || "BTC";
+
+  fetch(`/purchased_report/?sym=${sym}&page=${currentPage}`)
+    .then(r => r.json())
+    .then(data => {
+      const tbody = document.getElementById('reportBody');
+
+      if (!data.page_obj || data.page_obj.length === 0) {
+        reportSection.style.display = 'block';
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center">No data</td></tr>';
+        document.getElementById('total_qty').innerText = '0.00';
+        document.getElementById('last_price').innerText = '0.00';
+        document.getElementById('dcaQty').innerText = '0.00';
+        document.getElementById('dcaValue').innerText = '0.00';
+        document.getElementById('dcaCost').innerText = '0.00';
+        document.getElementById('pnl').innerText = '0.00';
+        document.getElementById('pageInfo').innerText = '';
+        return;
+      }
+
+      reportSection.style.display = 'block';
+      tbody.innerHTML = '';
+
+      data.page_obj.forEach(r => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${r.id}</td>
+            <td>${r.date}</td>
+            <td>${r.time}</td>
+            <td>${r.sym}</td>
+            <td class="text-end">${Number(r.crypto_post_bal).toLocaleString(undefined, { minimumFractionDigits: 8, maximumFractionDigits: 8 })}</td>
+            <td class="text-center">${r.classification}: ${Number(r.fear_greed).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 } )}</td>
+            <td class="text-end">${Number(r.purchase_amount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+            <td class="text-end">${Number(r.purchase_qty).toLocaleString(undefined, { minimumFractionDigits: 8, maximumFractionDigits: 8 })}</td>
+            <td class="text-end">${Number(r.purchase_price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+          </tr>`;
+      });
+
+      document.querySelector('th.symColumn').innerText = `${sym} in Wallet`;
+      document.querySelectorAll('.symBalance').forEach(el => {
+        // Store the original label if not already stored
+        if (!el.dataset.baseLabel) {
+            el.dataset.baseLabel = el.innerText.split(':')[0].trim();
+          }
+          el.innerText = `${sym} ${el.dataset.baseLabel}:`;
+        });
+    
+      // Convert string numbers to actual numbers before formatting
+      document.getElementById('accTotalValue').innerText = Number(data.acc_total_value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('accPostBal').innerText = Number(data.acc_post_bal).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('accTotalQty').innerText = Number(data.acc_total_qty).toFixed(8);
+      document.getElementById('accLastPrice').innerText = 
+        `${Number(data.acc_last_price).toLocaleString(undefined, 
+          { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (${data.usd_price}` + ')';
+
+      document.getElementById('dcaQty').innerText = Number(data.dca_qty).toFixed(8);
+      document.getElementById('dcaValue').innerText = Number(data.dca_value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('dcaCost').innerText = Number(data.dca_cost).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('pnl').innerText = Number(data.p_and_l).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('percent').innerText = Number(data.percent).toFixed(2);
+      const pnlElem = document.getElementById('pnl');
+      const pnlValue = Number(data.p_and_l);
+      if (pnlValue < 0) {
+        pnlElem.style.color = 'red';
+      } else {
+        pnlElem.style.color = 'green';
+      }
+      const percentElem = document.getElementById('percent');
+      const percentValue = Number(data.percent);
+      if (percentValue < 0) {
+        percentElem.style.color = 'red';
+      } else {
+        percentElem.style.color = 'green';
+      }
+
+      document.getElementById('pageInfo').innerText =
+        `Page ${data.pagination.current_page} / ${data.pagination.num_pages}`;
+      
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Failed to load report');
+    });
+}
+
+document.getElementById('confirmBuy').addEventListener('click', () => {
+  const sym = document.getElementById('symbolBuy').value;
+  const amount = document.getElementById('amountBuy').value;
+
+  fetch('/place_bid/', {
+    method: 'POST',
+    headers: { 
+      'X-CSRFToken': '{{ csrf_token }}', 
+      'Content-Type': 'application/x-www-form-urlencoded' 
+    },
+    body: `sym=${sym}&amt=${amount}`
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.status && data.status.error === 0) {
+      alert(`Purchase ${sym} amount ${amount} is success`);
+      symbolSelect.value = sym;
+      loadReport();
+    } else {
+      alert(`Purchase ${sym} amount ${amount} is rejected`);
+    }
+  })
+  .catch(err => console.error(err));
+});
+
+</script>
+
+{% endblock %}

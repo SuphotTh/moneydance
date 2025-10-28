@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}EMA Action Zone - {{ latest_signals.Symbol }}{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EMA Action Zone - {{ latest_signals.Symbol }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 10px;
+      font-size: 0.95rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .info-label { font-weight: 600; color: #333; min-width: 120px; }
+    .info-value { color: #555; flex: 1; }
+
+    /* Zone color badges */
+    .zone-badge {
+      display: inline-block;
+      width: 100px;
+      text-align: center;
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: white;
+      font-weight: 600;
+    }
+    .zone-Red { background-color: #e74c3c; }
+    .zone-Green { background-color: #27ae60; }
+    .zone-Blue { background-color: #2980b9; }
+    .zone-LightBlue { background-color: #5dade2; }
+    .zone-Orange { background-color: #e67e22; }
+    .zone-Yellow { background-color: #f1c40f; color: #000; }
+    .zone-Neutral { background-color: #95a5a6; }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container my-5">
+    <!-- Auto-submit form -->
+    <form method="GET" action="{% url 'n8n_actionzone_symbol' %}" class="text-center mb-4" id="symbolForm">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-3 fw-bold">
+          EMA Action Zone - {{ latest_signals.Symbol }}
+        </div>
+        <div class="col-md-5"></div>
+        <div class="col-md-3">
+          <select name="symbol" class="form-select" onchange="document.getElementById('symbolForm').submit()">
+            <option value="BTCUSDT" {% if selected_symbol == "BTCUSDT" %}selected{% endif %}>BTC</option>
+            <option value="ETHUSDT" {% if selected_symbol == "ETHUSDT" %}selected{% endif %}>ETH</option>
+            <option value="BNBUSDT" {% if selected_symbol == "BNBUSDT" %}selected{% endif %}>BNB</option>
+            <option value="XRPUSDT" {% if selected_symbol == "XRPUSDT" %}selected{% endif %}>XRP</option>
+            <option value="SOLUSDT" {% if selected_symbol == "SOLUSDT" %}selected{% endif %}>SOL</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <div class="info-row">
+          <span class="info-label">Symbol:</span>
+          <span class="info-value">{{ latest_signals.Symbol }}</span>
+          <span class="info-label">Open Time:</span>
+          <span class="info-value">{{ latest_signals.Open_time }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Zone:</span>
+          <span class="info-value">
+            <span class="zone-badge zone-{{ latest_signals.Zone }}">
+              {{ latest_signals.Zone }}
+            </span>
+          </span>
+          <span class="info-label">Close:</span>
+          <span class="info-value">{{ latest_signals.Close }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Buy:</span>
+          <span class="info-value">{{ latest_signals.Buy }}</span>
+          <span class="info-label">EMA Fast:</span>
+          <span class="info-value">{{ latest_signals.EMA_fast }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Sell:</span>
+          <span class="info-value">{{ latest_signals.Sell }}</span>
+          <span class="info-label">EMA Slow:</span>
+          <span class="info-value">{{ latest_signals.EMA_slow }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h5 class="fw-semibold mb-3">EMA Chart</h5>
+      <img src="data:image/png;base64,{{ chart_base64 }}" class="img-fluid rounded shadow-sm" alt="EMA Chart">
+    </div>
+  </div>
+</body>
+</html>
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}account_info{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settrade Account Info</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+      body {
+          background-color: #f8f9fa;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+      }
+      .account-info { flex: 1; max-height: 33%; overflow-y: auto; }
+      .portfolio-section { flex: 2; max-height: 67%; overflow-y: auto; }
+      .card { box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+      th { background-color: #0d6efd; color: white; }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid p-4">
+{% if error_message %}
+<div class="alert alert-warning text-center mt-3">
+  {{ error_message }}
+</div>
+{% endif %}
+  <!-- Account Info Section -->
+  <div class="row mb-4 account-info">
+      <div class="col-md-12">
+          <div class="card border-secondary">
+              <div class="card-header bg-secondary text-light">
+                  <h5 class="mb-0">Account Information : InnovestX</h5>
+              </div>
+              <div class="card-body">
+                  {% if account_info %}
+                  <div class="row">
+                      <div class="col-md-6">
+                          <p><strong>Invx Account #:</strong> {{ invx_acc_no }}</p>
+                          <p><strong>Account Type:</strong> {{ account_info.accountType }}</p>
+                          <p><strong>Client Type:</strong> {{ account_info.clientType }}</p>
+                          <p><strong>Customer Type:</strong> {{ account_info.customerType }}</p>
+                      </div>
+                      <div class="col-md-6">
+                            <p><strong>Credit Limit:</strong> {{ account_info.creditLimit|floatformat:2|intcomma }}</p>
+                            <p><strong>Line Available:</strong> {{ account_info.lineAvailable|floatformat:2|intcomma }}</p>
+                            <p><strong>Cash Balance:</strong> {{ account_info.cashBalance|floatformat:2|intcomma }}</p>
+                            <p><strong>Can Buy/Sell:</strong> 
+                                {% if account_info.canBuy %} ✅ {% else %} ❌ {% endif %} /
+                                {% if account_info.canSell %} ✅ {% else %} ❌ {% endif %}
+                            </p>
+                      </div>
+                  </div>
+                  {% else %}
+                  <p class="text-muted">No account information available.</p>
+                  {% endif %}
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Portfolio Section -->
+  <div class="row portfolio-section">
+      <div class="col-md-12">
+          <div class="card border-light mb-4">
+              <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">Portfolio Holdings</h5>
+                  <small class="text-light">({{ portfolio.portfolioList|length }} stocks)</small>
+              </div>
+              <div class="card-body p-0">
+                  {% if portfolio.portfolioList %}
+                  <div class="table-responsive">
+                      <table class="table table-striped table-hover align-middle mb-0">
+                            <thead>
+                                <tr class="text-end">
+                                    <th>Symbol</th>
+                                    <th>Current Volume</th>
+                                    <th>Average Cost</th>
+                                    <th>Market Price</th>
+                                    <th>Market Value</th>
+                                    <th>Profit</th>
+                                    <th>Profit (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in portfolio.portfolioList %}
+                                <tr>
+                                    <td>{{ item.symbol }}</td>
+                                    <td class="text-end">{{ item.currentVolume }}</td>
+                                    <td class="text-end">{{ item.averagePrice|floatformat:2 }}</td>
+                                    <td class="text-end">{{ item.marketPrice|floatformat:2 }}</td>
+                                    <td class="text-end">{{ item.marketValue|floatformat:2 }}</td>
+                                    <td class="text-end {% if item.profit >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                        {{ item.profit|floatformat:2 }}
+                                    </td>
+                                    <td class="text-end {% if item.percentProfit >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                        {{ item.percentProfit|floatformat:2 }}%
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                <!-- Total Portfolio Row -->
+                                {% if portfolio.totalPortfolio %}
+                                <tr class="fw-bold table-secondary">
+                                    <td>Total</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end">{{ portfolio.totalPortfolio.marketValue|floatformat:2 }}</td>
+                                    <td class="text-end {% if portfolio.totalPortfolio.profit >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                        {{ portfolio.totalPortfolio.profit|floatformat:2 }}
+                                    </td>
+                                    <td class="text-end {% if portfolio.totalPortfolio.percentProfit >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                        {{ portfolio.totalPortfolio.percentProfit|floatformat:2 }}%
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+
+                      </table>
+                  </div>
+                  {% else %}
+                  <p class="p-3 text-muted">No portfolio data available.</p>
+                  {% endif %}
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>
+
+</body>
+
+</html>
+
+
+
+{% endblock %}

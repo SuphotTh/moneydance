@@ -18,25 +18,19 @@ import os, csv, re
 import json
 
 # ***********OPEN AI************
-import openai
-from openai import OpenAI
-
+# import openai
+# from openai import OpenAI
 # ***********LANGCHAIN + OPEN AI************
-
-from langchain_community.chat_models import ChatOpenAI
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.schema import HumanMessage, SystemMessage
-from langchain.memory import ConversationBufferMemory
-
+# from langchain_community.chat_models import ChatOpenAI
+# from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+# from langchain.schema import HumanMessage, SystemMessage
+# from langchain.memory import ConversationBufferMemory
 # ***********LANGCHAIN + HUGGING FACES************
 # from langchain import HuggingFaceHub
 # from langchain_community.llms.HuggingFaceHub import HuggingFaceHub
-
-from langchain_huggingface import HuggingFaceEndpoint
-#from langchain.prompts import ChatPromptTemplate
-from django.conf import settings
-from decimal import Decimal
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+# from langchain_huggingface import HuggingFaceEndpoint
+# from langchain.prompts import ChatPromptTemplate
+# from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
 
 @login_required
@@ -58,7 +52,8 @@ def home(request):
                 # print ('expenses', total_expenses )
                 # print ("GRAND TOTAL : ", grand_total)
 
-                rep_contents = ai_report(report_data_set, selected_type)
+                # rep_contents = ai_report(report_data_set, selected_type)
+                rep_contents = " "
 
                 report_data = {
                     'year' : year,
@@ -90,62 +85,62 @@ def home(request):
 
         return render(request, 'home.html', context)
 
-def ai_report(report_data_set, selected_type):
-    # Extract report_table and grand_total from report_data
-    report_table = report_data_set['report_table']
-    grand_total = report_data_set['grand_total']
-    print("GRAND TOTAL:", grand_total)
+# def ai_report(report_data_set, selected_type):
+#     # Extract report_table and grand_total from report_data
+#     report_table = report_data_set['report_table']
+#     grand_total = report_data_set['grand_total']
+#     print("GRAND TOTAL:", grand_total)
 
-    # Custom serialization for dates and decimals
-    def custom_serializer(obj):
-        if isinstance(obj, (date)):
-            return obj.isoformat()  # Convert date to string in ISO format
-        elif isinstance(obj, Decimal):
-            return str(obj)  # Convert Decimal to string
-        raise TypeError(f"Type {type(obj)} not serializable")
+#     # Custom serialization for dates and decimals
+#     def custom_serializer(obj):
+#         if isinstance(obj, (date)):
+#             return obj.isoformat()  # Convert date to string in ISO format
+#         elif isinstance(obj, Decimal):
+#             return str(obj)  # Convert Decimal to string
+#         raise TypeError(f"Type {type(obj)} not serializable")
 
-    # Convert list of dictionaries to JSON string
-    json_transactions = json.dumps(report_table, default=custom_serializer)
+#     # Convert list of dictionaries to JSON string
+#     json_transactions = json.dumps(report_table, default=custom_serializer)
     
-    # Ensure grand_total is safely converted to a string in the prompt
-    grand_total_str = str(grand_total)
+#     # Ensure grand_total is safely converted to a string in the prompt
+#     grand_total_str = str(grand_total)
 
-    # Create the prompt with placeholders for variables
-    prompt_template = """
-    You are an expert financial coach. Given the following {json_transactions} in JSON format, total of {selected_type} is {grand_total_str}, 
-    analyze the {selected_type}, identify any patterns, highlight the most valuable {selected_type}, 
-    and write a comprehensive report with recommendations for financial management. 
-    Please format the financial report with appropriate HTML tags. Headers should not be bigger than <h4>, and no need for an HTML skeleton.
-    """
+#     # Create the prompt with placeholders for variables
+#     prompt_template = """
+#     You are an expert financial coach. Given the following {json_transactions} in JSON format, total of {selected_type} is {grand_total_str}, 
+#     analyze the {selected_type}, identify any patterns, highlight the most valuable {selected_type}, 
+#     and write a comprehensive report with recommendations for financial management. 
+#     Please format the financial report with appropriate HTML tags. Headers should not be bigger than <h4>, and no need for an HTML skeleton.
+#     """
 
-    # Initialize the ChatOpenAI model from LangChain
-    chat_model = ChatOpenAI(
-        model_name="gpt-4-turbo",
-        openai_api_key=settings.OPENAI_API_KEY,  # Assuming you have the key stored in Django settings
-        max_tokens=2000  # Adjust token limit based on your requirements
-    )
+#     # Initialize the ChatOpenAI model from LangChain
+#     chat_model = ChatOpenAI(
+#         model_name="gpt-4-turbo",
+#         openai_api_key=settings.OPENAI_API_KEY,  # Assuming you have the key stored in Django settings
+#         max_tokens=2000  # Adjust token limit based on your requirements
+#     )
 
-    # Initialize memory to manage conversation context (optional for multi-step prompts)
-    memory = ConversationBufferMemory()
+#     # Initialize memory to manage conversation context (optional for multi-step prompts)
+#     memory = ConversationBufferMemory()
 
-    # Create a ChatPromptTemplate to fill the prompt with actual data
-    prompt = ChatPromptTemplate.from_template(prompt_template)
+#     # Create a ChatPromptTemplate to fill the prompt with actual data
+#     prompt = ChatPromptTemplate.from_template(prompt_template)
 
-    # Format the prompt with actual values, now correctly passing grand_total_str
-    final_prompt = prompt.format(
-        selected_type=selected_type,
-        json_transactions=json_transactions,
-        grand_total_str=grand_total_str  # Use grand_total_str here
-    )
+#     # Format the prompt with actual values, now correctly passing grand_total_str
+#     final_prompt = prompt.format(
+#         selected_type=selected_type,
+#         json_transactions=json_transactions,
+#         grand_total_str=grand_total_str  # Use grand_total_str here
+#     )
 
-    # Execute the model to get the response
-    response = chat_model([SystemMessage(content="You are a financial assistant."), HumanMessage(content=final_prompt)])
+#     # Execute the model to get the response
+#     response = chat_model([SystemMessage(content="You are a financial assistant."), HumanMessage(content=final_prompt)])
     
-    # Extract the generated report content
-    report = response.content
-    print(report)
+#     # Extract the generated report content
+#     report = response.content
+#     print(report)
 
-    return report
+#     return report
 
 @login_required
 def inc_exp_report(request):

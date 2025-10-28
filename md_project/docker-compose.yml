@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: moneydance_postgres
+    environment:
+      POSTGRES_DB: moneydance_db
+      POSTGRES_USER: moneydance_user
+      POSTGRES_PASSWORD: moneydance_pass
+    ports:
+      - "5440:5432"   # host:container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  moneydance:
+    image: python:3.13
+    container_name: moneydance
+    working_dir: /app/md_project
+    volumes:
+      - /volume2/docker/moneydance/md_project:/app/md_project
+      - /volume2/docker/moneydance/static:/app/md_project/static
+    ports:
+      - "8004:8004"  # host:container (Django)
+    environment:
+      DEBUG: "on"
+      DATABASE_NAME: moneydance_db
+      DATABASE_USER: moneydance_user
+      DATABASE_PASSWORD: moneydance_pass
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+    depends_on:
+      - postgres
+    command: >
+      bash -c "
+        pip install --upgrade pip &&
+        pip install -r requirements.txt &&
+        python manage.py collectstatic --noinput &&
+        python manage.py runserver 0.0.0.0:8004
+      "
+    restart: unless-stopped
+volumes:
+  postgres_data:

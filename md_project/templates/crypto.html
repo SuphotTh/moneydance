@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Crypto Wallet{% endblock %}
+
+{% block content %}
+    <h4 style="text-align:center;">Crypto Wallet Balances</h4>
+    <h5 style="text-align:center;">Exchange : {{exchange}}</h5>
+    <table style="width:80%; margin:20px auto; border-collapse:collapse;">
+        <thead>
+            <tr style="background-color:#f2f2f2;">
+                <th style="text-align:left; padding:8px; border:1px solid #ccc;">Symbol</th>
+                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Quantity</th>
+                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Latest</th>
+                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td style="text-align:left; padding:8px; border:1px solid #ccc;">{{ item.symbol }}</td>
+                {% if item.symbol == "THB" %}
+                    <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.qty|floatformat:2 | intcomma}}</td>
+                {% else %}
+                    <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.qty|floatformat:8 | intcomma}}</td>
+                {% endif %}
+                <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.last|floatformat:2|intcomma }}</td>
+                <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.value|floatformat:2|intcomma }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr style="font-weight:bold; background-color:#e8f5e9;">
+                <td colspan="3" style="text-align:right; padding:8px; border:1px solid #ccc;">Total Value</td>
+                <td style="text-align:right; padding:8px; border:1px solid #ccc;">
+                    {{ total_value|floatformat:2|intcomma }}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <hr>
+        <h5 style="text-align:center;">Exchange : {{exchange2}}</h5>
+    <table style="width:80%; margin:20px auto; border-collapse:collapse;">
+        <thead>
+            <tr style="background-color:#f2f2f2;">
+                <th style="text-align:left; padding:8px; border:1px solid #ccc;">Symbol</th>
+                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Quantity</th>
+                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Latest</th>
+                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data2 %}
+            <tr>
+                <td style="text-align:left; padding:8px; border:1px solid #ccc;">{{ item.symbol }}</td>
+                {% if item.symbol == "THB" %}
+                    <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.qty|floatformat:2 | intcomma}}</td>
+                {% else %}
+                    <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.qty|floatformat:8 | intcomma}}</td>
+                {% endif %}
+                <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.last|floatformat:2|intcomma }}</td>
+                <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.value|floatformat:2|intcomma }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr style="font-weight:bold; background-color:#e8f5e9;">
+                <td colspan="3" style="text-align:right; padding:8px; border:1px solid #ccc;">Total Value</td>
+                <td style="text-align:right; padding:8px; border:1px solid #ccc;">
+                    {{ total_value2|floatformat:2|intcomma }}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

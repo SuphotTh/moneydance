@@ -56,7 +56,7 @@ class Account_detail(models.Model):
         db_table = 'Account_detail'
 
 class Payee(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=255)
     selected = models.BooleanField(default=True)
     
     class Meta:
@@ -125,5 +125,58 @@ class YearlyReport(models.Model):
             'year1': self.year1,
             'total': self.total,
         }
+
+class CryptoPurchase(models.Model):
+    sym = models.CharField(max_length=20)  # e.g. 'BTC', 'ETH'
+    transaction = models.CharField(max_length=50)
+    date = models.DateField()
+    time = models.TimeField()
+    acc_pre_bal = models.DecimalField(max_digits=18, decimal_places=2, blank=True, null=True)
+    acc_post_bal = models.DecimalField(max_digits=18, decimal_places=2, blank=True, null=True)
+    crypto_pre_bal = models.DecimalField(max_digits=18, decimal_places=8)
+    crypto_post_bal = models.DecimalField(max_digits=18, decimal_places=8)
+    purchase_amount = models.DecimalField(max_digits=18, decimal_places=2)
+    purchase_qty = models.DecimalField(max_digits=18, decimal_places=8)
+    purchase_price = models.DecimalField(max_digits=18, decimal_places=2)
+
+    # Spare fields (for future use)
+    spare_char1 = models.CharField(max_length=100, blank=True, null=True)
+    classification = models.CharField(max_length=100, blank=True, null=True)
+    fear_greed = models.DecimalField(max_digits=18, decimal_places=4, blank=True, null=True)
+    spare_dec2 = models.DecimalField(max_digits=18, decimal_places=4, blank=True, null=True)
+
+    class Meta:
+        db_table = 'CryptoPurchase'  # Explicit table name
+        managed = False
+
+    def __str__(self):
+        return f"{self.sym} | {self.date} {self.time} | Tx: {self.transaction}"
+
+class StockPurchased(models.Model):
+    trade_no = models.CharField(max_length=100, unique=True)
+    symbol = models.CharField(max_length=20)
+    acc_no = models.CharField(max_length=20)
+    order_no = models.CharField(max_length=20)
+    side = models.CharField(max_length=10)  # e.g., 'Buy' or 'Sell'
+    qty = models.DecimalField(max_digits=12, decimal_places=2)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
+    date = models.DateField()
+    time = models.TimeField()
+    brokerage_fee = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    trading_fee = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    clearing_fee = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+
+    # Spare fields for flexibility / future use
+    spare_char1 = models.CharField(max_length=100, blank=True, null=True)
+    spare_char3 = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        db_table = 'stock_purchased'
+        ordering = ['-date', '-time']
+
+    def __str__(self):
+        return f"{self.symbol} ({self.side}) - {self.qty}@{self.price} on {self.date} {self.time}"
+
+
 # to add: account_type, account_name, account_details
 # Create your models here.

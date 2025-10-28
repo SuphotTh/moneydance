@@ -22,6 +22,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-wfr+-qp7@x#2naw1j12!^u1m*l3pxchz$exf3-qpx=4n1yzsgj'
+APIKEY = '251e56195194d728881d0f054f'
+
+BITKUB_API = 'f4e233579193251e56195194d728881d0f054fd1909ed59771da3366d631d8d7'
+BITKUB_SECRET_KEY = '5a82abe75e9d46bbb11f9fd4ae2c85d00aa7f3e433bf4a3f9fb1819a50a4e0aew3A3kLS03f8fuaGI76I0f9w4vbZc'
+
+BINANCE_API = "0D02214C21BE15E964B1059D80CE8E60ED755CDA389D7EB7F116F70E9F961F79"
+BINANCE_SECRET_KEY = "BC8F92FB57198B2BFBDE61B4F4116EDDC0A4F525BF6D0C2BF2AE07F943C915BE"
+
+INVX_APP_ID = "AcNXEcykiCJnUVCz"
+INVX_APP_SECRET = "AMEUgFzT+9BU5bwt6LIjSt7SR8nLkN/LDK/ngZi/bWEl"
+INVX_BROKER_ID = "023"
+INVX_APP_CODE = "ALGO_EQ"
+INVX_PIN = "681906"
+INVX_ACC_NO = "922076234"
+# OPENAI_API_KEY = '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'
+# HUGGINGFACE_API_KEY = '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'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'my_money',
 ]
 
@@ -71,9 +88,12 @@ TEMPLATES = [
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),  # your development static files
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # collectstatic destination
 
 
 WSGI_APPLICATION = 'md_project.wsgi.application'
@@ -81,13 +101,27 @@ WSGI_APPLICATION = 'md_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'moneydance_db',
+        'USER': 'moneydance_user',
+        'PASSWORD': 'moneydance_pass',
+        'HOST': 'postgres',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -113,26 +147,34 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'Asia/Bangkok'
 USE_I18N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',  # Or DEBUG
+    },
+}
+
+
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
-
-OPENAI_API_KEY = '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'
-HUGGINGFACE_API_KEY = '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'

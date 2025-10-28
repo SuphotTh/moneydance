@@ -911,3 +911,1950 @@ Starting development server at http://0.0.0.0:8004/
 Quit the server with CONTROL-C.
 
 Watching for file changes with StatReloader
+[18/Jul/2025 03:12:19] "POST /monthly_report/ HTTP/1.1" 200 66544
+[18/Jul/2025 03:12:28] "GET /yearly_report/ HTTP/1.1" 200 26196
+[18/Jul/2025 03:12:33] "POST /yearly_report/ HTTP/1.1" 200 999095
+[18/Jul/2025 03:12:45] "POST /yearly_report/ HTTP/1.1" 200 353492
+[18/Jul/2025 03:14:37] "GET /report_by_range/ HTTP/1.1" 200 24444
+[18/Jul/2025 03:14:42] "POST /report_by_range/ HTTP/1.1" 200 325238
+[18/Jul/2025 03:15:07] "POST /report_by_range/ HTTP/1.1" 200 48417
+[18/Jul/2025 03:15:14] "POST /report_by_range/ HTTP/1.1" 200 26349
+[18/Jul/2025 03:15:38] "POST /report_by_range/ HTTP/1.1" 200 2536
+[18/Jul/2025 03:15:53] "POST /report_by_range/ HTTP/1.1" 200 35316
+[18/Jul/2025 03:16:05] "POST /report_by_range/ HTTP/1.1" 200 44646
+[18/Jul/2025 03:41:28] "POST /report_by_range/ HTTP/1.1" 200 35316
+[18/Jul/2025 03:41:50] "POST /report_by_range/ HTTP/1.1" 200 26349
+[18/Jul/2025 03:44:19] "GET /logout/ HTTP/1.1" 302 0
+[18/Jul/2025 03:44:19] "GET /login/ HTTP/1.1" 200 2224
+[18/Jul/2025 03:44:51] "GET /home/ HTTP/1.1" 302 0
+[18/Jul/2025 03:44:51] "GET /login/?next=/home/ HTTP/1.1" 200 2224
+[18/Jul/2025 03:44:57] "POST /login/?next=/home/ HTTP/1.1" 302 0
+[18/Jul/2025 03:44:57] "GET /home/ HTTP/1.1" 200 12219
+[18/Jul/2025 03:45:09] "GET /report_by_range/ HTTP/1.1" 200 24444
+[18/Jul/2025 03:45:11] "POST /report_by_range/ HTTP/1.1" 200 46742
+[18/Jul/2025 03:45:17] "POST /report_by_range/ HTTP/1.1" 200 24959
+[18/Jul/2025 03:45:29] "GET /logout/ HTTP/1.1" 302 0
+[18/Jul/2025 03:45:29] "GET /login/ HTTP/1.1" 200 2224
+[19/Jul/2025 02:44:09] "GET / HTTP/1.1" 302 0
+[19/Jul/2025 02:44:09] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[19/Jul/2025 02:44:11] "GET /favicon.ico HTTP/1.1" 404 5381
+[19/Jul/2025 02:44:15] "POST /login/?next=/ HTTP/1.1" 302 0
+[19/Jul/2025 02:44:16] "GET /home/ HTTP/1.1" 200 12219
+[19/Jul/2025 02:44:22] "GET /report_by_range/ HTTP/1.1" 200 24444
+[19/Jul/2025 02:44:26] "POST /report_by_range/ HTTP/1.1" 200 46742
+[19/Jul/2025 02:44:33] "POST /report_by_range/ HTTP/1.1" 200 24959
+[19/Jul/2025 02:45:01] "POST /report_by_range/ HTTP/1.1" 200 22114
+[19/Jul/2025 02:45:13] "POST /report_by_range/ HTTP/1.1" 200 325238
+[19/Jul/2025 02:46:06] "GET /logout/ HTTP/1.1" 302 0
+[19/Jul/2025 02:46:06] "GET /login/ HTTP/1.1" 200 2224
+[22/Jul/2025 03:29:38] "GET / HTTP/1.1" 302 0
+[22/Jul/2025 03:29:38] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[22/Jul/2025 03:29:39] "GET /favicon.ico HTTP/1.1" 404 5381
+[22/Jul/2025 03:29:45] "POST /login/?next=/ HTTP/1.1" 302 0
+[22/Jul/2025 03:29:45] "GET /home/ HTTP/1.1" 200 12219
+[22/Jul/2025 03:29:48] "GET /report_by_range/ HTTP/1.1" 200 24444
+[22/Jul/2025 03:29:52] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[22/Jul/2025 03:31:02] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[22/Jul/2025 03:32:07] "GET /report_by_range/ HTTP/1.1" 200 24444
+[22/Jul/2025 03:38:54] "GET /logout/ HTTP/1.1" 302 0
+[22/Jul/2025 03:38:54] "GET /login/ HTTP/1.1" 200 2224
+[22/Jul/2025 03:39:12] "GET / HTTP/1.1" 302 0
+[22/Jul/2025 03:39:12] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[22/Jul/2025 03:39:14] "GET /favicon.ico HTTP/1.1" 404 5381
+[22/Jul/2025 03:39:17] "POST /login/?next=/ HTTP/1.1" 302 0
+[22/Jul/2025 03:39:17] "GET /home/ HTTP/1.1" 200 12219
+[22/Jul/2025 03:39:21] "GET /report_by_range/ HTTP/1.1" 200 24444
+[22/Jul/2025 03:39:28] "POST /report_by_range/ HTTP/1.1" 200 59500
+[22/Jul/2025 03:42:03] "POST /report_by_range/ HTTP/1.1" 200 336896
+[22/Jul/2025 03:43:26] "POST /report_by_range/ HTTP/1.1" 200 217014
+[22/Jul/2025 03:44:05] "POST /report_by_range/ HTTP/1.1" 200 364856
+[22/Jul/2025 03:44:09] "POST /report_by_range/ HTTP/1.1" 200 537858
+[22/Jul/2025 03:45:13] "POST /report_by_range/ HTTP/1.1" 200 364856
+[22/Jul/2025 03:45:17] "POST /report_by_range/ HTTP/1.1" 200 374414
+[22/Jul/2025 03:45:30] "POST /report_by_range/ HTTP/1.1" 200 364856
+[22/Jul/2025 03:45:39] "GET /logout/ HTTP/1.1" 302 0
+[22/Jul/2025 03:45:39] "GET /login/ HTTP/1.1" 200 2224
+Watching for file changes with StatReloader
+[23/Jul/2025 02:32:09] "POST /login/ HTTP/1.1" 302 0
+[23/Jul/2025 02:32:09] "GET /home/ HTTP/1.1" 200 12219
+[23/Jul/2025 02:32:12] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[23/Jul/2025 02:33:22] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[23/Jul/2025 02:33:27] "GET /report_by_range/ HTTP/1.1" 200 24444
+[23/Jul/2025 02:33:35] "POST /report_by_range/ HTTP/1.1" 200 41102
+[23/Jul/2025 02:37:40] "GET /monthly_report/ HTTP/1.1" 200 26206
+[23/Jul/2025 02:37:41] "POST /monthly_report/ HTTP/1.1" 200 58
+[23/Jul/2025 02:37:47] "POST /monthly_report/ HTTP/1.1" 200 87671
+[23/Jul/2025 02:38:54] "POST /monthly_report/ HTTP/1.1" 200 146025
+[23/Jul/2025 02:39:21] "POST /monthly_report/ HTTP/1.1" 200 87671
+[23/Jul/2025 02:39:33] "POST /monthly_report/ HTTP/1.1" 200 151129
+[23/Jul/2025 02:40:13] "POST /monthly_report/ HTTP/1.1" 200 151710
+[23/Jul/2025 02:40:46] "POST /monthly_report/ HTTP/1.1" 200 176305
+[23/Jul/2025 02:41:34] "GET /report_by_range/ HTTP/1.1" 200 24444
+[23/Jul/2025 02:41:41] "POST /report_by_range/ HTTP/1.1" 200 32918
+[23/Jul/2025 02:41:47] "POST /report_by_range/ HTTP/1.1" 200 220120
+[23/Jul/2025 02:42:20] "POST /report_by_range/ HTTP/1.1" 200 195293
+[23/Jul/2025 02:42:41] "POST /report_by_range/ HTTP/1.1" 200 220120
+[23/Jul/2025 02:42:44] "POST /report_by_range/ HTTP/1.1" 200 228676
+[23/Jul/2025 02:42:48] "POST /report_by_range/ HTTP/1.1" 200 220120
+[23/Jul/2025 02:42:59] "POST /report_by_range/ HTTP/1.1" 200 195293
+[23/Jul/2025 02:43:02] "POST /report_by_range/ HTTP/1.1" 200 220120
+[23/Jul/2025 02:43:08] "POST /report_by_range/ HTTP/1.1" 200 195293
+[23/Jul/2025 02:43:23] "POST /report_by_range/ HTTP/1.1" 200 372046
+[23/Jul/2025 02:44:05] "POST /report_by_range/ HTTP/1.1" 200 372046
+[23/Jul/2025 02:44:17] "POST /report_by_range/ HTTP/1.1" 200 372046
+[23/Jul/2025 02:44:43] "POST /report_by_range/ HTTP/1.1" 200 284814
+[23/Jul/2025 02:44:57] "POST /report_by_range/ HTTP/1.1" 200 337877
+[23/Jul/2025 02:45:03] "POST /report_by_range/ HTTP/1.1" 200 284814
+[23/Jul/2025 02:45:26] "POST /report_by_range/ HTTP/1.1" 200 200746
+[23/Jul/2025 02:45:55] "POST /report_by_range/ HTTP/1.1" 200 284814
+[23/Jul/2025 02:46:10] "POST /report_by_range/ HTTP/1.1" 200 166272
+[23/Jul/2025 02:46:20] "POST /report_by_range/ HTTP/1.1" 200 209815
+[23/Jul/2025 02:46:34] "POST /report_by_range/ HTTP/1.1" 200 221156
+[23/Jul/2025 02:46:52] "GET /yearly_report/ HTTP/1.1" 200 26196
+[23/Jul/2025 02:46:59] "POST /yearly_report/ HTTP/1.1" 200 504441
+[23/Jul/2025 02:47:19] "POST /yearly_report/ HTTP/1.1" 200 504945
+[23/Jul/2025 02:47:34] "POST /yearly_report/ HTTP/1.1" 200 283866
+[23/Jul/2025 02:47:50] "POST /yearly_report/ HTTP/1.1" 200 271499
+[23/Jul/2025 02:48:41] "POST /yearly_report/ HTTP/1.1" 200 469107
+[23/Jul/2025 02:49:05] "POST /yearly_report/ HTTP/1.1" 200 504945
+[23/Jul/2025 02:49:31] "GET /yearly_report/ HTTP/1.1" 200 26196
+[23/Jul/2025 02:49:45] "POST /yearly_report/ HTTP/1.1" 200 336960
+[23/Jul/2025 02:49:51] "POST /yearly_report/ HTTP/1.1" 200 123368
+[23/Jul/2025 02:51:57] "POST /yearly_report/ HTTP/1.1" 200 336960
+[23/Jul/2025 02:57:28] "GET /logout/ HTTP/1.1" 302 0
+[23/Jul/2025 02:57:28] "GET /login/ HTTP/1.1" 200 2224
+[23/Jul/2025 08:10:59] "POST /login/ HTTP/1.1" 302 0
+[23/Jul/2025 08:10:59] "GET /home/ HTTP/1.1" 200 12219
+[23/Jul/2025 08:11:02] "GET /logout/ HTTP/1.1" 302 0
+[23/Jul/2025 08:11:02] "GET /login/ HTTP/1.1" 200 2224
+[23/Jul/2025 11:34:29] "GET / HTTP/1.1" 302 0
+[23/Jul/2025 11:34:29] "GET /login/?next=/ HTTP/1.1" 200 2224
+[24/Jul/2025 03:54:37] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[24/Jul/2025 03:54:38] "GET /favicon.ico HTTP/1.1" 404 5377
+[24/Jul/2025 03:54:43] "POST /login/?next=/ HTTP/1.1" 302 0
+[24/Jul/2025 03:54:43] "GET /home/ HTTP/1.1" 200 12219
+[24/Jul/2025 03:54:45] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[24/Jul/2025 03:55:52] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[24/Jul/2025 03:56:27] "GET /report_by_range/ HTTP/1.1" 200 24444
+[24/Jul/2025 03:56:34] "POST /report_by_range/ HTTP/1.1" 200 43991
+[24/Jul/2025 03:58:32] "POST /report_by_range/ HTTP/1.1" 200 36272
+[24/Jul/2025 03:58:43] "POST /report_by_range/ HTTP/1.1" 200 43991
+[24/Jul/2025 04:00:10] "GET /logout/ HTTP/1.1" 302 0
+[24/Jul/2025 04:00:10] "GET /login/ HTTP/1.1" 200 2224
+[25/Jul/2025 01:40:59] "GET / HTTP/1.1" 302 0
+[25/Jul/2025 01:40:59] "GET /login/?next=/ HTTP/1.1" 200 2224
+[25/Jul/2025 01:41:06] "POST /login/?next=/ HTTP/1.1" 302 0
+[25/Jul/2025 01:41:06] "GET /home/ HTTP/1.1" 200 12219
+[25/Jul/2025 01:41:09] "GET /report_by_range/ HTTP/1.1" 200 24444
+[25/Jul/2025 01:41:11] "POST /report_by_range/ HTTP/1.1" 200 43273
+[25/Jul/2025 04:22:28] "GET /logout/ HTTP/1.1" 302 0
+[25/Jul/2025 04:22:28] "GET /login/ HTTP/1.1" 200 2224
+[25/Jul/2025 07:55:12] "GET / HTTP/1.1" 302 0
+[25/Jul/2025 07:55:12] "GET /login/?next=/ HTTP/1.1" 200 2224
+[25/Jul/2025 07:55:26] "POST /login/?next=/ HTTP/1.1" 302 0
+[25/Jul/2025 07:55:26] "GET /home/ HTTP/1.1" 200 12219
+[25/Jul/2025 07:55:36] "GET /yearly_report/ HTTP/1.1" 200 26196
+[25/Jul/2025 07:55:45] "POST /yearly_report/ HTTP/1.1" 200 506216
+[26/Jul/2025 10:39:15] "GET / HTTP/1.1" 200 11067
+[26/Jul/2025 10:56:17] "GET / HTTP/1.1" 200 11067
+Not Found: /favicon.ico
+[26/Jul/2025 10:56:22] "GET /favicon.ico HTTP/1.1" 404 5381
+[26/Jul/2025 10:56:26] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[26/Jul/2025 10:57:35] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[26/Jul/2025 10:58:20] "GET /report_by_range/ HTTP/1.1" 200 24444
+[26/Jul/2025 10:58:22] "POST /report_by_range/ HTTP/1.1" 200 48896
+[26/Jul/2025 11:00:10] "POST /report_by_range/ HTTP/1.1" 200 36272
+[26/Jul/2025 11:01:07] "GET /monthly_report/ HTTP/1.1" 200 26206
+[26/Jul/2025 11:01:07] "POST /monthly_report/ HTTP/1.1" 200 58
+[26/Jul/2025 11:01:13] "POST /monthly_report/ HTTP/1.1" 200 155659
+[26/Jul/2025 11:01:34] "POST /monthly_report/ HTTP/1.1" 200 155078
+[26/Jul/2025 11:01:48] "POST /monthly_report/ HTTP/1.1" 200 139686
+[26/Jul/2025 11:02:02] "GET /logout/ HTTP/1.1" 302 0
+[26/Jul/2025 11:02:02] "GET /login/ HTTP/1.1" 200 2224
+[31/Jul/2025 05:56:55] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[31/Jul/2025 05:56:55] "GET /favicon.ico HTTP/1.1" 404 5377
+[31/Jul/2025 05:57:03] "POST /login/?next=/ HTTP/1.1" 302 0
+[31/Jul/2025 05:57:03] "GET /home/ HTTP/1.1" 200 12219
+[31/Jul/2025 05:57:06] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[31/Jul/2025 05:58:27] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[31/Jul/2025 06:00:15] "GET /report_by_range/ HTTP/1.1" 200 24444
+[31/Jul/2025 06:00:19] "POST /report_by_range/ HTTP/1.1" 200 88857
+[31/Jul/2025 06:01:12] "POST /report_by_range/ HTTP/1.1" 200 368600
+[31/Jul/2025 06:01:28] "POST /report_by_range/ HTTP/1.1" 200 368600
+[31/Jul/2025 06:01:51] "POST /report_by_range/ HTTP/1.1" 200 109
+[31/Jul/2025 06:02:06] "POST /report_by_range/ HTTP/1.1" 200 279848
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 23, 2025 - 02:32:03
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-07-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+*****start_date***** 2025-07-01
+date range :  ['2025-06-01', '2025-06-30']
+date range.start :  2025-06-01
+date range.end :  2025-06-30
+Date selection :  last_month
+Tier :  2
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-23']
+date range.start :  2025-01-01
+date range.end :  2025-07-23
+Date selection :  ytd
+Tier :  2
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-23']
+date range.start :  2025-01-01
+date range.end :  2025-07-23
+Date selection :  ytd
+Tier :  1
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-23']
+date range.start :  2025-01-01
+date range.end :  2025-07-23
+Date selection :  ytd
+Tier :  2
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-23']
+date range.start :  2025-01-01
+date range.end :  2025-07-23
+Date selection :  ytd
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-23']
+date range.start :  2025-01-01
+date range.end :  2025-07-23
+Date selection :  ytd
+Tier :  2
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-23']
+date range.start :  2025-01-01
+date range.end :  2025-07-23
+Date selection :  ytd
+Tier :  1
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-23']
+date range.start :  2025-01-01
+date range.end :  2025-07-23
+Date selection :  ytd
+Tier :  2
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-23']
+date range.start :  2025-01-01
+date range.end :  2025-07-23
+Date selection :  ytd
+Tier :  1
+date info :  <class 'dict'>
+date range :  ['2024-01-01', '2024-12-31']
+date range.start :  2024-01-01
+date range.end :  2024-12-31
+Date selection :  last_year
+Tier :  1
+date info :  <class 'dict'>
+date range :  ['2024-01-01', '2024-12-31']
+date range.start :  2024-01-01
+date range.end :  2024-12-31
+Date selection :  last_year
+Tier :  1
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  1
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  1
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  2
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  1
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  1
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  1
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  1
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  2
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+start date : 2020-01-01
+end date : 2025-12-31
+Year  2025
+xx 2020
+xx 2021
+xx 2022
+xx 2023
+xx 2024
+start date : 2020-01-01
+end date : 2025-12-31
+Year  2025
+xx 2020
+xx 2021
+xx 2022
+xx 2023
+xx 2024
+start date : 2014-01-01
+end date : 2019-12-31
+Year  2019
+xx 2014
+xx 2015
+xx 2016
+xx 2017
+xx 2018
+start date : 2013-01-01
+end date : 2018-12-31
+Year  2018
+xx 2013
+xx 2014
+xx 2015
+xx 2016
+xx 2017
+start date : 2019-01-01
+end date : 2024-12-31
+Year  2024
+xx 2019
+xx 2020
+xx 2021
+xx 2022
+xx 2023
+start date : 2020-01-01
+end date : 2025-12-31
+Year  2025
+xx 2020
+xx 2021
+xx 2022
+xx 2023
+xx 2024
+start date : 2010-01-01
+end date : 2015-12-31
+Year  2015
+xx 2010
+xx 2011
+xx 2012
+xx 2013
+xx 2014
+start date : 2010-01-01
+end date : 2015-12-31
+Year  2015
+xx 2010
+xx 2011
+xx 2012
+xx 2013
+xx 2014
+start date : 2010-01-01
+end date : 2015-12-31
+Year  2015
+xx 2010
+xx 2011
+xx 2012
+xx 2013
+xx 2014
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-07-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-06-01', '2025-06-30']
+date range.start :  2025-06-01
+date range.end :  2025-06-30
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+*****start_date***** 2025-07-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+start date : 2020-01-01
+end date : 2025-12-31
+Year  2025
+xx 2020
+xx 2021
+xx 2022
+xx 2023
+xx 2024
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-07-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-07-01
+Date selection :  custom_date
+Tier :  4
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-31']
+date range.start :  2025-01-01
+date range.end :  2025-07-31
+Date selection :  ytd
+Tier :  4
+date info :  <class 'dict'>
+date range :  ['2025-01-01', '2025-07-31']
+date range.start :  2025-01-01
+date range.end :  2025-07-31
+Date selection :  ytd
+Tier :  4
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  4
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  4
+date info :  <class 'dict'>
+Date selection : [31/Jul/2025 06:02:22] "POST /report_by_range/ HTTP/1.1" 200 127532
+[31/Jul/2025 06:02:32] "POST /report_by_range/ HTTP/1.1" 200 40576
+[31/Jul/2025 06:02:47] "POST /report_by_range/ HTTP/1.1" 200 29879
+[31/Jul/2025 06:02:56] "GET /monthly_report/ HTTP/1.1" 200 26206
+[31/Jul/2025 06:02:56] "POST /monthly_report/ HTTP/1.1" 200 58
+[31/Jul/2025 06:03:03] "POST /monthly_report/ HTTP/1.1" 200 80729
+[31/Jul/2025 06:03:04] "POST /monthly_report/ HTTP/1.1" 200 191061
+[31/Jul/2025 06:06:21] "POST /monthly_report/ HTTP/1.1" 200 282037
+[31/Jul/2025 06:06:31] "POST /monthly_report/ HTTP/1.1" 200 224198
+[31/Jul/2025 06:06:44] "POST /monthly_report/ HTTP/1.1" 200 172013
+[31/Jul/2025 06:06:52] "POST /monthly_report/ HTTP/1.1" 200 109280
+[31/Jul/2025 06:07:00] "GET /yearly_report/ HTTP/1.1" 200 26196
+[31/Jul/2025 06:07:09] "POST /yearly_report/ HTTP/1.1" 200 1025542
+[31/Jul/2025 06:09:46] "POST /yearly_report/ HTTP/1.1" 200 353492
+[31/Jul/2025 06:14:16] "POST /yearly_report/ HTTP/1.1" 200 1025542
+[31/Jul/2025 06:16:59] "POST /yearly_report/ HTTP/1.1" 200 514222
+[31/Jul/2025 06:17:05] "POST /yearly_report/ HTTP/1.1" 200 1025542
+[31/Jul/2025 06:17:21] "POST /yearly_report/ HTTP/1.1" 200 514222
+[31/Jul/2025 06:17:29] "POST /yearly_report/ HTTP/1.1" 200 283866
+[31/Jul/2025 06:18:18] "POST /yearly_report/ HTTP/1.1" 200 1017051
+[31/Jul/2025 06:18:34] "POST /yearly_report/ HTTP/1.1" 200 1201827
+[31/Jul/2025 06:19:28] "POST /yearly_report/ HTTP/1.1" 200 353492
+[31/Jul/2025 06:19:51] "POST /yearly_report/ HTTP/1.1" 200 1025542
+[31/Jul/2025 06:20:03] "POST /yearly_report/ HTTP/1.1" 200 1154909
+[31/Jul/2025 06:30:28] "GET /logout/ HTTP/1.1" 302 0
+[31/Jul/2025 06:30:28] "GET /login/ HTTP/1.1" 200 2224
+[31/Jul/2025 06:36:12] "POST /login/ HTTP/1.1" 302 0
+[31/Jul/2025 06:36:12] "GET /home/ HTTP/1.1" 200 12219
+[31/Jul/2025 06:36:18] "GET /get_dataset/ HTTP/1.1" 200 17257
+[31/Jul/2025 06:36:22] "POST /get_dataset/ HTTP/1.1" 200 2702
+[31/Jul/2025 06:36:34] "POST /get_dataset/ HTTP/1.1" 200 9960
+[31/Jul/2025 06:37:04] "POST /get_dataset/ HTTP/1.1" 200 91875
+[31/Jul/2025 06:37:08] "POST /get_dataset/ HTTP/1.1" 200 2518
+[31/Jul/2025 06:37:15] "POST /get_dataset/ HTTP/1.1" 200 5014
+[31/Jul/2025 06:37:26] "POST /get_dataset/ HTTP/1.1" 200 2518
+[31/Jul/2025 06:38:02] "GET /report_by_range/ HTTP/1.1" 200 24444
+[31/Jul/2025 06:38:06] "POST /report_by_range/ HTTP/1.1" 200 88857
+[31/Jul/2025 06:38:36] "POST /report_by_range/ HTTP/1.1" 200 45893
+[31/Jul/2025 06:39:17] "POST /report_by_range/ HTTP/1.1" 200 54600
+[31/Jul/2025 06:40:04] "GET /monthly_report/ HTTP/1.1" 200 26206
+[31/Jul/2025 06:40:04] "POST /monthly_report/ HTTP/1.1" 200 58
+[31/Jul/2025 06:40:13] "POST /monthly_report/ HTTP/1.1" 200 191061
+[31/Jul/2025 06:40:20] "POST /monthly_report/ HTTP/1.1" 200 207308
+[31/Jul/2025 06:46:15] "POST /monthly_report/ HTTP/1.1" 200 105555
+[31/Jul/2025 06:46:19] "POST /monthly_report/ HTTP/1.1" 200 207308
+[31/Jul/2025 06:46:52] "POST /monthly_report/ HTTP/1.1" 200 191061
+[31/Jul/2025 06:47:05] "POST /monthly_report/ HTTP/1.1" 200 207308
+[31/Jul/2025 06:49:27] "POST /monthly_report/ HTTP/1.1" 200 207308
+[31/Jul/2025 06:49:38] "GET /yearly_report/ HTTP/1.1" 200 26196
+[31/Jul/2025 06:49:46] "POST /yearly_report/ HTTP/1.1" 200 1154909
+[31/Jul/2025 06:49:53] "POST /yearly_report/ HTTP/1.1" 200 1238436
+[31/Jul/2025 06:51:31] "POST /yearly_report/ HTTP/1.1" 200 1154909
+[31/Jul/2025 06:51:54] "POST /yearly_report/ HTTP/1.1" 200 1025542
+[31/Jul/2025 06:52:02] "POST /yearly_report/ HTTP/1.1" 200 1053329
+[31/Jul/2025 07:09:06] "GET /logout/ HTTP/1.1" 302 0
+[31/Jul/2025 07:09:06] "GET /login/ HTTP/1.1" 200 2224
+[01/Aug/2025 13:06:04] "GET / HTTP/1.1" 302 0
+[01/Aug/2025 13:06:04] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[01/Aug/2025 13:06:05] "GET /favicon.ico HTTP/1.1" 404 5381
+[01/Aug/2025 13:09:26] "GET / HTTP/1.1" 302 0
+[01/Aug/2025 13:09:26] "GET /login/?next=/ HTTP/1.1" 200 2224
+[01/Aug/2025 13:35:36] "GET / HTTP/1.1" 302 0
+[01/Aug/2025 13:35:36] "GET /login/?next=/ HTTP/1.1" 200 2224
+[01/Aug/2025 15:07:23] "GET / HTTP/1.1" 302 0
+[01/Aug/2025 15:07:23] "GET /login/?next=/ HTTP/1.1" 200 2224
+[02/Aug/2025 10:56:05] "GET / HTTP/1.1" 302 0
+[02/Aug/2025 10:56:05] "GET /login/?next=/ HTTP/1.1" 200 2224
+[02/Aug/2025 10:56:14] "POST /login/?next=/ HTTP/1.1" 302 0
+[02/Aug/2025 10:56:14] "GET /home/ HTTP/1.1" 200 12219
+[02/Aug/2025 10:56:17] "GET /report_by_range/ HTTP/1.1" 200 24444
+[02/Aug/2025 10:56:22] "POST /report_by_range/ HTTP/1.1" 200 57680
+[02/Aug/2025 11:01:38] "POST /report_by_range/ HTTP/1.1" 200 88857
+[02/Aug/2025 11:01:56] "GET /monthly_report/ HTTP/1.1" 200 26206
+[02/Aug/2025 11:01:57] "POST /monthly_report/ HTTP/1.1" 200 58
+[02/Aug/2025 11:03:56] "POST /monthly_report/ HTTP/1.1" 200 96956
+[02/Aug/2025 11:03:59] "POST /monthly_report/ HTTP/1.1" 200 96956
+[02/Aug/2025 11:05:04] "GET /logout/ HTTP/1.1" 302 0
+[02/Aug/2025 11:05:04] "GET /login/ HTTP/1.1" 200 2224
+[02/Aug/2025 12:52:10] "GET / HTTP/1.1" 302 0
+[02/Aug/2025 12:52:10] "GET /login/?next=/ HTTP/1.1" 200 2224
+Watching for file changes with StatReloader
+[05/Aug/2025 15:53:23] "GET / HTTP/1.1" 302 0
+[05/Aug/2025 15:53:23] "GET /login/?next=/ HTTP/1.1" 200 2224
+[05/Aug/2025 15:53:29] "POST /login/?next=/ HTTP/1.1" 302 0
+[05/Aug/2025 15:53:29] "GET /home/ HTTP/1.1" 200 12219
+[05/Aug/2025 15:53:31] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[05/Aug/2025 15:54:37] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[05/Aug/2025 15:54:44] "GET /report_by_range/ HTTP/1.1" 200 24444
+[05/Aug/2025 15:54:47] "POST /report_by_range/ HTTP/1.1" 200 6014
+[05/Aug/2025 15:54:48] "POST /report_by_range/ HTTP/1.1" 200 6324
+[05/Aug/2025 15:55:05] "POST /report_by_range/ HTTP/1.1" 200 6014
+[05/Aug/2025 15:55:28] "POST /report_by_range/ HTTP/1.1" 200 7745
+[05/Aug/2025 15:55:48] "GET /logout/ HTTP/1.1" 302 0
+[05/Aug/2025 15:55:48] "GET /login/ HTTP/1.1" 200 2224
+[07/Aug/2025 04:41:52] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[07/Aug/2025 04:41:55] "GET /favicon.ico HTTP/1.1" 404 5377
+[07/Aug/2025 04:42:00] "POST /login/?next=/ HTTP/1.1" 302 0
+[07/Aug/2025 04:42:01] "GET /home/ HTTP/1.1" 200 12219
+[07/Aug/2025 04:42:06] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[07/Aug/2025 04:43:14] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[07/Aug/2025 04:47:26] "GET /report_by_range/ HTTP/1.1" 200 24444
+[07/Aug/2025 04:47:29] "POST /report_by_range/ HTTP/1.1" 200 8737
+[07/Aug/2025 04:48:54] "POST /report_by_range/ HTTP/1.1" 200 10468
+[07/Aug/2025 04:49:08] "POST /report_by_range/ HTTP/1.1" 200 58630
+[07/Aug/2025 04:49:38] "POST /report_by_range/ HTTP/1.1" 200 58630
+[07/Aug/2025 04:50:06] "POST /report_by_range/ HTTP/1.1" 200 36563
+[07/Aug/2025 04:50:51] "GET /monthly_report/ HTTP/1.1" 200 26206
+[07/Aug/2025 04:50:51] "POST /monthly_report/ HTTP/1.1" 200 58
+[07/Aug/2025 04:51:01] "POST /monthly_report/ HTTP/1.1" 200 83901
+[07/Aug/2025 04:51:46] "POST /monthly_report/ HTTP/1.1" 200 100128
+[07/Aug/2025 04:51:58] "POST /monthly_report/ HTTP/1.1" 200 196551
+[07/Aug/2025 04:52:23] "GET /logout/ HTTP/1.1" 302 0
+[07/Aug/2025 04:52:23] "GET /login/ HTTP/1.1" 200 2224
+[07/Aug/2025 06:48:01] "GET /login/?next=/ HTTP/1.1" 200 2224
+[07/Aug/2025 06:48:09] "POST /login/?next=/ HTTP/1.1" 302 0
+[07/Aug/2025 06:48:09] "GET /home/ HTTP/1.1" 200 12219
+[07/Aug/2025 06:48:15] "GET /report_by_range/ HTTP/1.1" 200 24444
+[07/Aug/2025 06:48:20] "POST /report_by_range/ HTTP/1.1" 200 8737
+[07/Aug/2025 06:48:40] "GET /logout/ HTTP/1.1" 302 0
+[07/Aug/2025 06:48:40] "GET /login/ HTTP/1.1" 200 2224
+[14/Aug/2025 06:22:14] "GET /login/?next=/ HTTP/1.1" 200 2224
+[14/Aug/2025 07:04:58] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[14/Aug/2025 07:04:59] "GET /favicon.ico HTTP/1.1" 404 5377
+[14/Aug/2025 07:05:04] "POST /login/?next=/ HTTP/1.1" 302 0
+[14/Aug/2025 07:05:04] "GET /home/ HTTP/1.1" 200 12219
+[14/Aug/2025 07:05:08] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[14/Aug/2025 07:06:21] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[14/Aug/2025 07:06:39] "GET /report_by_range/ HTTP/1.1" 200 24444
+[14/Aug/2025 07:06:43] "POST /report_by_range/ HTTP/1.1" 200 18853
+[14/Aug/2025 07:08:02] "POST /report_by_range/ HTTP/1.1" 200 20497
+[14/Aug/2025 07:08:38] "POST /report_by_range/ HTTP/1.1" 200 21597
+[14/Aug/2025 07:09:00] "POST /report_by_range/ HTTP/1.1" 200 58635
+[14/Aug/2025 07:09:11] "GET /monthly_report/ HTTP/1.1" 200 26206
+[14/Aug/2025 07:09:11] "POST /monthly_report/ HTTP/1.1" 200 58
+[14/Aug/2025 07:09:16] "POST /monthly_report/ HTTP/1.1" 200 102543
+[14/Aug/2025 07:09:20] "POST /monthly_report/ HTTP/1.1" 200 199266
+[14/Aug/2025 07:10:05] "GET /report_by_range/ HTTP/1.1" 200 24444
+[14/Aug/2025 07:10:11] "POST /report_by_range/ HTTP/1.1" 200 604537
+[14/Aug/2025 07:10:29] "POST /report_by_range/ HTTP/1.1" 200 391382
+[14/Aug/2025 07:10:36] "POST /report_by_range/ HTTP/1.1" 200 588408
+[14/Aug/2025 07:10:52] "GET /monthly_report/ HTTP/1.1" 200 26206
+[14/Aug/2025 07:10:52] "POST /monthly_report/ HTTP/1.1" 200 58
+[14/Aug/2025 07:10:57] "POST /monthly_report/ HTTP/1.1" 200 146583
+[14/Aug/2025 07:11:01] "POST /monthly_report/ HTTP/1.1" 200 282030
+[14/Aug/2025 07:11:23] "POST /monthly_report/ HTTP/1.1" 200 224198
+[14/Aug/2025 07:11:31] "POST /monthly_report/ HTTP/1.1" 200 172013
+[14/Aug/2025 07:11:37] "POST /monthly_report/ HTTP/1.1" 200 109280
+[14/Aug/2025 07:13:11] "POST /monthly_report/ HTTP/1.1" 200 67330
+[14/Aug/2025 07:13:21] "POST /monthly_report/ HTTP/1.1" 200 66544
+[14/Aug/2025 07:13:30] "POST /monthly_report/ HTTP/1.1" 200 74019
+[14/Aug/2025 07:13:52] "POST /monthly_report/ HTTP/1.1" 200 67343
+[14/Aug/2025 07:30:58] "GET /logout/ HTTP/1.1" 302 0
+[14/Aug/2025 07:30:58] "GET /login/ HTTP/1.1" 200 2224
+Watching for file changes with StatReloader
+[20/Aug/2025 02:15:47] "GET / HTTP/1.1" 302 0
+[20/Aug/2025 02:15:47] "GET /login/?next=/ HTTP/1.1" 200 2224
+[20/Aug/2025 02:15:47] "GET /static/js/script.js HTTP/1.1" 304 0
+[20/Aug/2025 02:15:47] "GET /static/css/style.css HTTP/1.1" 304 0
+Not Found: /favicon.ico
+[20/Aug/2025 02:15:48] "GET /favicon.ico HTTP/1.1" 404 5381
+[20/Aug/2025 02:15:53] "POST /login/?next=/ HTTP/1.1" 302 0
+[20/Aug/2025 02:15:53] "GET /home/ HTTP/1.1" 200 12219
+[20/Aug/2025 02:15:56] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[20/Aug/2025 02:17:48] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[20/Aug/2025 02:17:52] "GET /report_by_range/ HTTP/1.1" 200 24444
+[20/Aug/2025 02:17:55] "POST /report_by_range/ HTTP/1.1" 200 24550
+[20/Aug/2025 02:18:15] "POST /report_by_range/ HTTP/1.1" 200 25650
+[20/Aug/2025 02:18:22] "POST /report_by_range/ HTTP/1.1" 200 58967
+[20/Aug/2025 02:18:59] "POST /report_by_range/ HTTP/1.1" 200 25650
+[20/Aug/2025 02:19:10] "GET /monthly_report/ HTTP/1.1" 200 26206
+[20/Aug/2025 02:19:11] "POST /monthly_report/ HTTP/1.1" 200 58
+[20/Aug/2025 02:19:16] "POST /monthly_report/ HTTP/1.1" 200 105197
+[20/Aug/2025 02:19:33] "GET /logout/ HTTP/1.1" 302 0
+[20/Aug/2025 02:19:33] "GET /login/ HTTP/1.1" 200 2224
+[20/Aug/2025 07:52:42] "GET / HTTP/1.1" 302 0
+[20/Aug/2025 07:52:42] "GET /login/?next=/ HTTP/1.1" 200 2224
+[22/Aug/2025 09:04:51] "GET / HTTP/1.1" 302 0
+[22/Aug/2025 09:04:51] "GET /login/?next=/ HTTP/1.1" 200 2224
+[22/Aug/2025 09:04:51] "GET /static/css/style.css HTTP/1.1" 200 2519
+[22/Aug/2025 09:04:51] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[22/Aug/2025 09:04:58] "GET /favicon.ico HTTP/1.1" 404 5381
+Watching for file changes with StatReloader
+[26/Aug/2025 04:09:48] "GET / HTTP/1.1" 302 0
+[26/Aug/2025 04:09:48] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[26/Aug/2025 04:09:49] "GET /favicon.ico HTTP/1.1" 404 5381
+[26/Aug/2025 04:09:54] "POST /login/?next=/ HTTP/1.1" 302 0
+[26/Aug/2025 04:09:54] "GET /home/ HTTP/1.1" 200 12219
+[26/Aug/2025 04:10:17] "GET /report_by_range/ HTTP/1.1" 200 24444
+[26/Aug/2025 04:10:21] "POST /report_by_range/ HTTP/1.1" 200 24932
+[26/Aug/2025 04:10:32] "POST /report_by_range/ HTTP/1.1" 200 25650
+[26/Aug/2025 04:14:10] "POST /report_by_range/ HTTP/1.1" 200 58967
+[26/Aug/2025 04:15:13] "POST /report_by_range/ HTTP/1.1" 200 25650
+[26/Aug/2025 04:15:21] "POST /report_by_range/ HTTP/1.1" 200 58967
+[26/Aug/2025 04:15:28] "POST /report_by_range/ HTTP/1.1" 200 25650
+[26/Aug/2025 04:15:43] "POST /report_by_range/ HTTP/1.1" 200 58967
+[26/Aug/2025 04:16:16] "POST /report_by_range/ HTTP/1.1" 200 25650
+[26/Aug/2025 04:17:24] "POST /report_by_range/ HTTP/1.1" 200 58967
+[26/Aug/2025 04:21:34] "POST /report_by_range/ HTTP/1.1" 200 25650
+[26/Aug/2025 04:21:50] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[26/Aug/2025 04:23:18] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[26/Aug/2025 04:23:51] "GET /report_by_range/ HTTP/1.1" 200 24444
+[26/Aug/2025 04:23:53] "POST /report_by_range/ HTTP/1.1" 200 30655
+[26/Aug/2025 04:24:20] "POST /report_by_range/ HTTP/1.1" 200 31373
+[26/Aug/2025 04:25:23] "GET /monthly_report/ HTTP/1.1" 200 26206
+[26/Aug/2025 04:25:24] "POST /monthly_report/ HTTP/1.1" 200 58
+[26/Aug/2025 04:25:30] "POST /monthly_report/ HTTP/1.1" 200 106691
+[26/Aug/2025 04:48:50] "GET /logout/ HTTP/1.1" 302 0
+[26/Aug/2025 04:48:50] "GET /login/ HTTP/1.1" 200 2224
+[02/Sep/2025 01:08:14] "GET / HTTP/1.1" 302 0
+[02/Sep/2025 01:08:14] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[02/Sep/2025 01:08:15] "GET /favicon.ico HTTP/1.1" 404 5381
+[02/Sep/2025 01:08:21] "POST /login/?next=/ HTTP/1.1" 302 0
+[02/Sep/2025 01:08:21] "GET /home/ HTTP/1.1" 200 12219
+[02/Sep/2025 01:08:23] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[02/Sep/2025 01:09:58] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[02/Sep/2025 01:10:01] "GET /report_by_range/ HTTP/1.1" 200 24444
+[02/Sep/2025 01:10:05] "POST /report_by_range/ HTTP/1.1" 200 41208
+[02/Sep/2025 01:38:10] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[02/Sep/2025 01:39:27] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[02/Sep/2025 01:39:55] "GET /report_by_range/ HTTP/1.1" 200 24444
+[02/Sep/2025 01:39:59] "POST /report_by_range/ HTTP/1.1" 200 42440
+[02/Sep/2025 01:40:33] "POST /report_by_range/ HTTP/1.1" 200 42440
+[02/Sep/2025 01:40:39] "POST /report_by_range/ HTTP/1.1" 200 60273
+[02/Sep/2025 09:55:51] "POST /report_by_range/ HTTP/1.1" 200 42440
+[02/Sep/2025 09:57:00] "POST /report_by_range/ HTTP/1.1" 200 41615
+[02/Sep/2025 09:57:16] "GET /monthly_report/ HTTP/1.1" 200 26206
+[02/Sep/2025 09:57:16] "POST /monthly_report/ HTTP/1.1" 200 58
+[02/Sep/2025 09:57:22] "POST /monthly_report/ HTTP/1.1" 200 111594
+[02/Sep/2025 09:57:48] "GET /logout/ HTTP/1.1" 302 0
+[02/Sep/2025 09:57:48] "GET /login/ HTTP/1.1" 200 2224
+[25/Sep/2025 09:44:48] "GET /login/?next=/ HTTP/1.1" 200 2224
+[25/Sep/2025 09:44:48] "GET /static/css/style.css HTTP/1.1" 200 2519
+[25/Sep/2025 09:44:48] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[25/Sep/2025 09:44:49] "GET /favicon.ico HTTP/1.1" 404 5377
+[26/Sep/2025 23:32:44] "GET / HTTP/1.1" 302 0
+[26/Sep/2025 23:32:44] "GET /login/?next=/ HTTP/1.1" 200 2224
+[26/Sep/2025 23:32:44] "GET /static/css/style.css HTTP/1.1" 304 0
+[26/Sep/2025 23:32:44] "GET /static/js/script.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+[26/Sep/2025 23:32:45] "GET /favicon.ico HTTP/1.1" 404 5381
+[26/Sep/2025 23:32:50] "POST /login/?next=/ HTTP/1.1" 302 0
+[26/Sep/2025 23:32:50] "GET /home/ HTTP/1.1" 200 12219
+[26/Sep/2025 23:32:53] "GET /convert_moneydance/ HTTP/1.1" 200 6547
+[26/Sep/2025 23:34:25] "POST /convert_moneydance/ HTTP/1.1" 200 41
+[26/Sep/2025 23:35:14] "GET /report_by_range/ HTTP/1.1" 200 24444
+[26/Sep/2025 23:43:21] "GET /logout/ HTTP/1.1" 302 0
+[26/Sep/2025 23:43:21] "GET /login/ HTTP/1.1" 200 2224
+[26/Sep/2025 23:43:55] "GET / HTTP/1.1" 302 0
+[26/Sep/2025 23:43:55] "GET /login/?next=/ HTTP/1.1" 200 2224
+[26/Sep/2025 23:43:55] "GET /static/css/style.css HTTP/1.1" 200 2519
+[26/Sep/2025 23:43:55] "GET /static/js/script.js HTTP/1.1" 200 857
+Not Found: /favicon.ico
+[26/Sep/2025 23:43:55] "GET /favicon.ico HTTP/1.1" 404 5381
+[26/Sep/2025 23:44:01] "POST /login/?next=/ HTTP/1.1" 302 0
+[26/Sep/2025 23:44:01] "GET /home/ HTTP/1.1" 200 12219
+[26/Sep/2025 23:44:05] "GET /report_by_range/ HTTP/1.1" 200 24444
+[26/Sep/2025 23:44:08] "POST /report_by_range/ HTTP/1.1" 200 15805
+[26/Sep/2025 23:44:32] "POST /report_by_range/ HTTP/1.1" 200 43169
+[26/Sep/2025 23:44:48] "POST /report_by_range/ HTTP/1.1" 200 15805
+[26/Sep/2025 23:45:05] "POST /report_by_range/ HTTP/1.1" 200 18113
+[26/Sep/2025 23:45:19] "POST /report_by_range/ HTTP/1.1" 200 43169
+[26/Sep/2025 23:45:31] "POST /report_by_range/ HTTP/1.1" 200 18113
+[26/Sep/2025 23:45:39] "GET /monthly_report/ HTTP/1.1" 200 26206
+[26/Sep/2025 23:45:39] "POST /monthly_report/ HTTP/1.1" 200 58
+[26/Sep/2025 23:45:42] "GET /report_by_range/ HTTP/1.1" 200 24444
+[26/Sep/2025 23:45:46] "POST /report_by_range/ HTTP/1.1" 200 139149
+[26/Sep/2025 23:46:05] "GET /monthly_report/ HTTP/1.1" 200 26206
+[26/Sep/2025 23:46:05] "POST /monthly_report/ HTTP/1.1" 200 58
+[26/Sep/2025 23:46:12] "POST /monthly_report/ HTTP/1.1" 200 115377
+[26/Sep/2025 23:46:49] "POST /monthly_report/ HTTP/1.1" 200 199120
+[26/Sep/2025 23:47:18] "POST /monthly_report/ HTTP/1.1" 200 198540
+[26/Sep/2025 23:47:56] "POST /monthly_report/ HTTP/1.1" 200 182326
+[26/Sep/2025 23:48:11] "POST /monthly_report/ HTTP/1.1" 200 198540
+[26/Sep/2025 23:48:52] "GET /logout/ HTTP/1.1" 302 0
+[26/Sep/2025 23:48:52] "GET /login/ HTTP/1.1" 200 2224
+[27/Sep/2025 01:08:52] "GET / HTTP/1.1" 302 0
+[27/Sep/2025 01:08:52] "GET /login/?next=/ HTTP/1.1" 200 2224
+[27/Sep/2025 01:08:58] "POST /login/?next=/ HTTP/1.1" 302 0
+[27/Sep/2025 01:08:58] "GET /home/ HTTP/1.1" 200 12219
+/app/md_project/my_money/views_dir/report_views.py:122: LangChainDeprecationWarning: The class `ChatOpenAI` was deprecated in LangChain 0.0.10 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-openai package and should be used instead. To use it run `pip install -U :class:`~langchain-openai` and import as `from :class:`~langchain_openai import ChatOpenAI``.
+  chat_model = ChatOpenAI(
+/app/md_project/my_money/views_dir/report_views.py:129: LangChainDeprecationWarning: Please see the migration guide at: https://python.langchain.com/docs/versions/migrating_memory/
+  memory = ConversationBufferMemory()
+/app/md_project/my_money/views_dir/report_views.py:142: LangChainDeprecationWarning: The method `BaseChatModel.__call__` was deprecated in langchain-core 0.1.7 and will be removed in 1.0. Use :meth:`~invoke` instead.
+  response = chat_model([SystemMessage(content="You are a financial assistant."), HumanMessage(content=final_prompt)])
+[27/Sep/2025 01:09:20] "GET /report_by_range/ HTTP/1.1" 200 24444
+[27/Sep/2025 01:09:23] "POST /report_by_range/ HTTP/1.1" 200 18113
+[27/Sep/2025 01:09:26] "GET /monthly_report/ HTTP/1.1" 200 26206
+[27/Sep/2025 01:09:26] "POST /monthly_report/ HTTP/1.1" 200 58
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 26, 2025 - 04:09:46
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+*****start_date***** 2025-08-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-07-01', '2025-07-31']
+date range.start :  2025-07-01
+date range.end :  2025-07-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-07-01', '2025-07-31']
+date range.start :  2025-07-01
+date range.end :  2025-07-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-07-01', '2025-07-31']
+date range.start :  2025-07-01
+date range.end :  2025-07-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-07-01', '2025-07-31']
+date range.start :  2025-07-01
+date range.end :  2025-07-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-08-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-09-01
+date range :  ['2025-08-01', '2025-08-31']
+date range.start :  2025-08-01
+date range.end :  2025-08-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-09-01
+date range :  ['2025-08-01', '2025-08-31']
+date range.start :  2025-08-01
+date range.end :  2025-08-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-08-01', '2025-08-31']
+date range.start :  2025-08-01
+date range.end :  2025-08-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-08-01', '2025-08-31']
+date range.start :  2025-08-01
+date range.end :  2025-08-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-08-01', '2025-08-31']
+date range.start :  2025-08-01
+date range.end :  2025-08-31
+Date selection :  last_month
+Tier :  2
+date info :  <class 'dict'>
+ csv file name = Income and Expenses Detailed.csv
+Start processing----------------------->
+last year ->  2024
+Start processing_2------------------------------------>
+***************source file loop******************
+transaction table is updated
+Writing data for group = Expenses , category = Membership
+Updated category table
+parent column =  description
+child table =  <class 'my_money.models.Payee'>
+updated  <class 'my_money.models.Payee'> table
+parent column =  account_type
+child table =  <class 'my_money.models.Account_type'>
+updated  <class 'my_money.models.Account_type'> table
+parent column =  account_name
+child table =  <class 'my_money.models.Account_name'>
+updated  <class 'my_money.models.Account_name'> table
+parent column =  account_detail
+child table =  <class 'my_money.models.Account_detail'>
+updated  <class 'my_money.models.Account_detail'> table
+*****start_date***** 2025-09-01
+*****start_date***** 2025-09-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-08-01', '2025-08-31']
+date range.start :  2025-08-01
+date range.end :  2025-08-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+date range :  ['2025-08-01', '2025-08-31']
+date range.start :  2025-08-01
+date range.end :  2025-08-31
+Date selection :  last_month
+Tier :  3
+date info :  <class 'dict'>
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+*****start_date***** 2025-09-01
+date range :  ['2025-06-01', '2025-08-31']
+date range.start :  2025-06-01
+date range.end :  2025-08-31
+Date selection :  last_3months
+Tier :  3
+date info :  <class 'dict'>
+GRAND TOTAL: 1649919.36
+*****start_date***** 2025-09-01
+Date selection :  custom_date
+Tier :  3
+date info :  <class 'dict'>
+<h4>Financial Analysis Report for the Year 2025</h4>
+
+<p>This report provides a detailed analysis of the recorded expenses for the year 2025, identifying trends, significant expenses, and potential areas for cost optimization. The total expenses for the year amounted to $1,649,919.36.</p>
+
+<h4>Overview of Major Expense Categories</h4>
+<ul>
+    <li><strong>Home Monthly Fixed Expenses:</strong> The largest expense category, totaling $480,000.00. This suggests a substantial fixed cost structure that could be revisited for potential renegotiation or reduction.</li>
+    <li><strong>Fixed and Service:</strong> Another significant category with expenses of $149,637.02, primarily in February and April. A closer look into the service agreements or contracts could offer opportunities for savings.</li>
+    <li><strong>Insurance Automobile:</strong> High expenses in the insurance category, particularly automobile and life insurance, total $91,300.00 and $53,021.00, respectively. Comparing insurance providers and plans could reduce these costs.</li>
+    <li><strong>Home Monthly Variable Expenses:</strong> Totaling $256,034.16, showing variability and potential for cost management.</li>
+    <li><strong>Home Meal:</strong> With a total of $55,367.27 spread throughout the year, reviewing meal planning and purchasing habits could provide significant savings.</li>
+    <li><strong>Travel:</strong> A substantial one-time expense in August amounting to $44,493.00 suggests occasional high spending in leisure activities.</li>
+    <li><strong>Fuel:</strong> Cumulative spending on fuel stands at $37,560.00, indicating frequent vehicle use. Considering alternative transportation methods or more fuel-efficient vehicles could offer long-term savings.</li>
+</ul>
+
+<h4>Analysis of Spending Patterns</h4>
+<p>Spending is heavily skewed towards certain months, particularly in categories like Fixed and Service, and Insurance. This suggests that significant payments are scheduled in specific periods, which could impact cash flow management. Consistent expenses in categories like Home Meals and Home Internet indicate routine consumption that warrants regular review and budgeting.</p>
+
+<h4>Recommendations for Financial Management</h4>
+<ol>
+    <li><strong>Review Fixed Expenses:</strong> Analyze contracts and services that contribute to the Home Monthly Fixed Expenses and Fixed and Service categories to negotiate better terms or seek more cost-effective alternatives.</li>
+    <li><strong>Insurance Costs:</strong> Shop around for better rates or bundle services for insurance to reduce premiums without compromising coverage.</li>
+    <li><strong>Energy and Fuel Efficiency:</strong> Invest in energy-saving appliances and consider switching to hybrid or electric vehicles to cut down on the Fuel category costs.</li>
+    <li><strong>Meal Planning:</strong> Implement structured meal planning and bulk buying for groceries to reduce the frequent high expenditures noted in Home Meal and Grocery categories.</li>
+    <li><strong>Travel and Leisure:</strong> Plan and budget for travel expenses ahead of time to avoid significant one-time financial outlays.</li>
+    <li><strong>Debt Management:</strong> If any expenses are financed through debt, consider strategies for consolidation or refinancing to lower interest costs.</li>
+</ol>
+
+<h4>Conclusion</h4>
+<p>The financial analysis for 2025 suggests that while the household has managed substantial expenses, there is room for optimization, particularly in fixed expenses, insurance, and energy usage. By implementing the recommended strategies, there could be a more efficient allocation of resources, potentially leading to significant savings and a better financial outlook.</p>[27/Sep/2025 01:09:27] "POST /home/ HTTP/1.1" 200 3855
+[27/Sep/2025 01:09:32] "POST /monthly_report/ HTTP/1.1" 200 199120
+[27/Sep/2025 01:09:45] "POST /monthly_report/ HTTP/1.1" 200 224738
+[27/Sep/2025 01:09:59] "POST /monthly_report/ HTTP/1.1" 200 245593
+[27/Sep/2025 01:10:27] "POST /monthly_report/ HTTP/1.1" 200 278970
+[27/Sep/2025 01:10:34] "POST /monthly_report/ HTTP/1.1" 200 224198
+[27/Sep/2025 01:10:41] "POST /monthly_report/ HTTP/1.1" 200 172013
+[27/Sep/2025 01:10:51] "GET /yearly_report/ HTTP/1.1" 200 26196
+[27/Sep/2025 01:10:58] "POST /yearly_report/ HTTP/1.1" 200 1076911
+[27/Sep/2025 01:11:16] "POST /yearly_report/ HTTP/1.1" 200 353492
+[27/Sep/2025 01:11:43] "POST /yearly_report/ HTTP/1.1" 200 1076911
+[27/Sep/2025 01:11:56] "GET /logout/ HTTP/1.1" 302 0
+[27/Sep/2025 01:11:56] "GET /login/ HTTP/1.1" 200 2224
+[02/Oct/2025 08:30:18] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[02/Oct/2025 08:30:19] "GET /favicon.ico HTTP/1.1" 404 5377
+[02/Oct/2025 08:30:24] "POST /login/?next=/ HTTP/1.1" 302 0
+[02/Oct/2025 08:30:24] "GET /home/ HTTP/1.1" 200 12233
+[02/Oct/2025 08:31:04] "GET /home/ HTTP/1.1" 200 12233
+[02/Oct/2025 08:31:09] "GET /logout/ HTTP/1.1" 302 0
+[02/Oct/2025 08:31:09] "GET /login/ HTTP/1.1" 200 2224
+[02/Oct/2025 14:11:39] "GET / HTTP/1.1" 302 0
+[02/Oct/2025 14:11:39] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[02/Oct/2025 14:11:40] "GET /favicon.ico HTTP/1.1" 404 5381
+[02/Oct/2025 14:11:45] "POST /login/?next=/ HTTP/1.1" 302 0
+[02/Oct/2025 14:11:45] "GET /home/ HTTP/1.1" 200 12233
+/app/md_project/my_money/urls.py changed, reloading.
+
+start date : 2020-01-01
+end date : 2025-12-31
+Year  2025
+xx 2020
+xx 2021
+xx 2022
+xx 2023
+xx 2024
+start date : 2014-01-01
+end date : 2019-12-31
+Year  2019
+xx 2014
+xx 2015
+xx 2016
+xx 2017
+xx 2018
+start date : 2020-01-01
+end date : 2025-12-31
+Year  2025
+xx 2020
+xx 2021
+xx 2022
+xx 2023
+xx 2024
+Watching for file changes with StatReloader
+/app/md_project/my_money/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 02, 2025 - 14:22:04
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+/app/md_project/my_money/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 02, 2025 - 14:22:12
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+/app/md_project/my_money/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 02, 2025 - 14:22:40
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/local/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+        app_configs=app_configs,
+    ...<2 lines>...
+        databases=databases,
+    )
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/md_project/urls.py", line 23, in <module>
+    path('', include('my_money.urls')),  # Make sure this line is present
+             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/my_money/urls.py", line 28, in <module>
+    path('crypto/', crypto_views.convert_moneydance, name='crypto'),
+                    ^^^^^^^^^^^^
+NameError: name 'crypto_views' is not defined
+/app/md_project/my_money/urls.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/local/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+        app_configs=app_configs,
+    ...<2 lines>...
+        databases=databases,
+    )
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/md_project/urls.py", line 23, in <module>
+    path('', include('my_money.urls')),  # Make sure this line is present
+             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/my_money/urls.py", line 28, in <module>
+    path('crypto/', crypto_views.get_wallet, name='crypto'),
+                    ^^^^^^^^^^^^
+NameError: name 'crypto_views' is not defined
+/app/md_project/my_money/urls.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/local/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+        app_configs=app_configs,
+    ...<2 lines>...
+        databases=databases,
+    )
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/md_project/urls.py", line 23, in <module>
+    path('', include('my_money.urls')),  # Make sure this line is present
+             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/my_money/urls.py", line 28, in <module>
+    path('crypto/', crypto_views.get_wallet_balance, name='crypto'),
+                    ^^^^^^^^^^^^
+NameError: name 'crypto_views' is not defined
+/app/md_project/my_money/urls.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/local/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+        app_configs=app_configs,
+    ...<2 lines>...
+        databases=databases,
+    )
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/md_project/urls.py", line 23, in <module>
+    path('', include('my_money.urls')),  # Make sure this line is present
+             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/my_money/urls.py", line 28, in <module>
+    path('crypto/', crypto_views.get_wallet_balances, name='crypto'),
+                    ^^^^^^^^^^^^
+NameError: name 'crypto_views' is not defined
+Watching for file changes with StatReloader
+[02/Oct/2025 17:04:25] "GET /report_by_range/ HTTP/1.1" 200 24556
+[02/Oct/2025 17:04:28] "GET /monthly_report/ HTTP/1.1" 200 26318
+[02/Oct/2025 17:04:28] "POST /monthly_report/ HTTP/1.1" 200 58
+[02/Oct/2025 17:04:32] "POST /monthly_report/ HTTP/1.1" 200 198540
+[02/Oct/2025 17:04:40] "GET /crypto/ HTTP/1.1" 200 8538
+[02/Oct/2025 17:06:01] "GET /crypto/ HTTP/1.1" 200 8596
+[02/Oct/2025 17:06:19] "GET /crypto/ HTTP/1.1" 200 8596
+[02/Oct/2025 17:06:32] "GET /crypto/ HTTP/1.1" 200 8596
+[02/Oct/2025 17:09:01] "GET /crypto/ HTTP/1.1" 200 8596
+[02/Oct/2025 17:17:31] "GET /logout/ HTTP/1.1" 302 0
+[02/Oct/2025 17:17:31] "GET /login/ HTTP/1.1" 200 2224
+[03/Oct/2025 02:07:14] "GET / HTTP/1.1" 302 0
+[03/Oct/2025 02:07:14] "GET /login/?next=/ HTTP/1.1" 200 2224
+[03/Oct/2025 02:10:50] "GET / HTTP/1.1" 302 0
+[03/Oct/2025 02:10:50] "GET /login/?next=/ HTTP/1.1" 200 2224
+[03/Oct/2025 02:32:23] "GET / HTTP/1.1" 302 0
+[03/Oct/2025 02:32:23] "GET /login/?next=/ HTTP/1.1" 200 2224
+[03/Oct/2025 04:13:32] "GET / HTTP/1.1" 302 0
+[03/Oct/2025 04:13:32] "GET /login/?next=/ HTTP/1.1" 200 2224
+[03/Oct/2025 04:26:53] "GET / HTTP/1.1" 302 0
+[03/Oct/2025 04:26:53] "GET /login/?next=/ HTTP/1.1" 200 2224
+[03/Oct/2025 08:53:50] "GET / HTTP/1.1" 302 0
+[03/Oct/2025 08:53:50] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[03/Oct/2025 08:53:51] "GET /favicon.ico HTTP/1.1" 404 5901
+[03/Oct/2025 08:53:55] "POST /login/?next=/ HTTP/1.1" 302 0
+[03/Oct/2025 08:53:55] "GET /home/ HTTP/1.1" 200 12331
+[03/Oct/2025 08:53:59] "GET /crypto/ HTTP/1.1" 200 8596
+Internal Server Error: /place_order/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The view my_money.views_dir.crypto_views.place_order didn't return an HttpResponse object. It returned None instead.
+[03/Oct/2025 08:54:10] "GET /place_order/ HTTP/1.1" 500 61469
+Internal Server Error: /place_order/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The view my_money.views_dir.crypto_views.place_order didn't return an HttpResponse object. It returned None instead.
+[03/Oct/2025 08:54:31] "GET /place_order/ HTTP/1.1" 500 61606
+[03/Oct/2025 08:54:34] "GET /crypto/ HTTP/1.1" 200 8596
+[03/Oct/2025 08:55:58] "GET /logout/ HTTP/1.1" 302 0
+[03/Oct/2025 08:55:58] "GET /login/ HTTP/1.1" 200 2224
+[03/Oct/2025 12:52:56] "GET / HTTP/1.1" 302 0
+[03/Oct/2025 12:52:56] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[03/Oct/2025 12:52:57] "GET /favicon.ico HTTP/1.1" 404 5901
+[03/Oct/2025 12:53:01] "POST /login/?next=/ HTTP/1.1" 302 0
+[03/Oct/2025 12:53:01] "GET /home/ HTTP/1.1" 200 12331
+[03/Oct/2025 12:53:03] "GET /crypto/ HTTP/1.1" 200 8596
+Internal Server Error: /place_order/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: The view my_money.views_dir.crypto_views.place_order didn't return an HttpResponse object. It returned None instead.
+[03/Oct/2025 12:53:11] "GET /place_order/ HTTP/1.1" 500 61469
+[03/Oct/2025 12:53:18] "GET /crypto/ HTTP/1.1" 200 8596
+Not Found: /n8n-trigger/
+[03/Oct/2025 13:56:39] "POST /n8n-trigger/ HTTP/1.1" 404 5905
+/app/md_project/my_money/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 02, 2025 - 17:04:18
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+*****start_date***** 2025-10-01
+symbol          qty       last     value
+   BTC     0.027265 3874749.89 105645.02
+   KUB   115.000000      50.00   5750.00
+ SUSHI    14.140805      22.98    324.96
+   THB 14978.800000       1.00  14978.80
+   UNI     9.053959     264.85   2397.94
+  USDT   817.239307      32.41  26486.73
+   XRP    19.932871      98.72   1967.77
+symbol          qty       last     value
+   BTC     0.027265 3873291.05 105605.24
+   KUB   115.000000      50.00   5750.00
+ SUSHI    14.140805      22.98    324.96
+   THB 14978.800000       1.00  14978.80
+   UNI     9.053959     264.85   2397.94
+  USDT   817.239307      32.40  26478.55
+   XRP    19.932871      98.51   1963.59
+symbol          qty       last     value
+   BTC     0.027265 3874999.65 105651.83
+   KUB   115.000000      50.00   5750.00
+ SUSHI    14.140805      22.98    324.96
+   THB 14978.800000       1.00  14978.80
+   UNI     9.053959     264.85   2397.94
+  USDT   817.239307      32.40  26478.55
+   XRP    19.932871      98.56   1964.58
+symbol          qty       last     value
+   BTC     0.027265 3874999.65 105651.83
+   KUB   115.000000      50.00   5750.00
+ SUSHI    14.140805      22.98    324.96
+   THB 14978.800000       1.00  14978.80
+   UNI     9.053959     264.85   2397.94
+  USDT   817.239307      32.40  26478.55
+   XRP    19.932871      98.56   1964.58
+symbol          qty       last     value
+   BTC     0.027265 3877395.43 105717.15
+   KUB   115.000000      49.85   5732.75
+ SUSHI    14.140805      22.98    324.96
+   THB 15078.800000       1.00  15078.80
+   UNI     9.053959     264.85   2397.94
+  USDT   817.239307      32.39  26470.38
+   XRP    19.932871      98.55   1964.38
+symbol          qty       last     value
+   BTC     0.027265 3877999.00 105733.60
+   KUB   115.000000      50.02   5752.30
+ SUSHI    14.140805      23.09    326.51
+   THB 15078.800000       1.00  15078.80
+   UNI     9.053959     265.03   2399.57
+  USDT   817.239307      32.34  26429.52
+   XRP    19.932871      98.77   1968.77
+{'error': 0, 'result': {'amt': 100, 'ci': '', 'cre': 0, 'fee': 0, 'id': '439476908', 'rat': 0, 'rec': 0, 'ts': '1759481650', 'typ': 'market'}}
+{'error': 0, 'result': {'amt': 100, 'ci': '', 'cre': 0, 'fee': 0, 'id': '439476951', 'rat': 0, 'rec': 0, 'ts': '1759481671', 'typ': 'market'}}
+symbol          qty       last     value
+   BTC     0.027316 3877999.00 105933.09
+   KUB   115.000000      50.02   5752.30
+ SUSHI    14.140805      23.09    326.51
+   THB 14878.800000       1.00  14878.80
+   UNI     9.053959     265.03   2399.57
+  USDT   817.239307      32.35  26437.69
+   XRP    19.932871      98.75   1968.37
+symbol          qty       last     value
+   BTC     0.027316 3898000.42 106479.46
+   KUB   115.000000      50.01   5751.15
+ SUSHI    14.140805      23.21    328.21
+   THB 14878.800000       1.00  14878.80
+   UNI     9.053959     266.82   2415.78
+  USDT   817.239307      32.43  26503.07
+   XRP    19.932871      98.08   1955.02
+{'error': 0, 'result': {'amt': 100, 'ci': '', 'cre': 0, 'fee': 0, 'id': '439513105', 'rat': 0, 'rec': 0, 'ts': '1759495991', 'typ': 'market'}}
+symbol          qty       last     value
+   BTC     0.027342 3900000.00 106633.84
+   KUB   115.000000      50.01   5751.15
+ SUSHI    14.140805      23.21    328.21
+   THB 14778.800000       1.00  14778.80
+   UNI     9.053959     266.82   2415.78
+  USDT   817.239307      32.43  26503.07
+   XRP    19.932871      98.08   1955.02
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/local/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+        app_configs=app_configs,
+    ...<2 lines>...
+        databases=databases,
+    )
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/md_project/urls.py", line 23, in <module>
+    path('', include('my_money.urls')),  # Make sure this line is present
+             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/my_money/urls.py", line 30, in <module>
+    path('n8n-trigger/', n8n_trigger, name='n8n_trigger'),
+                         ^^^^^^^^^^^
+NameError: name 'n8n_trigger' is not defined
+/app/md_project/my_money/urls.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/local/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+        app_configs=app_configs,
+    ...<2 lines>...
+        databases=databases,
+    )
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/md_project/urls.py", line 23, in <module>
+    path('', include('my_money.urls')),  # Make sure this line is present
+             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/my_money/urls.py", line 30, in <module>
+    path('n8n-trigger/', crypto_views.n8n_trigger, name='n8n_trigger'),
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'my_money.views_dir.crypto_views' has no attribute 'n8n_trigger'
+/app/md_project/my_money/views_dir/crypto_views.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/local/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+        app_configs=app_configs,
+    ...<2 lines>...
+        databases=databases,
+    )
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/md_project/urls.py", line 23, in <module>
+    path('', include('my_money.urls')),  # Make sure this line is present
+             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/my_money/urls.py", line 30, in <module>
+    path('n8n-trigger/', crypto_views.n8n_trigger, name='n8n_trigger'),
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'my_money.views_dir.crypto_views' has no attribute 'n8n_trigger'
+/app/md_project/my_money/views_dir/crypto_views.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/local/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+        app_configs=app_configs,
+    ...<2 lines>...
+        databases=databases,
+    )
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/md_project/urls.py", line 23, in <module>
+    path('', include('my_money.urls')),  # Make sure this line is present
+             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/my_money/urls.py", line 3, in <module>
+    from .views_dir import login_views, report_views, data_import_views, crypto_views
+  File "/app/md_project/my_money/views_dir/crypto_views.py", line 151
+    def 
+        ^
+SyntaxError: invalid syntax
+/app/md_project/my_money/views_dir/crypto_views.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/local/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+    ~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/core/management/base.py", line 486, in check
+    all_issues = checks.run_checks(
+        app_configs=app_configs,
+    ...<2 lines>...
+        databases=databases,
+    )
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/registry.py", line 88, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/local/lib/python3.13/site-packages/django/core/checks/urls.py", line 26, in check_resolver
+    return check_method()
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/md_project/urls.py", line 23, in <module>
+    path('', include('my_money.urls')),  # Make sure this line is present
+             ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/app/md_project/my_money/urls.py", line 3, in <module>
+    from .views_dir import login_views, report_views, data_import_views, crypto_views
+  File "/app/md_project/my_money/views_dir/crypto_views.py", line 151
+    def 
+        ^
+SyntaxError: invalid syntax
+/app/md_project/my_money/views_dir/crypto_views.py changed, reloading.
+Performing system checks...
+
+Watching for file changes with StatReloader
+/app/md_project/my_money/views_dir/crypto_views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 03, 2025 - 14:01:55
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+/app/md_project/my_money/views_dir/crypto_views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 03, 2025 - 14:02:21
+Django version 5.1.4, using settings 'md_project.settings'
+Starting development server at http://0.0.0.0:8004/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+[03/Oct/2025 15:17:23] "GET /logout/ HTTP/1.1" 302 0
+[03/Oct/2025 15:17:23] "GET /login/ HTTP/1.1" 200 2224
+[03/Oct/2025 15:17:26] "POST /login/ HTTP/1.1" 302 0
+[03/Oct/2025 15:17:27] "GET /home/ HTTP/1.1" 200 12331
+[03/Oct/2025 15:17:29] "GET /crypto/ HTTP/1.1" 200 8596
+[03/Oct/2025 15:44:09] "GET /crypto/ HTTP/1.1" 200 8596
+[03/Oct/2025 15:44:29] "GET /logout/ HTTP/1.1" 302 0
+[03/Oct/2025 15:44:29] "GET /login/ HTTP/1.1" 200 2224
+[03/Oct/2025 17:00:08] "POST /n8n-trigger/ HTTP/1.1" 200 154
+[03/Oct/2025 20:00:08] "POST /n8n-trigger/ HTTP/1.1" 200 154
+[03/Oct/2025 23:00:08] "POST /n8n-trigger/ HTTP/1.1" 200 154
+[04/Oct/2025 00:50:49] "GET / HTTP/1.1" 302 0
+[04/Oct/2025 00:50:49] "GET /login/?next=/ HTTP/1.1" 200 2224
+Not Found: /favicon.ico
+[04/Oct/2025 00:50:49] "GET /favicon.ico HTTP/1.1" 404 6166
+[04/Oct/2025 00:50:53] "POST /login/?next=/ HTTP/1.1" 302 0
+[04/Oct/2025 00:50:53] "GET /home/ HTTP/1.1" 200 12331
+[04/Oct/2025 00:50:57] "GET /crypto/ HTTP/1.1" 200 8596

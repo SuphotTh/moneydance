@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Deposit History{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h5 class="mb-4">Deposit History (THB)</h5>
+  
+  <!-- Exchange Selection -->
+  <div class="mb-3">
+    <label for="exchangeSelect" class="form-label"><strong>Select Exchange:</strong></label>
+    <select id="exchangeSelect" class="form-select">
+      <option value="bitkub" selected>Bitkub</option>
+      <option value="binanceth">BinanceTh</option>
+    </select>
+  </div>
+  
+  <!-- Data Table -->
+  <table class="table table-striped mt-3" id="depositTable">
+    <thead>
+      <tr>
+        <th>Txn ID</th>
+        <th>Currency</th>
+        <th>Amount (THB)</th>
+        <th>Status</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="5" class="text-center text-muted">Loading...</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <!-- Pagination Info -->
+  <div id="paginationInfo" class="mt-2 text-end text-muted"></div>
+</div>
+
+<script>
+function loadDepositData(exchange) {
+  const tableBody = document.querySelector("#depositTable tbody");
+  const paginationDiv = document.getElementById("paginationInfo");
+  
+  tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-info">Loading...</td></tr>`;
+  paginationDiv.textContent = '';
+  
+  fetch(`/deposit_history_${exchange}/`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.error !== 0 || !data.result || data.result.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-warning">No deposit data found</td></tr>`;
+        return;
+      }
+      
+      let rows = "";
+      data.result.forEach(item => {
+        const date = new Date(item.time * 1000).toLocaleString('en-GB', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+        
+        rows += `
+          <tr>
+            <td>${item.txn_id}</td>
+            <td>${item.currency}</td>
+            <td>${parseFloat(item.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+            <td><span class="badge ${item.status === 'complete' ? 'bg-success' : 'bg-warning'}">${item.status}</span></td>
+            <td>${date}</td>
+          </tr>`;
+      });
+      tableBody.innerHTML = rows;
+      
+      // Show pagination info if available
+      if (data.pagination) {
+        paginationDiv.textContent = `Page ${data.pagination.page} of ${data.pagination.last}`;
+      }
+    })
+    .catch(err => {
+      console.error('Error loading deposit data:', err);
+      tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-danger">Error loading data: ${err.message}</td></tr>`;
+    });
+}
+
+// Load Bitkub deposits by default on page load
+document.addEventListener("DOMContentLoaded", function() {
+  loadDepositData("bitkub");
+});
+
+// Exchange selection listener
+document.getElementById("exchangeSelect").addEventListener("change", function() {
+  loadDepositData(this.value);
+});
+</script>
+{% endblock %}
