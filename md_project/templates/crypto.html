@@ -11,8 +11,8 @@
         <thead>
             <tr style="background-color:#f2f2f2;">
                 <th style="text-align:left; padding:8px; border:1px solid #ccc;">Symbol</th>
-                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Quantity</th>
                 <th style="text-align:right; padding:8px; border:1px solid #ccc;">Latest</th>
+                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Quantity</th>
                 <th style="text-align:right; padding:8px; border:1px solid #ccc;">Value</th>
             </tr>
         </thead>
@@ -20,12 +20,12 @@
             {% for item in data %}
             <tr>
                 <td style="text-align:left; padding:8px; border:1px solid #ccc;">{{ item.symbol }}</td>
+                <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.last|floatformat:2|intcomma }}</td>
                 {% if item.symbol == "THB" %}
                     <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.qty|floatformat:2 | intcomma}}</td>
                 {% else %}
                     <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.qty|floatformat:8 | intcomma}}</td>
                 {% endif %}
-                <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.last|floatformat:2|intcomma }}</td>
                 <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.value|floatformat:2|intcomma }}</td>
             </tr>
             {% endfor %}
@@ -45,8 +45,8 @@
         <thead>
             <tr style="background-color:#f2f2f2;">
                 <th style="text-align:left; padding:8px; border:1px solid #ccc;">Symbol</th>
-                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Quantity</th>
                 <th style="text-align:right; padding:8px; border:1px solid #ccc;">Latest</th>
+                <th style="text-align:right; padding:8px; border:1px solid #ccc;">Quantity</th>
                 <th style="text-align:right; padding:8px; border:1px solid #ccc;">Value</th>
             </tr>
         </thead>
@@ -54,12 +54,12 @@
             {% for item in data2 %}
             <tr>
                 <td style="text-align:left; padding:8px; border:1px solid #ccc;">{{ item.symbol }}</td>
+                <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.last|floatformat:2|intcomma }}</td>
                 {% if item.symbol == "THB" %}
                     <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.qty|floatformat:2 | intcomma}}</td>
                 {% else %}
                     <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.qty|floatformat:8 | intcomma}}</td>
                 {% endif %}
-                <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.last|floatformat:2|intcomma }}</td>
                 <td style="text-align:right; padding:8px; border:1px solid #ccc;">{{ item.value|floatformat:2|intcomma }}</td>
             </tr>
             {% endfor %}

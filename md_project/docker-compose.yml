@@ -36,9 +36,11 @@ services:
       bash -c "
         pip install --upgrade pip &&
         pip install -r requirements.txt &&
+        pip install python-dotenv &&
         python manage.py collectstatic --noinput &&
         python manage.py runserver 0.0.0.0:8004
       "
     restart: unless-stopped
+
 volumes:
   postgres_data:

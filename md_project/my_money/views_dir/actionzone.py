@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect
-from ..models import CryptoPurchase
+from ..models import CryptoPurchase, CryptoSymbolStatus, BinanceTransaction, CryptoAccumulatedAmount
 from datetime import datetime, date, timedelta
 from django.db import transaction
 from django.conf import settings
@@ -14,6 +14,7 @@ from django.db.models import Sum, F
 from decimal import Decimal
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
+from .crypto_views import get_fear_greed_index
 import csv
 import re
 import io
@@ -24,7 +25,7 @@ import hashlib
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
-import base64
+import io, base64
 import logging
 
 logger = logging.getLogger(__name__)
@@ -36,36 +37,153 @@ api_secret = settings.BITKUB_SECRET_KEY
 binance_api = settings.BINANCE_API
 binance_secret_key = settings.BINANCE_SECRET_KEY
 
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
-from django.conf import settings
-import requests
-import pandas as pd
-import matplotlib.pyplot as plt
-import io, base64
+# Helper function for API key verification
+def verify_api_key(request):
+    api_key = request.headers.get('Authorization')
+    if api_key != f'Bearer {settings.APIKEY}':
+        return JsonResponse({'error': 'Unauthorized Access'}, status=401)
+    return None
+
+@csrf_exempt
+def n8n_start_process(request):
+    unauthorized = verify_api_key(request)
+    if unauthorized:
+        return unauthorized
+
+    symbol = request.headers.get('Symbol') #BTCUSDT
+    sym = symbol.replace("USDT", "")
+    symbol_thb = symbol.replace("USDT", "THB")
+    choice = "2"
+    latest_signals = actionzone_signal_calc(symbol, choice)
+    logger.info("latest signals: %s", latest_signals)
+    buy_signal = bool(latest_signals.get('Buy', False))
+    sell_signal = bool(latest_signals.get('Sell', False))
+    zone = latest_signals.get('Zone', '')
+    timestamp = timezone.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    symbol_status_record = CryptoSymbolStatus.objects.filter(sym=symbol).first()
+    if symbol_status_record is None:
+        symbol_status_record = CryptoSymbolStatus.objects.create(
+            sym=symbol,
+            buy_status=False,
+            sell_status=False,
+            zone_color=zone,
+            timestamp=timestamp,
+            spare1='', spare2='', spare3=None, spare4=None
+        )
+        symbol_status_record = CryptoSymbolStatus.objects.filter(sym=symbol).first()
+    
+    # if buy_signal and not buy_status:
+        # place order , symbol=BTCUSDT, amount = CryptoAccumulatedAmount
+        # if buy success update accumulated_amount of symbol 
+        # update CryptoAccumulatedAmount to 0
+        # update CryptoSymbolStatus : buy_status to true, sell_status to false
+        # update BinanceTransaction table with buy transaction
+        
+    # if sell_signal and not sell_status:
+        # process to sell BTC amount , qty BTC quantity in Binance wallet
+        # if sell success update accumulated_amount of symbol == amount of selling this transaction
+        # update CryptoAccumulatedAmount: amount of selling this transaction, symbol 
+        # update CryptoSymbolStatus : sell_status to true, buy_status to false
+        # update BinanceTransaction table with sell transaction
+
+    # get fear and greed index
+    fear_greed, classification = get_fear_greed_index()
+    amt = 50
+    amt = ((100-int(fear_greed))*0.01)* amt #calculate amount of purchase 
+
+    #has to find daily purchase routine
+    # if zone == "Green" or zone == "Orange" or zone == "Yellow":
+    #     event = "CONTINUE_BUY"
+    #     # send order to function place order has to change BTCUSDT to BTCTHB
+    #     transaction = place_order(event, symbol_thb, zone)
+        
+        # update transaction to BinanceTransaction table 
+        # check THB in wallet if < accumulated_amount then send Notice to user
+
+    # if zone == "Red" or zone == "Light Blue" or zone == "Blue":
+    #     acc_amt_record = CryptoAccumulatedAmount.objects.filter(sym=sym).first()
+    #     #has to change BTCUSDT to BTC
+    #     #variable name symbol = "BTCUSDT", symbol_thb = "BTCTHB", sym = "BTC"
+    #     if accumulated_amount_record is None:
+    #         acc_amt_record = CryptoAccumulatedAmount.objects.create(
+    #             sym=sym,
+    #             accumulated_amount=amt,
+    #             timestamp=timestamp,
+    #             spare1='', spare2='', spare3=None, spare4=None
+    #         )
+    #     else
+    #         # Update existing
+    #         acc_amt = acc_amt + amt
+    #         acc_amt_record.accumulated_amount = acc_amt
+    #         acc_amt_record.timestamp = timestamp
+    #         acc_amt_record.save()
+
+        # calculated_amount to buy (apply with fear and greed index)
+        # update CryptoAccumulatedAmount: table accumulated_amount = accumuldated_amount+calculated_amount 
+        # check THB in wallet if < accumulated_amount then send Notice to user
+
+
+    return JsonResponse({
+        "symbol": symbol,
+        "latest_signals": latest_signals,
+        "buy_status": buy_status,
+        "sell_status": sell_status
+    })
+    pass
 
 @csrf_exempt
 def n8n_actionzone_symbol(request):
-    # --- API key check ---
-    api_key2 = request.headers.get('Authorization')
-    symbol = (
-        request.headers.get('Symbol')
-        or request.GET.get('symbol')
-        or request.POST.get('symbol')
-        or 'BTCUSDT'
-    )
+    unauthorized = verify_api_key(request)
+    if unauthorized:
+        return unauthorized
 
-    # Determine if it's API mode
-    api_mode = api_key2 == f'Bearer {settings.APIKEY}'
+    symbol = request.headers.get('Symbol')
+    choice = "3" #API
+    latest_signals = actionzone_signal_calc(symbol, choice)
+    return JsonResponse({
+        "symbol": symbol,
+        "latest_signals": latest_signals
+    })
 
-    # Handle missing symbol for API
-    if api_mode and not symbol:
-        return JsonResponse({'error': 'Missing Symbol'}, status=400)
+@login_required
+def actionzone_symbol1(request):
+    symbol = (request.GET.get('symbol')
+            or request.POST.get('symbol')
+            or 'BTCUSDT'
+        )
+    choice = "1" # from Frontend
+    latest_signals, img_base64 = actionzone_signal_calc(symbol, choice)
+
+    return render(request, "actionzone_signal.html", {
+        "latest_signals": latest_signals,
+        "chart_base64": img_base64,
+        "selected_symbol": symbol
+    })
+
+@csrf_exempt
+def actionzone_signal_calc(symbol, choice):
+    # # --- API key check ---
+    # api_key2 = request.headers.get('Authorization')
+    # symbol = (
+    #     request.headers.get('Symbol')
+    #     or request.GET.get('symbol')
+    #     or request.POST.get('symbol')
+    #     or 'BTCUSDT'
+    # )
+
+    # # Determine if it's API mode
+    # api_mode = api_key2 == f'Bearer {settings.APIKEY}'
+
+    # # Handle missing symbol for API
+    # if api_mode and not symbol:
+    #     return JsonResponse({'error': 'Missing Symbol'}, status=400)
 
     # --- Parameters ---
-    interval = "1d"
     limit = 500
+    if choice == "2" or choice == "3":
+        limit = 250
+    interval = "1d"
     ema_fast_period = 12
     ema_slow_period = 26
 
@@ -109,7 +227,7 @@ def n8n_actionzone_symbol(request):
     latest_signals = latest.to_dict(orient="records")[0]
 
     # --- Generate Chart (only for web render) ---
-    if not api_mode:
+    if choice == "1":
         fig, ax = plt.subplots(figsize=(12, 6))
         ax.plot(df["Open time"], df["Close"], label="Close", linewidth=1)
         ax.plot(df["Open time"], df["EMA_fast"], label=f"EMA{ema_fast_period}", color="red", linewidth=1.5)
@@ -129,17 +247,10 @@ def n8n_actionzone_symbol(request):
         plt.close(fig)
 
         # Render frontend HTML
-        return render(request, "actionzone_signal.html", {
-            "latest_signals": latest_signals,
-            "chart_base64": img_base64,
-            "selected_symbol": symbol
-        })
+        return latest_signals, img_base64
 
-    # --- For API call (return JSON only) ---
-    return JsonResponse({
-        "symbol": symbol,
-        "latest_signals": latest_signals
-    })
+    elif choice == "2" or choice == "3":
+        return latest_signals
     
 @csrf_exempt
 def n8n_actionzone_execute(request):
@@ -152,37 +263,125 @@ def n8n_actionzone_execute(request):
     event = request.headers.get('Event')
     symbol = request.headers.get('Symbol')
     symbol = symbol.replace("USDT", "THB")
-    amount = 5000
-    # binanceTh minimum 300 THB/order
-
+    zone = request.headers.get('Zone')
+    
     logger.info("Event: %s", event)
     logger.info("Symbol: %s", symbol)
 
-    transaction = place_order(event, symbol, amount)
-
-    data_update()
-
-    # --- Return as JSON ---
-    return JsonResponse({"Event": event, "Symbol": symbol, "Transaction": transaction})
+    if zone == "Green" or zone == "Yellow" or zone == "Orange":
+        transaction = place_order(combined, symbol, zone)    
+        data_update()
+        # --- Return as JSON ---
+        return JsonResponse({"Event": event, "Symbol": symbol, "Transaction": transaction})
+    else:
+        return JsonResponse({"Event": "No transaction executed, Zone color is not Green or Yellow", "Zone": zone, "Symbol": symbol})
 
 def data_update():
     pass
 
-def place_order(event, symbol, amount):
+def get_binance_wallet_value():
+    # ACCOUNT INFO
+
+    base_url = "https://api.binance.th/api/v1/accountV2"
+
+    timestamp = int(time.time() * 1000)
+    params = {
+        'timestamp': timestamp
+    }
+
+    # Create query string
+    query_string = '&'.join([f"{key}={value}" for key, value in params.items()])
+
+    # Generate signature using HMAC SHA256
+    signature = hmac.new(api_secret.encode('utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
+
+    # Add signature to params
+    params['signature'] = signature
+
+    # Add headers
+    headers = {
+        'Accept': 'application/json',
+        'X-MBX-APIKEY': api_key
+    }
+
+    # Send GET request
+    r = requests.get(base_url, params=params, headers=headers)
+    account_data = r.json()
+
+    balances = account_data.get('balances', [])
+    table_data2 = []
+
+    # === 2. For each asset, get last price and compute value ===
+    for bal in balances:
+        symbol = bal.get('asset')
+        qty = float(bal.get('free', 0))
+
+        # Skip if quantity is zero or the asset is THB
+        if qty == 0:
+            continue
+
+        table_data2.append({
+            'symbol': symbol,
+            'qty': round(qty, 8),
+        })
+
+
+    btc_qty = None
+    thb_amount = None
+
+    for item in table_data2:
+        if item['symbol'] == 'BTC':
+            btc_qty = item['qty']
+        elif item['symbol'] == 'THB':
+            thb_amount = item['qty']
+
+    # print("BTC Quantity to sell:", btc_qty)
+    # print("THB Value to buy:", thb_value) 
+    return btc_qty, thb_amount
+
+def place_order(event, symbol, zone):
     
     base_url = "https://api.binance.th/api/v1/order"
 
     # --- Order Parameters ---
     timestamp = int(time.time() * 1000)
 
-    params = {
-        "symbol": symbol,           # BTC/THB trading pair
-        "side": event,                # BUY or SELL
-        "type": "MARKET",             # Market order
-        "quoteOrderQty": amount,         # minimum 300 THB/order
-        "timestamp": timestamp
-    }
+    btc_qty, thb_amount = get_binance_wallet_value()
+    logger.info("BTC_QTY: %s", btc_qty)
+    logger.info("THB_AMOUNT: %s", thb_amount)
 
+    if (event == "BUY"):
+        params = {
+            "symbol": symbol,             # BTC/THB trading pair
+            "side": event,                # BUY or SELL
+            "type": "MARKET",             # Market order
+            "quoteOrderQty": thb_amount,  # minimum 300 THB/order
+            "timestamp": timestamp
+        }
+    elif (event == "CONTINUE_BUY"):
+        amount_to_buy = 1000
+        if zone == "Green":
+            amount_to_buy = amount_to_buy * 0.3
+        elif zone == "Yellow":
+            amount_to_buy = amount_to_buy * 0.5
+        else:
+            amount_to_buy = amount_to_buy * 0.7
+
+        params = {
+            "symbol": symbol,             # BTC/THB trading pair
+            "side": event,                # BUY or SELL
+            "type": "MARKET",             # Market order
+            "quoteOrderQty": amount_to_buy,  # minimum 300 THB/order
+            "timestamp": timestamp
+        }
+    elif (event == "SELL"):
+        params = {
+            "symbol": symbol,             # BTC/THB trading pair
+            "side": event,                # BUY or SELL
+            "type": "MARKET",             # Market order
+            "quantity": btc_qty,          # minimum ???
+            "timestamp": timestamp
+        }
 
     # --- Create query string ---
     query_string = '&'.join([f"{key}={value}" for key, value in params.items()])
@@ -218,3 +417,4 @@ def place_order(event, symbol, amount):
 
     except requests.exceptions.RequestException as e:
         print(f"Request Error: {str(e)}")
+

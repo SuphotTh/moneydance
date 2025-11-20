@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}EMA Signals{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h3 class="mb-4">EMA Action Zone – Latest Signals</h3>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center">Symbol</th>
+                    <th class="text-center">Close Price</th>
+                    <th class="text-center">EMA Fast</th>
+                    <th class="text-center">EMA Slow</th>
+                    <th class="text-center">Zone</th>
+                    <th class="text-center">Buy?</th>
+                    <th class="text-center">Sell?</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in signal_list %}
+                <tr>
+                    <td class="text-center fw-bold">{{ row.Symbol }}</td>
+                    <td class="text-end">{{ row.Close|floatformat:2|intcomma }}</td>
+                    <td class="text-end">{{ row.EMA_fast|floatformat:2|intcomma }}</td>
+                    <td class="text-end">{{ row.EMA_slow|floatformat:2|intcomma }}</td>
+
+                    <!-- Zone with Bootstrap colors -->
+                    <td class="text-center">
+                        {% if row.Zone == "Green" %}
+                            <span class="badge bg-success">Green</span>
+                        {% elif row.Zone == "Blue" %}
+                            <span class="badge bg-primary">Blue</span>
+                        {% elif row.Zone == "LightBlue" %}
+                            <span class="badge bg-info text-dark">Light Blue</span>
+                        {% elif row.Zone == "Red" %}
+                            <span class="badge bg-danger">Red</span>
+                        {% elif row.Zone == "Orange" %}
+                            <span class="badge bg-warning text-dark">Orange</span>
+                        {% elif row.Zone == "Yellow" %}
+                            <span class="badge bg-warning">Yellow</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Neutral</span>
+                        {% endif %}
+                    </td>
+
+                    <!-- Buy -->
+                    <td class="text-center">
+                        {% if row.Buy %}
+                            <span class="badge bg-success">✔ Buy</span>
+                        {% else %}
+                            <span class="badge bg-secondary">False</span>
+                        {% endif %}
+                    </td>
+
+                    <!-- Sell -->
+                    <td class="text-center">
+                        {% if row.Sell %}
+                            <span class="badge bg-danger">✘ Sell</span>
+                        {% else %}
+                            <span class="badge bg-secondary">False</span>
+                        {% endif %}
+                    </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center py-3 text-muted">No data available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

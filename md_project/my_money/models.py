@@ -177,6 +177,75 @@ class StockPurchased(models.Model):
     def __str__(self):
         return f"{self.symbol} ({self.side}) - {self.qty}@{self.price} on {self.date} {self.time}"
 
+# for Binance Transactions
+class BinanceTransaction(models.Model):
+    sym = models.CharField(max_length=20)  # e.g. 'BTC', 'ETH'
+    transaction = models.CharField(max_length=50)
+    timestamps = models.CharField(max_length=30, blank=True, null=True)
+    date = models.DateField()
+    time = models.TimeField()
+    side = models.CharField(max_length=20)  # "Buy" or "Sell"
+    acc_post_bal = models.DecimalField(max_digits=18, decimal_places=2, blank=True, null=True)
+    crypto_post_bal = models.DecimalField(max_digits=18, decimal_places=8)
+    purchase_amount = models.DecimalField(max_digits=18, decimal_places=2)
+    purchase_qty = models.DecimalField(max_digits=18, decimal_places=8)
+    purchase_price = models.DecimalField(max_digits=18, decimal_places=2)
+    classification = models.CharField(max_length=100, blank=True, null=True)
+    fear_greed = models.DecimalField(max_digits=18, decimal_places=4, blank=True, null=True)
+
+    # Spare fields
+    spare_char1 = models.CharField(max_length=100, blank=True, null=True)
+    spare_dec2 = models.DecimalField(max_digits=18, decimal_places=4, blank=True, null=True)
+
+    class Meta:
+        db_table = "BinanceTransaction"
+        # managed = False
+
+    def __str__(self):
+        return f"{self.sym} | {self.date} {self.time} | Tx: {self.transaction}"
+
+class CryptoAccumulatedAmount(models.Model):
+    sym = models.CharField(max_length=20)
+
+    accumulated_amount = models.DecimalField(max_digits=18, decimal_places=8, blank=True, null=True)
+
+    timestamp = models.CharField(max_length=30, blank=True, null=True)
+
+    # Spare fields
+    spare1 = models.CharField(max_length=100, blank=True, null=True)
+    spare2 = models.CharField(max_length=100, blank=True, null=True)
+    spare3 = models.DecimalField(max_digits=18, decimal_places=4, blank=True, null=True)
+    spare4 = models.DecimalField(max_digits=18, decimal_places=4, blank=True, null=True)
+
+    class Meta:
+        db_table = "CryptoAccumulatedAmount"
+        # managed = False
+
+    def __str__(self):
+        return f"{self.sym} | Acc: {self.accumulated_amount}"
+
+class CryptoSymbolStatus(models.Model):
+    sym = models.CharField(max_length=20)
+
+    buy_status = models.BooleanField(default=False)
+    sell_status = models.BooleanField(default=False)
+
+    zone_color = models.CharField(max_length=10, blank=True, null=True)
+    timestamp = models.CharField(max_length=30, blank=True, null=True)
+
+    # Spare fields
+    spare1 = models.CharField(max_length=100, blank=True, null=True)
+    spare2 = models.CharField(max_length=100, blank=True, null=True)
+    spare3 = models.DecimalField(max_digits=18, decimal_places=4, blank=True, null=True)
+    spare4 = models.DecimalField(max_digits=18, decimal_places=4, blank=True, null=True)
+
+    class Meta:
+        db_table = "CryptoSymbolStatus"
+        # managed = False
+
+    def __str__(self):
+        return f"{self.sym} | Buy:{self.buy_status} Sell:{self.sell_status}"
+
 
 # to add: account_type, account_name, account_details
 # Create your models here.

@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %}EMA Action Zone - {{ latest_signals.Symbol }}{% endblock %}
+{% block title %}Settrade Action Zone - {{ latest_signals.Symbol }}{% endblock %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -44,22 +44,28 @@
 <body class="bg-light">
   <div class="container my-5">
     <!-- Auto-submit form -->
-    <form method="GET" action="{% url 'actionzone_symbol1' %}" class="text-center mb-4" id="symbolForm">
+    <form method="GET" action="{% url 'settrade_actionzone_signal1' %}" class="text-center mb-4" id="symbolForm">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-3 fw-bold">
           EMA Action Zone - {{ latest_signals.Symbol }}
         </div>
         <div class="col-md-5"></div>
+
         <div class="col-md-3">
           <select name="symbol" class="form-select" onchange="document.getElementById('symbolForm').submit()">
-            <option value="BTCUSDT" {% if selected_symbol == "BTCUSDT" %}selected{% endif %}>BTC</option>
-            <option value="ETHUSDT" {% if selected_symbol == "ETHUSDT" %}selected{% endif %}>ETH</option>
-            <option value="BNBUSDT" {% if selected_symbol == "BNBUSDT" %}selected{% endif %}>BNB</option>
-            <option value="SOLUSDT" {% if selected_symbol == "SOLUSDT" %}selected{% endif %}>SOL</option>
-            <option value="SUSHIUSDT" {% if selected_symbol == "SUSHIUSDT" %}selected{% endif %}>SUSHI</option>
-            <option value="XRPUSDT" {% if selected_symbol == "XRPUSDT" %}selected{% endif %}>XRP</option>
-            <option value="UNIUSDT" {% if selected_symbol == "UNIUSDT" %}selected{% endif %}>UNI</option>
+
+            <!-- Fixed default option -->
+            <option value="SET" {% if selected_symbol == "SET" %}selected{% endif %}>SET</option>
+
+            <!-- Dynamically populated options from interesting_lists -->
+            {% for sym in interesting_lists %}
+                <option value="{{ sym }}" {% if selected_symbol == sym %}selected{% endif %}>
+                    {{ sym }}
+                </option>
+            {% endfor %}
+
           </select>
+          <input type="hidden" name="choice" value="1">
         </div>
       </div>
     </form>

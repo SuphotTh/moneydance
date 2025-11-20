@@ -31,15 +31,20 @@ urlpatterns = [
 
     path('purchased_report_page/', crypto_views.purchased_report_page, name='purchased_report_page'),
     path('purchased_report/', crypto_views.purchased_report, name='purchased_report'),  # JSON API
+    path('crypto_signal_list/', crypto_views.crypto_signal_list, name='crypto_signal_list'), 
 
     # n8n-BITKUB http-request method
     # path('n8n-btc-trigger/', crypto_views.n8n_btc_trigger, name='n8n_btc_trigger'),
     # path('n8n-eth-trigger/', crypto_views.n8n_eth_trigger, name='n8n_eth_trigger'),
     path('n8n-trigger/', crypto_views.n8n_trigger, name='n8n_trigger'), # this url is send various Symbol and Amount
     path('place_bid/', crypto_views.place_order, name='place_bid'),
+    path('n8n-daily_update/', crypto_views.n8n_daily_update, name='n8n_daily_update'), # this url is send various Symbol and Amount
+    
 
     # n8n Chaloke Action Zone 
     path('n8n-actionzone-symbol/', actionzone.n8n_actionzone_symbol, name='n8n_actionzone_symbol'),
+    path('n8n-start_process/', actionzone.n8n_start_process, name='n8n_start_process'),
+    path('actionzone_symbol1/', actionzone.actionzone_symbol1, name='actionzone_symbol1'),
     path('n8n-actionzone-execute/', actionzone.n8n_actionzone_execute, name='n8n_actionzone_execute'),
     
     # data set api
@@ -49,7 +54,13 @@ urlpatterns = [
     # n8n-SET http-request method
     path('n8n-set-trigger/', set_api_views.n8n_set_trigger, name='n8n_set_trigger'), 
     path('n8n-update_stock_purchased/', set_api_views.n8n_update_stock_purchased, name='n8n_update_stock_purchased'), 
+    path('n8n-settrade_actionzone_signal/', set_api_views.n8n_settrade_actionzone_signal, name='n8n_settrade_actionzone_signal'),
+    path('settrade_actionzone_signal1/', set_api_views.settrade_actionzone_signal1, name='settrade_actionzone_signal1'),
+    path('settrade_actionzone_signal2/', set_api_views.settrade_actionzone_signal2, name='settrade_actionzone_signal2'),
     # purchase stock via API -> KBANK,BBL,SCB, APPL80, GOOG80, META01, MFST80
+    path('settrade_signal_list/', set_api_views.settrade_signal_list, name='settrade_signal_list'), 
+    path('purchase_stock_report_page/', set_api_views.purchase_stock_report_page, name='purchase_stock_report_page'),
+    path('purchase_stock_report/', set_api_views.purchase_stock_report, name='purchase_stock_report'),  # JSON API
     
 
 ]

@@ -43,7 +43,7 @@ def custom_serializer(obj):
 # Convert list of dictionaries to JSON string
 json_transactions = json.dumps(transactions, default=custom_serializer)
 
-client = OpenAI(api_key = "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")
+client = OpenAI(api_key = "fill openai api key")
 
 prompt = f"""
 You are an expert financial analyst. Given the following transactions in JSON format, analyze the income and expenses, identify any patterns, and write a comprehensive report with recommendations for financial management.
@@ -243,7 +243,7 @@ def home(request):
 
             """ 
 
-            client = OpenAI(api_key = "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")
+            client = OpenAI(api_key = "fill openai api key")
 
             # Generate the report using OpenAI's GPT-4-turbo
             response = client.chat.completions.create(model="gpt-4-turbo",

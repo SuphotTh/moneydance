@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %}EMA Action Zone - {{ latest_signals.Symbol }}{% endblock %}
+{% block title %}Settrade Action Zone2 - {{ latest_signals.Symbol }}{% endblock %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -44,22 +44,24 @@
 <body class="bg-light">
   <div class="container my-5">
     <!-- Auto-submit form -->
-    <form method="GET" action="{% url 'actionzone_symbol1' %}" class="text-center mb-4" id="symbolForm">
+    <form id="symbolForm" method="get" action="{% url 'settrade_actionzone_signal2' %}">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-3 fw-bold">
           EMA Action Zone - {{ latest_signals.Symbol }}
         </div>
         <div class="col-md-5"></div>
         <div class="col-md-3">
-          <select name="symbol" class="form-select" onchange="document.getElementById('symbolForm').submit()">
-            <option value="BTCUSDT" {% if selected_symbol == "BTCUSDT" %}selected{% endif %}>BTC</option>
-            <option value="ETHUSDT" {% if selected_symbol == "ETHUSDT" %}selected{% endif %}>ETH</option>
-            <option value="BNBUSDT" {% if selected_symbol == "BNBUSDT" %}selected{% endif %}>BNB</option>
-            <option value="SOLUSDT" {% if selected_symbol == "SOLUSDT" %}selected{% endif %}>SOL</option>
-            <option value="SUSHIUSDT" {% if selected_symbol == "SUSHIUSDT" %}selected{% endif %}>SUSHI</option>
-            <option value="XRPUSDT" {% if selected_symbol == "XRPUSDT" %}selected{% endif %}>XRP</option>
-            <option value="UNIUSDT" {% if selected_symbol == "UNIUSDT" %}selected{% endif %}>UNI</option>
-          </select>
+          <div class="input-group">
+            <input 
+              type="text" 
+              class="form-control text-uppercase"
+              name="symbol"
+              placeholder="Enter symbol"
+              value="{{ selected_symbol }}"
+              id="symbolInput"
+            >
+            <button type="submit" class="btn btn-primary">Go</button>
+          </div>
         </div>
       </div>
     </form>
@@ -102,12 +104,12 @@
       <img src="data:image/png;base64,{{ chart_base64 }}" class="img-fluid rounded shadow-sm" alt="EMA Chart">
     </div>
   </div>
+  {% if error_message %}
+    <div class="alert alert-danger text-center mt-3" role="alert">
+      {{ error_message }}
+    </div>
+  {% endif %}
+
 </body>
 </html>
 {% endblock %}
-
-
-
-
-
-

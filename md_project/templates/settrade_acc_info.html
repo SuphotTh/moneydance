@@ -71,72 +71,123 @@
   </div>
 
   <!-- Portfolio Section -->
-  <div class="row portfolio-section">
-      <div class="col-md-12">
-          <div class="card border-light mb-4">
-              <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center">
-                  <h5 class="mb-0">Portfolio Holdings</h5>
-                  <small class="text-light">({{ portfolio.portfolioList|length }} stocks)</small>
-              </div>
-              <div class="card-body p-0">
-                  {% if portfolio.portfolioList %}
-                  <div class="table-responsive">
-                      <table class="table table-striped table-hover align-middle mb-0">
-                            <thead>
-                                <tr class="text-end">
-                                    <th>Symbol</th>
-                                    <th>Current Volume</th>
-                                    <th>Average Cost</th>
-                                    <th>Market Price</th>
-                                    <th>Market Value</th>
-                                    <th>Profit</th>
-                                    <th>Profit (%)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in portfolio.portfolioList %}
-                                <tr>
-                                    <td>{{ item.symbol }}</td>
-                                    <td class="text-end">{{ item.currentVolume }}</td>
-                                    <td class="text-end">{{ item.averagePrice|floatformat:2 }}</td>
-                                    <td class="text-end">{{ item.marketPrice|floatformat:2 }}</td>
-                                    <td class="text-end">{{ item.marketValue|floatformat:2 }}</td>
-                                    <td class="text-end {% if item.profit >= 0 %}text-success{% else %}text-danger{% endif %}">
-                                        {{ item.profit|floatformat:2 }}
-                                    </td>
-                                    <td class="text-end {% if item.percentProfit >= 0 %}text-success{% else %}text-danger{% endif %}">
-                                        {{ item.percentProfit|floatformat:2 }}%
-                                    </td>
-                                </tr>
-                                {% endfor %}
+<div class="row portfolio-section">
+    <div class="col-md-12">
+        <div class="card border-light mb-4">
+            <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Portfolio Holdings</h5>
+                <small class="text-light">({{ portfolio.portfolioList|length }} stocks)</small>
+            </div>
+            <div class="card-body p-0">
+                {% if portfolio.portfolioList %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered align-middle mb-0">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Current Volume</th>
+                                <th>Average Cost</th>
+                                <th>Market Price</th>
+                                <th>Market Value</th>
+                                <th>Profit</th>
+                                <th>Profit (%)</th>
+                                <th>EMA Fast</th>
+                                <th>EMA Slow</th>
+                                <th>Zone</th>
+                                <th>Buy?</th>
+                                <th>Sell?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in portfolio.portfolioList %}
+                            <tr>
+                                <td class="text-center fw-bold">{{ item.symbol }}</td>
+                                <td class="text-end">{{ item.currentVolume }}</td>
+                                <td class="text-end">{{ item.averagePrice|floatformat:2 }}</td>
+                                <td class="text-end">{{ item.marketPrice|floatformat:2 }}</td>
+                                <td class="text-end">{{ item.marketValue|floatformat:2 | intcomma }}</td>
+                                <td class="text-end {% if item.profit >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                    {{ item.profit|floatformat:2 | intcomma}}
+                                </td>
+                                <td class="text-end {% if item.percentProfit >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                    {{ item.percentProfit|floatformat:2 | intcomma}}%
+                                </td>
 
-                                <!-- Total Portfolio Row -->
-                                {% if portfolio.totalPortfolio %}
-                                <tr class="fw-bold table-secondary">
-                                    <td>Total</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-end">{{ portfolio.totalPortfolio.marketValue|floatformat:2 }}</td>
-                                    <td class="text-end {% if portfolio.totalPortfolio.profit >= 0 %}text-success{% else %}text-danger{% endif %}">
-                                        {{ portfolio.totalPortfolio.profit|floatformat:2 }}
-                                    </td>
-                                    <td class="text-end {% if portfolio.totalPortfolio.percentProfit >= 0 %}text-success{% else %}text-danger{% endif %}">
-                                        {{ portfolio.totalPortfolio.percentProfit|floatformat:2 }}%
-                                    </td>
-                                </tr>
+                                {% if item.latest_signals %}
+                                <td class="text-end">{{ item.latest_signals.EMA_fast|floatformat:2 }}</td>
+                                <td class="text-end">{{ item.latest_signals.EMA_slow|floatformat:2 }}</td>
+
+                                <!-- Zone -->
+                                <td class="text-center">
+                                    {% if item.latest_signals.Zone == "Green" %}
+                                        <span class="badge bg-success">Green</span>
+                                    {% elif item.latest_signals.Zone == "Blue" %}
+                                        <span class="badge bg-primary">Blue</span>
+                                    {% elif item.latest_signals.Zone == "LightBlue" %}
+                                        <span class="badge bg-info text-dark">Light Blue</span>
+                                    {% elif item.latest_signals.Zone == "Red" %}
+                                        <span class="badge bg-danger">Red</span>
+                                    {% elif item.latest_signals.Zone == "Orange" %}
+                                        <span class="badge bg-warning text-dark">Orange</span>
+                                    {% elif item.latest_signals.Zone == "Yellow" %}
+                                        <span class="badge bg-warning">Yellow</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Neutral</span>
+                                    {% endif %}
+                                </td>
+
+                                <!-- Buy -->
+                                <td class="text-center">
+                                    {% if item.latest_signals.Buy %}
+                                        <span class="badge bg-success">✔ Buy</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">False</span>
+                                    {% endif %}
+                                </td>
+
+                                <!-- Sell -->
+                                <td class="text-center">
+                                    {% if item.latest_signals.Sell %}
+                                        <span class="badge bg-danger">✘ Sell</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">False</span>
+                                    {% endif %}
+                                </td>
+                                {% else %}
+                                <td colspan="5" class="text-center text-muted">No signal</td>
                                 {% endif %}
-                            </tbody>
+                            </tr>
+                            {% endfor %}
 
-                      </table>
-                  </div>
-                  {% else %}
-                  <p class="p-3 text-muted">No portfolio data available.</p>
-                  {% endif %}
-              </div>
-          </div>
-      </div>
-  </div>
+                            <!-- Total Portfolio Row -->
+                            {% if portfolio.totalPortfolio %}
+                            <tr class="fw-bold table-secondary text-end">
+                                <td>Total</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{ portfolio.totalPortfolio.marketValue|floatformat:2 | intcomma }}</td>
+                                <td class="{% if portfolio.totalPortfolio.profit >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                    {{ portfolio.totalPortfolio.profit|floatformat:2 | intcomma}}
+                                </td>
+                                <td class="{% if portfolio.totalPortfolio.percentProfit >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                    {{ portfolio.totalPortfolio.percentProfit|floatformat:2 | intcomma}}%
+                                </td>
+                                <td colspan="5"></td>
+                            </tr>
+                            {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="p-3 text-center text-muted">No portfolio data available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </div>
 

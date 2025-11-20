@@ -27,15 +27,14 @@
     <table class="table table-bordered">
       <thead class="table-dark">
         <tr>
-          <th>id</th>
+          <th>Order ID</th>
           <th>Date</th>
           <th>Time</th>
-          <th>Symbol</th>
-          <th class="symColumn">{{ sym }} in Wallet</th>
           <th>Fear&Greed Index</th>
+          <th>Symbol</th>
+          <th class="symColumn">{{ sym }} Price</th>
+          <th class="symColumnQty">{{ sym }} Price</th>
           <th>Amount</th>
-          <th>Purchase Qty</th>
-          <th>Purchase Price</th>
         </tr>
       </thead>
       <tbody id="reportBody"></tbody>
@@ -141,19 +140,19 @@ function loadReport() {
       data.page_obj.forEach(r => {
         tbody.innerHTML += `
           <tr>
-            <td>${r.id}</td>
+            <td>${r.order_id}</td>
             <td>${r.date}</td>
             <td>${r.time}</td>
+            <td class="text-center">${r.side} at ${r.classification} index : ${Number(r.fear_greed).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 } )}</td>
             <td>${r.sym}</td>
-            <td class="text-end">${Number(r.crypto_post_bal).toLocaleString(undefined, { minimumFractionDigits: 8, maximumFractionDigits: 8 })}</td>
-            <td class="text-center">${r.classification}: ${Number(r.fear_greed).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 } )}</td>
-            <td class="text-end">${Number(r.purchase_amount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-            <td class="text-end">${Number(r.purchase_qty).toLocaleString(undefined, { minimumFractionDigits: 8, maximumFractionDigits: 8 })}</td>
             <td class="text-end">${Number(r.purchase_price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+            <td class="text-end">${Number(r.purchase_qty).toLocaleString(undefined, { minimumFractionDigits: 8, maximumFractionDigits: 8 })}</td>
+            <td class="text-end">${Number(r.purchase_amount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
           </tr>`;
       });
 
-      document.querySelector('th.symColumn').innerText = `${sym} in Wallet`;
+      document.querySelector('th.symColumn').innerText = `${sym} Price`;
+      document.querySelector('th.symColumnQty').innerText = `${sym} Qty`;
       document.querySelectorAll('.symBalance').forEach(el => {
         // Store the original label if not already stored
         if (!el.dataset.baseLabel) {
